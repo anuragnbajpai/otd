@@ -5,13 +5,21 @@
         <tr>
           <th>Product</th>
           <td *ngFor="let d of stateSearch.compareProducts">
-            <img src="{{d.picture}}" width="50%">
-            <div>{{d.title}}</div>
+            <img src="{{d.picture}}" width="50%" style="max-width: 80px">
+            
+            <div><b>{{d.title}}</b></div>
+         
           </td>  
         </tr>
         <tr>
           <th>Brand</th>
           <td *ngFor="let d of stateSearch.compareProducts">{{d.brand}}</td> 
+        </tr>
+        <tr>
+          <th>Rating</th>
+          <td *ngFor="let d of stateSearch.compareProducts"><div fxLayout="row" fxLayoutAlign="center"><star-rating starType="svg" [rating]="d.avgRating" size="medium" [readOnly]="true"
+            [showHalfStars]="true"></star-rating>
+          {{d.avgRating}} </div> </td> 
         </tr>
         <tr>
             <th>Price</th>

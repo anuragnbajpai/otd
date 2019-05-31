@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchService } from '../../state/search.service';
 
 @Component({
   selector: 'app-image',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImageComponent implements OnInit {
 
-  constructor() { }
+  constructor(public stateSearch: SearchService) { 
+    if(this.stateSearch.selectedProduct.images == null
+       || this.stateSearch.selectedProduct.images.length == 0){
+      this.stateSearch.getImages();
+    }
+  }
 
   ngOnInit() {
   }

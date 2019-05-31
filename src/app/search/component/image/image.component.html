@@ -1,8 +1,26 @@
-<mat-card class="tab-content">
-    <mat-grid-list cols="2" rowHeight="1:1" gutterSize="10px" >
-        <mat-grid-tile *ngFor="let i of _detail.images; let i= index" (click)="imagePopup(i)" style="background: lightcyan;" >
-            <img src="{{i.link}}" alt="{{i.description}}" width="50%" >
-           <!-- <mat-grid-tile-footer>test </mat-grid-tile-footer> -->
+
+     
+
+
+  <mat-card class="tab-content">
+        <mat-card fxLayout="row" fxLayoutAlign="space-between" style="background:lightcyan">
+          <div>
+              Sort By: <button mat-button [matMenuTriggerFor]="menu" style="background: lightgrey">{{sortBy}}</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="sortBy = 'Price'">Price</button>
+                <button mat-menu-item (click)="sortBy = 'Brand'">Brand</button>
+                <button mat-menu-item (click)="sortBy = 'Date'">Date</button>
+              </mat-menu>
+          </div> 
+          <div> <button mat-button style="background: lightgrey" >Add</button></div>      
+           
+        </mat-card>
+      <mat-grid-list cols="2" rowHeight="2:1" gutterSize="10px" style="padding-top: 10px" >
+        <mat-grid-tile *ngFor="let element of stateSearch.selectedProduct.images;let i = index" (click)="imagePopup(element)" style="background: lightcyan;" > 
+                <img src="{{element.link}}" alt="{{element.description}}" width="80%" >
+          <mat-grid-tile-footer>
+              {{element.dateTime.toDate() | date}} 
+          </mat-grid-tile-footer>
         </mat-grid-tile>
-      </mat-grid-list>
+      </mat-grid-list>      
     </mat-card>

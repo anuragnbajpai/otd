@@ -51,6 +51,19 @@ export class SearchService {
     });
   }
 
+
+  getDeals(){
+    this.svcFirestore.getDocument('deals', this.selectedProduct.id).subscribe(d => {
+      this.selectedProduct.deals = (d.payload.data() as any).deals;
+      this.searchResult.find(f => f.title === this.selectedProduct.title).deals = this.selectedProduct.deals;
+    });
+  }
+  getImages(){
+    this.svcFirestore.getDocument('images',  this.selectedProduct.id).subscribe(d => {
+      this.selectedProduct.images =  (d.payload.data() as any).images;
+      this.searchResult.find(f => f.title === this.selectedProduct.title).images = this.selectedProduct.images;
+      });
+  }
   updateProductValue(title){
     this.selectedProduct = this.searchResult.find(f => f.title === title);
   }

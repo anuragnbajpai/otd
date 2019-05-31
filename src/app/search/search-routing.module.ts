@@ -23,7 +23,7 @@ const routes: Routes = [
         path: ':category/:product',
         component: SearchComponent,
         data: {
-          page: 'search',
+          page: 'detail',
           title: 'Top 10 {category}',
           metatags: {
             keywords: 'top {product}, top 10 {product}, best {product}, {product} deals',

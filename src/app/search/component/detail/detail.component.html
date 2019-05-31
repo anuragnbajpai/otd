@@ -29,7 +29,7 @@
 <mat-card class="detail" style="background-color:lightcyan;"
   *ngIf="stateSearch.selectedProduct && stateSearch.compareProducts.length==0">
   <div style="padding-bottom:10px;font-size: smaller;"><a routerLink="/">Home </a> / <a
-      routerLink="/user/search/{{stateSearch.selectedProduct.category}}">{{stateSearch.selectedProduct.category}}</a> /
+      routerLink="/search/{{stateSearch.selectedProduct.category}}">{{stateSearch.selectedProduct.category}}</a> /
     {{stateSearch.selectedProduct.title}}</div>
 
   <mat-card-header style="width: 100%;">
@@ -58,7 +58,7 @@
           Top Deals
         </ng-template>
         <ng-template matTabContent>
-          <!-- <app-deal></app-deal> -->
+          <app-deal></app-deal>
         </ng-template>
       </mat-tab>
       <mat-tab label="Features">
@@ -68,7 +68,7 @@
       </mat-tab>
       <mat-tab label="Images">
         <ng-template matTabContent>
-          <!-- <app-image></app-image> -->
+          <app-image></app-image>
         </ng-template>
       </mat-tab>
 
