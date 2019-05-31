@@ -1,0 +1,26 @@
+<mat-nav-list role="list" style="padding:0" fxLayout="column" fxFlex="100">
+
+    <img mat-list-item alt="todays deals" src="assets/images/onlytopdeals_logo.png" style="width: 170px;height: 60px;">
+    <div mat-list-item></div>
+
+    <a mat-list-item routerLink="/home" routerLinkActive="active" (click)="close()">
+         <fa-icon [icon]="['fas', 'home']"></fa-icon>  
+      &nbsp; Home
+    </a>
+
+    <a mat-list-item routerLink="/search" routerLinkActive="active"  (click)="close()">
+      <fa-icon [icon]="['fas', 'search']"></fa-icon> 
+      &nbsp; Search
+    </a>
+
+    <a mat-list-item [routerLink]="['/contactus']" routerLinkActive="active" (click)="close()">
+      <fa-icon [icon]="['fas', 'phone']"></fa-icon> 
+      &nbsp; Contact Us
+    </a>
+
+    <a mat-list-item routerLink="/aboutus" routerLinkActive="active" (click)="close()">
+      <fa-icon [icon]="['fas', 'info']"></fa-icon> 
+      &nbsp; About Us
+    </a>
+
+  </mat-nav-list>

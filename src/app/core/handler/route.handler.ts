@@ -1,0 +1,78 @@
+import { Injectable } from '@angular/core';
+import { NavigationEnd, Router, ActivationStart, ActivationEnd } from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
+import { SessionService } from '../state/session/session.service';
+import { filter } from 'rxjs/operators';
+import { SearchService } from 'src/app/search/state/search.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RouteHandler {
+  constructor(public router: Router, private titleService: Title, private metaService: Meta,
+              private stateSession: SessionService, private stateSearch: SearchService) {
+    this.initRouteTracking();
+  }
+
+  private initRouteTracking() {
+
+    this.router.events.subscribe(event => {
+      try{
+        if(event instanceof ActivationEnd){
+          this.updateStateRouteParameter(event);
+        }
+        if (event instanceof NavigationEnd) {
+          this.updateTitleAndMetaTags(event);
+          this.trackGoogleAnalytics(event);
+        }
+      } catch(e){
+        console.log(e);
+      }
+    });
+  }
+
+  updateStateRouteParameter(event) {
+    if (event.snapshot.params.category) {
+       this.stateSearch.UpdateCategory(event.snapshot.params.category);
+    }
+
+    if (event.snapshot.params.product) {
+       this.stateSearch.updateProduct(event.snapshot.params.product);
+    }
+    
+  }
+
+  updateTitleAndMetaTags(event) {
+    let root = this.router.routerState.snapshot.root;
+    while (root) {
+      if (root.children && root.children.length) {
+        root = root.children[0];
+      } else if (root.data && root.data.title) {
+        this.stateSession.updatePage(root.data.page)
+        this.titleService.setTitle(root.data.title
+          .replace(/{product}/g, root.params.category)
+          .replace(/{item}/g, root.params.product) + ' | OnlyTopDeals');
+        const tags = root.data.metatags;
+        // tslint:disable-next-line:forin
+        for (const tag in tags) {
+          this.metaService.updateTag({
+            name: tag, content: tags[tag]
+              .replace(/{product}/g, root.params.category)
+              .replace(/{item}/g, root.params.product)
+          });
+        }
+        return;
+      } else {
+        return;
+      }
+    }
+    (window as any).scrollTo(0, 0);
+  }
+
+  trackGoogleAnalytics(event) {
+    (window as any).ga('set', 'page', event.urlAfterRedirects);
+    (window as any).ga('send', 'pageview');
+  }
+
+
+}

@@ -1,0 +1,8 @@
+<div fxLayout="row" fxFlex="auto" fxFlex="100">
+  <mat-card class="search" [fxFlex.xs]="100" [fxFlex.gt-xs]="40" fxLayout="column" fxLayoutAlign="start" style="overflow-y:scroll;">
+    <app-resultlist></app-resultlist>
+  </mat-card>
+  <mat-card fxHide.xs [fxFlex.gt-xs]="60" style="overflow-y:scroll;width: 100%">
+    <app-detail></app-detail>
+  </mat-card>
+</div>

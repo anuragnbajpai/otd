@@ -1,1 +1,135 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+$color-positive-rating: red  !default;
+@import '~css-star-rating/css/star-rating.css';
+
+
+body {
+   margin: 0;
+}
+.search .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0;
+    padding: 0;
+}
+
+.search .mat-form-field-wrapper .mat-form-field-prefix{
+  top: 0em;
+}
+
+.search-input .mat-form-field-wrapper .mat-form-field-prefix, 
+.search-input .mat-form-field-wrapper .mat-form-field-suffix{
+  top: 0em;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+     padding: .5em 0;
+     border-top: 0.5em solid transparent;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline{
+
+  background-color: white;
+}
+app-home, app-search, app-contactus, app-aboutus, app-categry-manager,
+app-product-manager, app-contacts, app-detail {
+  width: 100%;  
+}
+
+app-detail {
+  overflow-y: scroll;
+}
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0;
+}
+
+.active
+{
+background-color: lightcyan;
+}
+
+.mat-list-base {
+  padding: 0;
+}
+
+.logo {
+  /* margin: 5px 5px; */
+  padding: 18px;
+  color: darkcyan;
+  font-family: sans-serif;
+  font-weight: 900;
+  font-size: large;
+  background-color: gainsboro;
+}
+
+.custom-dialog-container .mat-dialog-container {
+  padding: 0px;
+}
+
+.search .mat-card-avatar {
+  height: 100%;
+  width: 60px;
+  border-radius: 0;
+}
+
+
+.detail .mat-card-avatar {
+  height: 100%;
+  width: 60px;
+  border-radius: 0;
+}
+
+.compare .mat-grid-tile .mat-figure{
+  justify-content: center;
+  margin: 10px;
+}
+.detail .mat-card-header-text{
+  width: 100%;
+}
+
+.mat-sort-header-container{
+  justify-content: center;
+}
+
+.detail td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{
+  padding:0px;
+}
+.detail td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type, th.mat-header-cell:last-of-type{
+  padding: 0px;
+}
+.detail td.mat-cell{
+  text-align: center;
+}
+.detail .mat-tab-label-active {
+  background-color:white !important;
+}
+
+.search .mat-card-header .mat-card-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.detail .mat-tab-label{
+  min-width: 25%;
+  padding: 0px;
+}
+
+.search .mat-card-subtitle{
+  margin-bottom: 0px;
+}
+
+.search .mat-card-header-text {
+  width:100%;
+  margin: 0px 5px;
+}
+
+.search .star.medium,.search .rating.medium .star {
+  width: 15px;
+  height: 15px;
+}
+
+.detail .mat-card{
+  padding: 5px;
+}
+
+.detail .rating{
+  margin-bottom: 0px;
+}

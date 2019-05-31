@@ -24,10 +24,13 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/robots.txt",
+              "src/sitemap.xml"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/semantic-ui-placeholder/placeholder.min.css"
             ],
             "scripts": []
           },
@@ -118,6 +121,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "OTD"
+    }
+  },
+  "defaultProject": "OTD",
+  "cli": {
+    "defaultCollection": "@datorama/akita"
+  }
 }

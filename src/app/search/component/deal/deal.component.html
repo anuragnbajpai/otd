@@ -1,0 +1,26 @@
+<mat-card class="tab-content">
+          
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="dateTime" matSortDirection="desc">
+      
+        <ng-container matColumnDef="store">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Store </th>
+          <td mat-cell *matCellDef="let element"> 
+              <a style="min-width:110px;max-width:110px" mat-raised-button href="{{element.link}}" target="_blank" color="primary"> {{element.store}}</a>
+          </td>
+        </ng-container>                    
+     
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+          <td mat-cell *matCellDef="let element"> <b>{{element.price}} {{_detail.currency}} </b></td>
+        </ng-container>
+                       
+        <ng-container matColumnDef="dateTime">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Posted On </th>
+          <td mat-cell *matCellDef="let element">  {{element.dateTime.toDate() | date}} </td>
+        </ng-container>                    
+                          
+        <tr mat-header-row *matHeaderRowDef="['store', 'price', 'dateTime']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['store', 'price', 'dateTime'];"></tr>
+      </table>
+      
+  </mat-card>

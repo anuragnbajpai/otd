@@ -1,0 +1,82 @@
+<mat-card [ngStyle]="{'display': stateSearch.searchResult ? 'none' : 'block' }">
+  <div class="ui placeholder">
+    <div class="image header">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+    <div class="paragraph">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+    <div class="paragraph">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+    <div class="paragraph">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+</mat-card>
+
+<mat-card class="detail" style="background-color:lightcyan;"
+  *ngIf="stateSearch.selectedProduct && stateSearch.compareProducts.length==0">
+  <div style="padding-bottom:10px;font-size: smaller;"><a routerLink="/">Home </a> / <a
+      routerLink="/user/search/{{stateSearch.selectedProduct.category}}">{{stateSearch.selectedProduct.category}}</a> /
+    {{stateSearch.selectedProduct.title}}</div>
+
+  <mat-card-header style="width: 100%;">
+    <img mat-card-avatar [src]="stateSearch.selectedProduct.picture">
+    <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
+      <div>
+        <h4 style="margin:0"> {{stateSearch.selectedProduct.brand}} {{stateSearch.selectedProduct.title}}
+          &nbsp;&nbsp;(${{stateSearch.selectedProduct.price}} {{stateSearch.selectedProduct.currency}})</h4>
+      </div>
+    </mat-card-title>
+    <mat-card-subtitle style="margin-top:-10px">{{stateSearch.selectedProduct.description}}</mat-card-subtitle>
+
+  </mat-card-header>
+  <mat-card-subtitle fxLayout="row" fxLayoutAlign="center stretch">
+
+    <star-rating starType="svg" [rating]="stateSearch.selectedProduct.avgRating" size="medium" [readOnly]="true"
+      [showHalfStars]="true"></star-rating>
+    <div style=" align-self: center;font-size: large;"> {{stateSearch.selectedProduct.avgRating}} </div>
+
+  </mat-card-subtitle>
+
+  <mat-card-content>
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab fxLayoutAlign="center center">
+        <ng-template mat-tab-label>
+          Top Deals
+        </ng-template>
+        <ng-template matTabContent>
+          <!-- <app-deal></app-deal> -->
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Features">
+        <ng-template matTabContent>
+          <!-- <app-feature></app-feature> -->
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Images">
+        <ng-template matTabContent>
+          <!-- <app-image></app-image> -->
+        </ng-template>
+      </mat-tab>
+
+    </mat-tab-group>
+
+
+  </mat-card-content>
+
+</mat-card>
+
+<app-compare *ngIf="stateSearch.compareProducts.length > 0"></app-compare>

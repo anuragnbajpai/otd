@@ -1,0 +1,43 @@
+<!-- <app-resultitem></app-resultitem>
+{{stateSearch.category$| async}}
+{{stateSearch.product$| async}}
+
+{{stateSearch.searchResult|json}} -->
+
+
+<div [ngStyle]="{'display': stateSearch.searchResult ? 'none' : 'block' }">
+    <mat-card  *ngFor="let i of [1,2,3,4]" >
+      <div class="ui three column stackable grid" >
+          <div class="column">
+            <div class="ui raised segment">
+              <div class="ui placeholder">
+                <div class="image header">
+                  <div class="line"></div>
+                  <div class="line"></div>
+                </div>
+                <div class="paragraph">
+                  <div class="medium line"></div>
+                  <div class="short line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </mat-card>
+  </div>
+
+
+  <div style="margin-bottom:0" id="{{d.title}}" *ngFor="let d of stateSearch.searchResult;let i = index">
+ 
+      <app-resultitem [product]="d" [rank]="i"></app-resultitem>
+      <a style="display: none" href="/search/{{d.category}}/{{d.title}}">{{d.brand}} {{d.title}}</a>
+      <div *ngIf="i%5==4" style="top:10px;margin-bottom: 20px;padding: 5px; margin: 5px;" >
+          <ng-adsense
+            [adClient]="'ca-pub-6469787500519130'"
+            [adSlot]="3548695446"
+            [adFormat] = "'auto'"
+            >
+          </ng-adsense>
+        </div>
+    </div>
+  

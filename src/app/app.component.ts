@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CoreService } from './core/service/core.service';
+import { SessionService } from './core/state/session/session.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'OTD';
+  constructor(private svcCore: CoreService, private stateSession: SessionService) {
+
+  }
 }
