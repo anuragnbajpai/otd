@@ -30,7 +30,7 @@ export class ToastService {
       }
 }
 
-enum ToastStatus {
+export enum ToastStatus {
     Show = 'Show',
     Success = 'Success',
     Error= 'Error',

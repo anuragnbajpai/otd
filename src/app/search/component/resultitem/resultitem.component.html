@@ -1,5 +1,5 @@
 <mat-card *ngIf="product" style="padding: 10px; margin: 5px; width: 100%" fxLayout="row"  fxLayoutAlign="start" [ngStyle]="{'background-color': (stateSearch.product$|async) == product.title ? 'lightcyan' : 'white' }"  >
-        
+   
     <mat-card-header fxLayoutAlign="start stretch" style="width:100%" >
          
           <mat-card-title fxLayout="row"   (click)="detail()">
@@ -23,7 +23,7 @@
                 starType="svg" [rating]="product.avgRating" size="medium"  [readOnly]="true" [showHalfStars]="true"></star-rating>
               <div style=" align-self: center;padding-bottom: 4px;"> <b>{{product.avgRating}}</b> </div>
               </div> 
-              <button style="z-index:2;margin-top:10px;"  (click)="product.isCompare=!product.isCompare;addCompare()"
+              <button style="z-index:2;margin-top:10px;"  (click)="addCompare()"
               [ngStyle]="{'background-color':product.isCompare ? 'lightcyan' : 'white' }"
               fxLayout="row" >
               <div style="margin:2px;width: 70px;">Compare {{product.isCompare?'-':'+'}}</div>

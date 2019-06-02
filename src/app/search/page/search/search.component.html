@@ -1,8 +1,17 @@
-<div fxLayout="row" fxFlex="auto" fxFlex="100">
-  <mat-card class="search" [fxFlex.xs]="100" [fxFlex.gt-xs]="40" fxLayout="column" fxLayoutAlign="start" style="overflow-y:scroll;" [style.display]="((stateSession.page$| async) == 'detail' && (stateSession.device$| async) == 'xs') ? 'none' : 'block'">
-    <app-resultlist></app-resultlist>
+<div  fxLayout="row" fxFlex="auto" fxFlex="100" style="height: 92vh;">
+  <mat-card class="search scoll" [fxFlex.xs]="100" [fxFlex.gt-xs]="40" fxLayout="column" 
+  fxLayoutAlign="start" style="overflow-y:scroll;" 
+  [ngStyle.xs]="{'display': ((stateSession.page$| async) == 'search' ? 'block' : 'none')}"
+ >
+  <app-resultlist></app-resultlist>
   </mat-card>
-  <mat-card fxHide.xs [fxFlex.gt-xs]="60" style="overflow-y:scroll;width: 100%"  [style.display]="((stateSession.page$| async) == 'search' && (stateSession.device$| async) == 'xs') ? 'none' : 'block'">
-    <app-detail></app-detail>
+  <mat-card class="scoll" *ngIf="stateSearch.selectedProduct" [fxFlex.gt-xs]="60" style="overflow-y:scroll;width: 100%" 
+  [ngStyle.xs]="{'display': ((stateSession.page$| async) == 'detail' ? 'block' : 'none')}">
+    
+   <app-detail></app-detail>
   </mat-card>
+  <mat-card class="scoll" *ngIf="stateSearch.compareProducts.length > 0" [fxFlex.gt-xs]="60" style="overflow-y:scroll;width: 100%" 
+      [ngStyle.xs]="{'display': ((stateSession.page$| async) == 'compare' ? 'block' : 'none')}">
+   <app-compare></app-compare>
+ </mat-card>
 </div>

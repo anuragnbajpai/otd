@@ -27,11 +27,15 @@
 </mat-card>
 
 <mat-card class="detail" style="background-color:lightcyan;"
-  *ngIf="stateSearch.selectedProduct && stateSearch.compareProducts.length==0">
+  *ngIf="stateSearch.selectedProduct && stateSearch.compareProducts.length< 2">
+  <div fxLayout="row" fxLayoutAlign="space-between" >
   <div style="padding-bottom:10px;font-size: smaller;"><a routerLink="/">Home </a> / <a
-      routerLink="/search/{{stateSearch.selectedProduct.category}}">{{stateSearch.selectedProduct.category}}</a> /
-    {{stateSearch.selectedProduct.title}}</div>
-
+      routerLink="/search/{{stateSearch.selectedProduct?.category}}">{{stateSearch.selectedProduct?.category}}</a> /
+    {{stateSearch.selectedProduct?.title}}</div>
+    <button mat-icon-button fxHide.gt-xs routerLink="/search/{{stateSearch.selectedProduct?.category}}" >
+      <fa-icon [icon]="['fas', 'list']"></fa-icon>  
+    </button>
+  </div>
   <mat-card-header style="width: 100%;">
     <img mat-card-avatar [src]="stateSearch.selectedProduct.picture">
     <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
@@ -45,25 +49,22 @@
   </mat-card-header>
   <mat-card-subtitle fxLayout="row" fxLayoutAlign="center stretch">
 
-    <star-rating starType="svg" [rating]="stateSearch.selectedProduct.avgRating" size="medium" [readOnly]="true"
+    <star-rating starType="svg" [rating]="stateSearch.selectedProduct?.avgRating" size="medium" [readOnly]="true"
       [showHalfStars]="true"></star-rating>
-    <div style=" align-self: center;font-size: large;"> {{stateSearch.selectedProduct.avgRating}} </div>
+    <div style=" align-self: center;font-size: large;"> {{stateSearch.selectedProduct?.avgRating}} </div>
 
   </mat-card-subtitle>
 
   <mat-card-content>
-    <mat-tab-group mat-align-tabs="center">
-      <mat-tab fxLayoutAlign="center center">
-        <ng-template mat-tab-label>
-          Top Deals
-        </ng-template>
+    <mat-tab-group mat-align-tabs="center" (selectedTabChange)="onSequenceChangeEvent($event)">
+      <mat-tab label="Deals">    
         <ng-template matTabContent>
           <app-deal></app-deal>
         </ng-template>
       </mat-tab>
       <mat-tab label="Features">
         <ng-template matTabContent>
-          <!-- <app-feature></app-feature> -->
+          <app-feature></app-feature>
         </ng-template>
       </mat-tab>
       <mat-tab label="Images">
@@ -79,4 +80,3 @@
 
 </mat-card>
 
-<app-compare *ngIf="stateSearch.compareProducts.length > 0"></app-compare>

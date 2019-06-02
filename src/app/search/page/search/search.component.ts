@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from 'src/app/core/state/session/session.service';
+import { SearchService } from '../../state/search.service';
 
 @Component({
   selector: 'app-search',
@@ -8,7 +9,7 @@ import { SessionService } from 'src/app/core/state/session/session.service';
 })
 export class SearchComponent implements OnInit {
 
-  constructor( public stateSession: SessionService) { }
+  constructor( public stateSession: SessionService, public stateSearch: SearchService) { }
 
   ngOnInit() {
   }

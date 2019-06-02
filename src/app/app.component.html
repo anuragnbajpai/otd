@@ -5,6 +5,6 @@
   <mat-drawer-content fxLayout="column" fxLayoutAlign="stretch" style="overflow-y: hidden;">
     <app-header (leftNav)="drawer.toggle()"></app-header>
     <router-outlet [ngStyle]="{'padding-top': ((stateSession.page$ | async) == 'home') ? '25vh' : '8vh' }" ></router-outlet>
-    <app-footer> </app-footer>
+    <app-footer [hidden]="(stateSession.page$ | async) == 'search' || (stateSession.page$ | async) == 'detail'"> </app-footer>
   </mat-drawer-content>
 </mat-drawer-container>

@@ -8,12 +8,7 @@ import { SearchService } from '../../state/search.service';
 })
 export class DealComponent implements OnInit {
   sortBy = 'Price';
-  constructor(public stateSearch: SearchService) { 
-    if(this.stateSearch.selectedProduct.deals == null
-       || this.stateSearch.selectedProduct.deals.length == 0){
-      this.stateSearch.getDeals();
-    }
-    
+  constructor(public stateSearch: SearchService) {
   }
 
   ngOnInit() {

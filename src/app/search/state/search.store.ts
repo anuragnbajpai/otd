@@ -6,7 +6,10 @@ import { SearchState } from '../model/search.model';
 export function createInitialState(): SearchState {
   return {
     category: '',
-    product: ''
+    product: '',
+    tab: 'Deals',
+    compare1: '',
+    compare2: ''
   };
 }
 

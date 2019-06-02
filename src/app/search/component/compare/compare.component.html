@@ -1,7 +1,15 @@
-<mat-card  class="compare"  style="background-color:lightcyan;" [ngStyle.xs]="{'padding-top.px': 50}" >
+<div fxLayout="row" fxLayoutAlign="space-between" >
+    <div style="padding-bottom:10px;font-size: smaller;"><a routerLink="/">Home </a> / <a
+        routerLink="/search/{{stateSearch.compareProducts[0]?.category}}">{{stateSearch.compareProducts[0]?.category}}</a> /
+      {{stateSearch.compareProducts[0]?.title}} <b>vs</b> {{stateSearch.compareProducts[1]?.title}} </div>
+      <button mat-icon-button fxHide.gt-xs routerLink="/search/{{stateSearch.compareProducts[0]?.category}}" >
+        <fa-icon [icon]="['fas', 'list']"></fa-icon>  
+      </button>
+    </div>
 
 
-    <table style="width:100%">
+
+    <table style="width:100%;background-color:lightcyan;">
         <tr>
           <th>Product</th>
           <td *ngFor="let d of stateSearch.compareProducts">
@@ -32,4 +40,3 @@
       </table>
 
 
-</mat-card>

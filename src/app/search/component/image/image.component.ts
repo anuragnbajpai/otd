@@ -7,12 +7,12 @@ import { SearchService } from '../../state/search.service';
   styleUrls: ['./image.component.css']
 })
 export class ImageComponent implements OnInit {
-
+  sortBy = 'Date';
   constructor(public stateSearch: SearchService) { 
-    if(this.stateSearch.selectedProduct.images == null
-       || this.stateSearch.selectedProduct.images.length == 0){
-      this.stateSearch.getImages();
-    }
+    // if(this.stateSearch.selectedProduct.images == null
+    //    || this.stateSearch.selectedProduct.images.length == 0){
+    //   this.stateSearch.getImages();
+    // }
   }
 
   ngOnInit() {

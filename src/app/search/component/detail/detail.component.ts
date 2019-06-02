@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../state/search.service';
+import { MatTabChangeEvent } from '@angular/material';
 
 @Component({
   selector: 'app-detail',
@@ -12,5 +13,9 @@ export class DetailComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
+  onSequenceChangeEvent(event: MatTabChangeEvent) {
+    console.log(event.tab.textLabel);
+    this.stateSearch.updateTab(event.tab.textLabel);
+  }
 }

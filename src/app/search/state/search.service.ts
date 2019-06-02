@@ -12,6 +12,9 @@ import { take, distinctUntilChanged } from 'rxjs/operators';
 export class SearchService {
   category$ = this.query.select(e => e.category);
   product$ = this.query.select(e => e.product);
+  compare1$ = this.query.select(e => e.compare1);
+  compare2$ = this.query.select(e => e.compare2);
+  tab$ = this.query.select(e => e.tab);
   searchResult: Product[];
   selectedProduct: Product;
   compareProducts: Product[] = [];
@@ -27,10 +30,14 @@ export class SearchService {
           .orderBy('avgRating', 'desc').limit(10)).pipe(take(1)).subscribe(data => {
             this.searchResult = data.map(e => e.payload.doc.data()) as Product[];
             if (this.searchResult[0] ) {
+              if(this.getCompare1Product()){
+                this.getCompareList();
+              } else {
               if(this.query.getValue().product !== '' &&
                this.searchResult.findIndex(f => f.title === this.query.getValue().product) !== -1) {
                 this.updateProduct(this.query.getValue().product);
                 this.updateProductValue(this.query.getValue().product);
+                this.getTabData();
                 setTimeout(() => {
                   let el = document.getElementById(this.query.getValue().product);
                   el.scrollIntoView();
@@ -40,6 +47,7 @@ export class SearchService {
                 this.updateProduct(this.searchResult[0].title);
               }
             }
+            }
           });
       }
     });
@@ -47,11 +55,57 @@ export class SearchService {
     this.query.select(e => e.product).pipe(distinctUntilChanged()).subscribe(p => {
       if (this.searchResult && this.searchResult.length > 0) {
         this.updateProductValue(p);
+        this.getTabData();
       }
     });
+
+    this.query.select(e => e.tab).pipe(distinctUntilChanged()).subscribe(t => {
+      if (this.searchResult && this.searchResult.length > 0) {
+        this.getTabData();
+      }
+    });
+
+    this.query.select(e => e.compare1).pipe(distinctUntilChanged()).subscribe(c => {
+   
+        if (this.searchResult && this.searchResult.length > 0) {
+          this.getCompareList();
+        }
+
+    });
+    this.query.select(e => e.compare2).pipe(distinctUntilChanged()).subscribe(c => {
+   
+      if (this.searchResult && this.searchResult.length > 0) {
+        this.getCompareList();
+      }
+
+  });
   }
 
+  getCompareList(){
+    this.compareProducts = [];
+    const cmpProduct1 = this.searchResult.find(f => f.title === this.getCompare1Product());
+    const cmpProduct2 = this.searchResult.find(f => f.title === this.getCompare2Product());
+    if(cmpProduct1){
+      this.compareProducts.push(cmpProduct1);
+    }
+    if(cmpProduct2){
+      this.compareProducts.push(cmpProduct2);
+    }
+    if(cmpProduct1 || cmpProduct2){
+      this.updateProduct(null);
+      this.selectedProduct = null;
+    }
 
+  }
+  getCompare1Product(){
+    return this.query.getValue().compare1;
+  }
+  getCompare2Product(){
+    return this.query.getValue().compare2;
+  }
+  getProduct(){
+    return this.query.getValue().product;
+  }
   getDeals(){
     this.svcFirestore.getDocument('deals', this.selectedProduct.id).subscribe(d => {
       this.selectedProduct.deals = (d.payload.data() as any).deals;
@@ -65,6 +119,8 @@ export class SearchService {
       });
   }
   updateProductValue(title){
+    this.updateCompare1(null);
+    this.updateCompare2(null);
     this.selectedProduct = this.searchResult.find(f => f.title === title);
   }
 
@@ -74,6 +130,37 @@ export class SearchService {
 
   updateProduct(product) {
     this.store.update(state => ({ ...state, product }));
+  }
+  updateCompare1(compare1) {
+    this.store.update(state => ({ ...state, compare1 }));
+  }
+  updateCompare2(compare2) {
+    this.store.update(state => ({ ...state, compare2 }));
+  }
+  
+
+  getTabValue(){
+    return this.query.getValue().tab;
+  }
+
+  getTabData(){
+    if(this.selectedProduct){
+      switch(this.getTabValue()){
+        case 'Images':
+            if (this.selectedProduct.images == null || this.selectedProduct.images.length === 0){
+              this.getImages();
+            }
+            break;
+        case 'Deals':
+            if (this.selectedProduct.deals == null || this.selectedProduct.deals.length === 0){
+              this.getDeals();
+            }
+      }
+    }
+  }
+
+  updateTab(tab) {
+    this.store.update(state => ({ ...state, tab }));
   }
 
 

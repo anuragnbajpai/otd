@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchService } from '../../state/search.service';
 
 @Component({
   selector: 'app-feature',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeatureComponent implements OnInit {
 
-  constructor() { }
+  constructor(public stateSearch: SearchService) { }
 
   ngOnInit() {
   }

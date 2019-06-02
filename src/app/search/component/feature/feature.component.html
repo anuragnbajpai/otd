@@ -1,22 +1,14 @@
-<mat-card class="tab-content">
-    <!-- <p *ngFor="let p of _detail.properties" >
-      <b>{{ p.key }} : </b> {{ p.value}}
-    </p> -->
-       <mat-table [dataSource]="_detail.features">
-          <!-- User name Definition -->
-          <ng-container cdkColumnDef="key">
-            <mat-header-cell *cdkHeaderCellDef> key </mat-header-cell>
-            <mat-cell *cdkCellDef="let row"> <b> {{row.key}} </b> </mat-cell>
-          </ng-container>
+<mat-card style="background: white">
+<mat-card  class="tab-content" style="background-color:lightcyan;"  >
 
-          <!-- Age Definition -->
-          <ng-container cdkColumnDef="value">
-            <mat-header-cell *cdkHeaderCellDef> value </mat-header-cell>
-            <mat-cell *cdkCellDef="let row"> {{row.value}} </mat-cell>
-          </ng-container>
 
-         <!-- Header and Row Declarations -->
-          <mat-row *cdkRowDef="let row; columns: ['key', 'value']"></mat-row>
-        </mat-table>
+    <table style="width:100%">
+        <tr  *ngFor="let f of stateSearch.selectedProduct.features; let i = index">
+          <th>{{f.key}}</th>
+          <td>{{f.value}}</td>
+        </tr>
+      </table>
 
-  </mat-card>
+
+</mat-card>
+</mat-card>

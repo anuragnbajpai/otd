@@ -39,6 +39,13 @@ export class RouteHandler {
     if (event.snapshot.params.product) {
        this.stateSearch.updateProduct(event.snapshot.params.product);
     }
+
+    if (event.snapshot.params.compare1) {
+        this.stateSearch.updateCompare1(event.snapshot.params.compare1);
+    }
+    if (event.snapshot.params.compare2) {
+      this.stateSearch.updateCompare2(event.snapshot.params.compare2);
+  }
     
   }
 

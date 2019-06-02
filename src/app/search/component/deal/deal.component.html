@@ -1,28 +1,47 @@
 <mat-card class="tab-content">
     <mat-card fxLayout="row" fxLayoutAlign="space-between" style="background:lightcyan">
       <div>
-          Sort By: <button mat-button [matMenuTriggerFor]="menu" style="background: lightgrey">{{sortBy}}</button>
+          <button mat-button [matMenuTriggerFor]="menu" style="background: #d3d3d34d">
+              <span>Sort By:</span> &nbsp;<b style="padding-right: 5px">{{sortBy}}</b>
+              <fa-icon [icon]="['fas', 'sort']"></fa-icon>  
+          </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="sortBy = 'Price'">Price</button>
             <button mat-menu-item (click)="sortBy = 'Brand'">Brand</button>
             <button mat-menu-item (click)="sortBy = 'Date'">Date</button>
           </mat-menu>
       </div> 
-      <div> <button mat-button style="background: lightgrey" >Add</button></div>      
+      <div> <button mat-button style="background: #d3d3d34d" >Add <fa-icon [icon]="['fas', 'plus']"></fa-icon>  </button></div>      
        
     </mat-card>
-  <mat-grid-list cols="2" rowHeight="2:1" gutterSize="10px" style="padding-top: 10px" >
-    <mat-grid-tile *ngFor="let element of stateSearch.selectedProduct.deals;let i = index" style="background: lightcyan;"> 
-      <div fxLayout="column" fxLayoutAlign="space-between">
-        <div style=" align-self: center;font-size: x-large;">{{100 - ((element.price/stateSearch.selectedProduct.price)*100) | number:'1.0-0'}}%</div>
+  <mat-card fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
+    <mat-card *ngFor="let element of stateSearch.selectedProduct.deals;let i = index" 
+    style="background: lightcyan; margin:5px" [ngStyle.xs]="{'width.%': 80}" [ngStyle.gt-xs]="{'width.px': 200}"> 
+     <mat-card-content fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 0px">
+      <div style=" align-self: center;font-size: x-large;margin: 10px">{{100 - ((element.price/stateSearch.selectedProduct.price)*100) | number:'1.0-0'}}%</div>
       <div> <s>{{stateSearch.selectedProduct.price }}</s> &nbsp;<b>{{element.price}}</b> {{stateSearch.selectedProduct.currency}}  </div>
-      
-      <a style="min-width:110px;max-width:110px; background: rgb(205, 249, 249)" mat-raised-button href="{{element.link}}" target="_blank" > {{element.store}}</a>
-      <br/><br/>
-    </div>
-      <mat-grid-tile-footer>
-          {{element.dateTime.toDate() | date}} 
-      </mat-grid-tile-footer>
-    </mat-grid-tile>
-  </mat-grid-list>      
+      <a color="primary" style="margin: 10px" mat-raised-button href="{{element.link}}" target="_blank" > {{element.store}}</a>
+    </mat-card-content>
+      <mat-card-actions style="padding: 10px; background: #d3d3d34d;">  
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <div fxLayout="row">
+            <img mat-card-avatar style="width: 30px;background-size: cover;border-radius: 50%;margin-right: 10px;" 
+            src="https://material.angular.io/assets/img/examples/shiba1.jpg">  
+            <div>
+                <div>Anurag </div>
+                <div style="font-size: xx-small;">{{element.dateTime.toDate() | date}} </div>
+            </div>  
+          </div>
+            <div style="margin:5px">
+                <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> 123
+            </div>  
+            <div style="margin:5px">
+                <fa-icon [icon]="['far', 'thumbs-down']"></fa-icon> 45
+            </div>          
+            
+        </div> 
+                
+      </mat-card-actions>
+    </mat-card>
+  </mat-card>      
 </mat-card>

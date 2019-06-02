@@ -21,5 +21,9 @@ export class SessionService {
     this.store.update(state => ({...state, page}));
   }
 
+  getDevice(){
+    return this.query.getValue().device;
+  }
+
 }
 

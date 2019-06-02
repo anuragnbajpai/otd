@@ -30,6 +30,30 @@ const routes: Routes = [
             description: 'Top 10 {category} with reviews and deals information'
           }
         }
+      },
+      {
+        path: ':category/compare/:compare1',
+        component: SearchComponent,
+        data: {
+          page: 'compare',
+          title: 'Top 10 {category}',
+          metatags: {
+            keywords: 'top {product}, top 10 {product}, best {product}, {product} deals',
+            description: 'Top 10 {category} with reviews and deals information'
+          }
+        }
+      },
+      {
+        path: ':category/compare/:compare1/:compare2',
+        component: SearchComponent,
+        data: {
+          page: 'compare',
+          title: 'Top 10 {category}',
+          metatags: {
+            keywords: 'top {product}, top 10 {product}, best {product}, {product} deals',
+            description: 'Top 10 {category} with reviews and deals information'
+          }
+        }
       }
     ]
   }
