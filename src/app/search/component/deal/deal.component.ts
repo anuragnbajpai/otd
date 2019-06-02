@@ -7,11 +7,16 @@ import { SearchService } from '../../state/search.service';
   styleUrls: ['./deal.component.css']
 })
 export class DealComponent implements OnInit {
-  sortBy = 'Price';
+  sortBy = 'price';
   constructor(public stateSearch: SearchService) {
   }
 
   ngOnInit() {
+  }
+
+  sort(sortBy){
+    this.sortBy = sortBy;
+   // this.stateSearch.selectedProduct.deals = this.stateSearch.selectedProduct.deals.sort((a: any, b: any) => parseFloat(a[sortBy]) - parseFloat(b[sortBy]));
   }
 
 }

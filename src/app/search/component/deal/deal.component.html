@@ -6,16 +6,16 @@
               <fa-icon [icon]="['fas', 'sort']"></fa-icon>  
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="sortBy = 'Price'">Price</button>
-            <button mat-menu-item (click)="sortBy = 'Brand'">Brand</button>
-            <button mat-menu-item (click)="sortBy = 'Date'">Date</button>
+            <button mat-menu-item (click)="sort('price')">Price</button>
+            <button mat-menu-item (click)="sort('store')">Store</button>
+            <button mat-menu-item (click)="sort('dateTime')">Date</button>
           </mat-menu>
       </div> 
       <div> <button mat-button style="background: #d3d3d34d" >Add <fa-icon [icon]="['fas', 'plus']"></fa-icon>  </button></div>      
        
     </mat-card>
   <mat-card fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
-    <mat-card *ngFor="let element of stateSearch.selectedProduct.deals;let i = index" 
+    <mat-card *ngFor="let element of stateSearch.selectedProduct.deals | sort: sortBy"  
     style="background: lightcyan; margin:5px" [ngStyle.xs]="{'width.%': 80}" [ngStyle.gt-xs]="{'width.px': 200}"> 
      <mat-card-content fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 0px">
       <div style=" align-self: center;font-size: x-large;margin: 10px">{{100 - ((element.price/stateSearch.selectedProduct.price)*100) | number:'1.0-0'}}%</div>

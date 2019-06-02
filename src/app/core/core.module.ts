@@ -19,10 +19,11 @@ import { StarRatingModule } from 'angular-star-rating';
 import { ContactusComponent } from './page/contactus/contactus.component';
 import { AboutusComponent } from './page/aboutus/aboutus.component';
 import { SavedComponent } from './page/saved/saved.component';
+import { SortPipe } from './pipe/sort.pipe';
 
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, FooterComponent, SearchinputComponent, 
-    LeftnavComponent, ContactusComponent, AboutusComponent, SavedComponent],
+    LeftnavComponent, ContactusComponent, AboutusComponent, SavedComponent, SortPipe],
   imports: [
     CommonModule,
     MaterialModule,
@@ -53,6 +54,7 @@ import { SavedComponent } from './page/saved/saved.component';
     FooterComponent,
     SearchinputComponent,
     StarRatingModule,
+    SortPipe
   ],
   providers: [
     {provide: ErrorHandler, useClass: AppErrorHandler}
