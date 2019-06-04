@@ -1,10 +1,12 @@
-<mat-drawer-container autosize>
+<mat-drawer-container class="scoll" autosize  style="overflow-y: auto; height: 100vh;">
   <mat-drawer #drawer mode="over">
     <app-leftnav (leftNav)="drawer.toggle()"></app-leftnav>
   </mat-drawer>
-  <mat-drawer-content fxLayout="column" fxLayoutAlign="stretch" style="overflow-y: hidden;">
+  <mat-drawer-content fxLayout="column" fxLayoutAlign="stretch" class="scoll">
     <app-header (leftNav)="drawer.toggle()"></app-header>
     <router-outlet [ngStyle]="{'padding-top': ((stateSession.page$ | async) == 'home') ? '25vh' : '8vh' }" ></router-outlet>
-    <app-footer [hidden]="(stateSession.page$ | async) == 'search' || (stateSession.page$ | async) == 'detail'"> </app-footer>
+    <app-footer [hidden]="(stateSession.page$ | async) == 'search' || 
+    (stateSession.page$ | async) == 'detail' ||
+    (stateSession.page$ | async) == 'compare'"> </app-footer>
   </mat-drawer-content>
 </mat-drawer-container>

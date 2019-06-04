@@ -26,7 +26,7 @@ export class SearchService {
         this.compareProducts = [];
         this.selectedProduct = null;
         this.updateProduct(null);
-        this.svcFirestore.getCollectionCondition('products', ref => ref.where('category', '==', c)
+        this.svcFirestore.getCollectionCondition('products', ref => ref.where('tags', 'array-contains', c.toLowerCase())
           .orderBy('avgRating', 'desc').limit(10)).pipe(take(1)).subscribe(data => {
             this.searchResult = data.map(e => e.payload.doc.data()) as Product[];
             if (this.searchResult[0] ) {
@@ -105,6 +105,9 @@ export class SearchService {
   }
   getProduct(){
     return this.query.getValue().product;
+  }
+  getCategory(){
+    return this.query.getValue().category;
   }
   getDeals(){
     this.svcFirestore.getDocument('deals', this.selectedProduct.id).subscribe(d => {

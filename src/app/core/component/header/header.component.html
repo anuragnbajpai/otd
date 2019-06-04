@@ -15,4 +15,13 @@
 
   </div>
 
+  <button mat-icon-button [matMenuTriggerFor]="menu" style="position: fixed; top:1vh; right:2vw;z-index:10; background: transparent">
+      <img [src]="(stateSession.country$ | async)?.image">
+    </button>
+    <mat-menu #menu="matMenu">
+      <button fxLayout="row" style="line-height: 35px" mat-menu-item (click)="changeCountry(cnt)" *ngFor="let cnt of stateSession.countries" >
+       <img src="{{cnt.image}}" style="margin-right: 5px;"> <div>{{cnt.name}} </div> 
+      </button>   
+    </mat-menu>
+
 </mat-card>

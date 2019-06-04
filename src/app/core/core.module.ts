@@ -20,7 +20,7 @@ import { ContactusComponent } from './page/contactus/contactus.component';
 import { AboutusComponent } from './page/aboutus/aboutus.component';
 import { SavedComponent } from './page/saved/saved.component';
 import { SortPipe } from './pipe/sort.pipe';
-
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, FooterComponent, SearchinputComponent, 
     LeftnavComponent, ContactusComponent, AboutusComponent, SavedComponent, SortPipe],
@@ -38,7 +38,8 @@ import { SortPipe } from './pipe/sort.pipe';
     FontAwesomeModule,
     FontawesomeModule,
     RouterModule,
-    StarRatingModule
+    StarRatingModule,
+    HttpClientModule
   ],
   exports: [
     FormsModule,
@@ -54,7 +55,8 @@ import { SortPipe } from './pipe/sort.pipe';
     FooterComponent,
     SearchinputComponent,
     StarRatingModule,
-    SortPipe
+    SortPipe,
+    HttpClientModule
   ],
   providers: [
     {provide: ErrorHandler, useClass: AppErrorHandler}

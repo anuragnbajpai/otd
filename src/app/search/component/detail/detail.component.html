@@ -30,9 +30,9 @@
   *ngIf="stateSearch.selectedProduct && stateSearch.compareProducts.length< 2">
   <div fxLayout="row" fxLayoutAlign="space-between" >
   <div style="padding-bottom:10px;font-size: smaller;"><a routerLink="/">Home </a> / <a
-      routerLink="/search/{{stateSearch.selectedProduct?.category}}">{{stateSearch.selectedProduct?.category}}</a> /
+      routerLink="/search/{{stateSearch.category$ | async}}">{{stateSearch.category$ | async}}</a> /
     {{stateSearch.selectedProduct?.title}}</div>
-    <button mat-icon-button fxHide.gt-xs routerLink="/search/{{stateSearch.selectedProduct?.category}}" >
+    <button mat-icon-button fxHide.gt-xs routerLink="/search/{{stateSearch.category$ | async}}" >
       <fa-icon [icon]="['fas', 'list']"></fa-icon>  
     </button>
   </div>
@@ -41,7 +41,7 @@
     <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
       <div>
         <h4 style="margin:0"> {{stateSearch.selectedProduct.brand}} {{stateSearch.selectedProduct.title}}
-          &nbsp;&nbsp;(${{stateSearch.selectedProduct.price}} {{stateSearch.selectedProduct.currency}})</h4>
+          &nbsp;&nbsp;({{(stateSession.country$| async)?.currencySymbol }} {{stateSearch.selectedProduct.price}} {{(stateSession.country$| async)?.currency }})</h4>
       </div>
     </mat-card-title>
     <mat-card-subtitle style="margin-top:-10px">{{stateSearch.selectedProduct.description}}</mat-card-subtitle>

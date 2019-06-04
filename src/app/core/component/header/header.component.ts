@@ -19,4 +19,7 @@ export class HeaderComponent implements OnInit {
     this.leftNav.emit(true);
   }
 
+  changeCountry(country){
+    this.stateSession.updateCountry(country);
+  }
 }

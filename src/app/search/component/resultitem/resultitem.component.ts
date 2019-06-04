@@ -24,7 +24,7 @@ export class ResultitemComponent implements OnInit {
   detail() {
     this.stateSearch.compareProducts = [];
     this.stateSearch.searchResult.map(r => r.isCompare = false);
-    this.router.navigate(['/search/' + this.product.category + '/' + this.product.title]);
+    this.router.navigate(['/search/' + this.stateSearch.getCategory() + '/' + this.product.title]);
   }
 
   addCompare() {
@@ -39,7 +39,7 @@ export class ResultitemComponent implements OnInit {
       if (this.stateSearch.compareProducts.length === 1) {
         this.stateSearch.updateProduct(null);
         if (this.stateSession.getDevice() !== 'xs') {
-          this.router.navigate(['/search/' + this.product.category + '/compare/' + this.product.title]);
+          this.router.navigate(['/search/' + this.stateSearch.getCategory() + '/compare/' + this.product.title]);
         }
       }
 
@@ -50,7 +50,7 @@ export class ResultitemComponent implements OnInit {
     if (this.stateSearch.compareProducts.length === 2) {
       this.stateSearch.updateProduct(null);
       // tslint:disable-next-line:max-line-length
-      this.router.navigate(['/search/' + this.product.category + '/compare/' + this.stateSearch.compareProducts[0].title + '/' + this.stateSearch.compareProducts[1].title]);
+      this.router.navigate(['/search/' + this.stateSearch.getCategory() + '/compare/' + this.stateSearch.compareProducts[0].title + '/' + this.stateSearch.compareProducts[1].title]);
     }
     this.product.isCompare = !this.product.isCompare;
 

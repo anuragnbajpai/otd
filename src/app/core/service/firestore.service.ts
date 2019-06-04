@@ -32,13 +32,15 @@ export class FirestoreService {
     return guid;
   }
   updateItem(name, item) {
-    delete item.id;
+  //  delete item.id;
     this.firestore.doc(name + '/' + item.id).update(item);
   }
   updateDocument(name,id, item) {
-    delete item.id;
-    this.firestore.collection(name).doc(id).update(item);
+    // delete item.id;
+    this.firestore.collection(name).doc(id).update( {images: item} );
   }
+
+
   deleteItem(name , id: string) {
     this.firestore.doc(name + '/' + id).delete();
   }
@@ -49,4 +51,20 @@ export class FirestoreService {
   // getSearchResult(name, where) {
   //   return this.firestore.collection(name, where).snapshotChanges();
   // }
+
+  updateImages(name,id, images) {
+    // delete item.id;
+    this.firestore.collection(name).doc(id).set( { images });
+  }
+
+  updateDeals(name,id, deals) {
+    // delete item.id;
+    this.firestore.collection(name).doc(id).set( { deals });
+  }
+
+  updateReviews(name, id, reviews) {
+    // delete item.id;
+    this.firestore.collection(name).doc(id).set( { reviews });
+  }
+  
 }

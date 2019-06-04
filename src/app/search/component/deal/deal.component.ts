@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../state/search.service';
+import { SessionService } from 'src/app/core/state/session/session.service';
 
 @Component({
   selector: 'app-deal',
@@ -8,7 +9,7 @@ import { SearchService } from '../../state/search.service';
 })
 export class DealComponent implements OnInit {
   sortBy = 'price';
-  constructor(public stateSearch: SearchService) {
+  constructor(public stateSearch: SearchService, public stateSession: SessionService) {
   }
 
   ngOnInit() {

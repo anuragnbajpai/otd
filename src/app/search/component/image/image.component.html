@@ -23,23 +23,23 @@
          
         </mat-card-content>
           <mat-card-actions style="padding: 10px; background: #d3d3d34d;">  
-            <div fxLayout="row" fxLayoutAlign="space-between">
-              <div fxLayout="row">
-                <img mat-card-avatar style="width: 30px;background-size: cover;border-radius: 50%;margin-right: 10px;" 
-                src="https://material.angular.io/assets/img/examples/shiba1.jpg">  
-                <div>
-                    <div>Anurag </div>
-                    <div style="font-size: xx-small;">{{element.dateTime.toDate() | date}} </div>
-                </div>  
-              </div>
-                <div style="margin:5px">
-                    <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> 123
-                </div>  
-                <div style="margin:5px">
-                    <fa-icon [icon]="['far', 'thumbs-down']"></fa-icon> 45
-                </div>          
-                
-            </div> 
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                  <div fxLayout="row">
+                    <img mat-card-avatar style="width: 30px;background-size: cover;border-radius: 50%;margin-right: 10px;" 
+                    src="{{element.userPicture}}">  
+                    <div>
+                        <div>{{element.userName}} </div>
+                        <div style="font-size: xx-small;">{{element.dateTime.toDate() | date}} </div>
+                    </div>  
+                  </div>
+                    <div style="margin:5px">
+                        <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> {{element.review.liked.length}}
+                    </div>  
+                    <div style="margin:5px">
+                        <fa-icon [icon]="['far', 'thumbs-down']"></fa-icon> {{element.review.unliked.length}}
+                    </div>          
+                    
+                </div> 
                     
           </mat-card-actions>
         </mat-card>

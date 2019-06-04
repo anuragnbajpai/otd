@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../state/search.service';
 import { MatTabChangeEvent } from '@angular/material';
+import { SessionService } from 'src/app/core/state/session/session.service';
 
 @Component({
   selector: 'app-detail',
@@ -9,7 +10,7 @@ import { MatTabChangeEvent } from '@angular/material';
 })
 export class DetailComponent implements OnInit {
 
-  constructor(public stateSearch: SearchService) { }
+  constructor(public stateSearch: SearchService, public stateSession: SessionService) { }
 
   ngOnInit() {
   }

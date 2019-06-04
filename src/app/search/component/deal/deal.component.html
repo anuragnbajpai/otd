@@ -19,24 +19,24 @@
     style="background: lightcyan; margin:5px" [ngStyle.xs]="{'width.%': 80}" [ngStyle.gt-xs]="{'width.px': 200}"> 
      <mat-card-content fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 0px">
       <div style=" align-self: center;font-size: x-large;margin: 10px">{{100 - ((element.price/stateSearch.selectedProduct.price)*100) | number:'1.0-0'}}%</div>
-      <div> <s>{{stateSearch.selectedProduct.price }}</s> &nbsp;<b>{{element.price}}</b> {{stateSearch.selectedProduct.currency}}  </div>
+      <div> <s>{{(stateSession.country$| async)?.currencySymbol }}{{stateSearch.selectedProduct.price }}</s> &nbsp;<b>{{(stateSession.country$| async)?.currencySymbol }}{{element.price}}</b> {{(stateSession.country$| async)?.currency }}   </div>
       <a color="primary" style="margin: 10px" mat-raised-button href="{{element.link}}" target="_blank" > {{element.store}}</a>
     </mat-card-content>
       <mat-card-actions style="padding: 10px; background: #d3d3d34d;">  
         <div fxLayout="row" fxLayoutAlign="space-between">
           <div fxLayout="row">
             <img mat-card-avatar style="width: 30px;background-size: cover;border-radius: 50%;margin-right: 10px;" 
-            src="https://material.angular.io/assets/img/examples/shiba1.jpg">  
+            src="{{element.userPicture}}">  
             <div>
-                <div>Anurag </div>
+                <div>{{element.userName}} </div>
                 <div style="font-size: xx-small;">{{element.dateTime.toDate() | date}} </div>
             </div>  
           </div>
             <div style="margin:5px">
-                <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> 123
+                <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> {{element.review.liked.length}}
             </div>  
             <div style="margin:5px">
-                <fa-icon [icon]="['far', 'thumbs-down']"></fa-icon> 45
+                <fa-icon [icon]="['far', 'thumbs-down']"></fa-icon> {{element.review.unliked.length}}
             </div>          
             
         </div> 

@@ -6,7 +6,7 @@
             <div class="ranking">#{{rank+1}}</div>
             <span style="align-self: center;padding-left: 5px;" fxFlex="80"> {{product.brand}} {{product.title}}   </span>
             
-            <span style="align-self: center;text-align: center" >${{product.price}}
+            <span style="align-self: center;text-align: center" >{{(stateSession.country$| async)?.currencySymbol }}{{product.price}}
                <!-- <div style="font-size:10px">{{d.currency}}</div> -->
               </span>
           </mat-card-title>

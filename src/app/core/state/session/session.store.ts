@@ -6,7 +6,8 @@ export function createInitialState(): SessionState {
   return {
     device: 'xs',
     page: 'home',
-    user: null
+    user: null,
+    country: null
   };
 }
 

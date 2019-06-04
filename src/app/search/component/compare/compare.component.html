@@ -35,7 +35,7 @@
           </tr>
         <tr  *ngFor="let p of stateSearch.compareProducts[0].features; let i = index">
           <th>{{p.key}}</th>
-          <td *ngFor="let d of stateSearch.compareProducts">{{d.features[i].value}}</td>
+          <td *ngFor="let d of stateSearch.compareProducts">{{d.features[i]?.value}}</td>
         </tr>
       </table>
 
