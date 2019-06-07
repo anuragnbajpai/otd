@@ -12,6 +12,7 @@ export class SessionService {
   page$ = this.query.select(e => e.page);
   country$ = this.query.select(e => e.country);
   countries = null;
+  user$ = this.query.select(e => e.user);
 
   constructor(private store: SessionStore, private svcFirestore: FirestoreService, private query: SessionQuery, private http: HttpClient) {
 
@@ -19,6 +20,8 @@ export class SessionService {
       console.log('find location success');
       this.setCountry(res.geoplugin_countryCode.toLowerCase());
     });
+    this.updateUser(JSON.parse(localStorage.getItem('user')));
+    console.log(localStorage.getItem('user'));
   }
 
   UpdateDevice(device) {
@@ -61,6 +64,9 @@ export class SessionService {
    }
    getUser(){
     return this.query.getValue().user;
+   }
+   updateUser(user){
+    this.store.update(state => ({ ...state, user }));
    }
 
 }

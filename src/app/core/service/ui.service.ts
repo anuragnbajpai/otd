@@ -9,7 +9,7 @@ import { AddreviewComponent } from 'src/app/core/component/addreview/addreview.c
 
 @Injectable({ providedIn: 'root' })
 export class UiService {
-
+  isOpen = false;
   constructor(    
     public dialog: MatDialog,
     private router: Router,
@@ -23,9 +23,9 @@ export class UiService {
     let dialogComponent: any;
     if(this.checkLogin()){
       switch (component) {
-        case 'login':
-          dialogComponent = LoginComponent;
-          break;
+        // case 'login':
+        //   dialogComponent = LoginComponent;
+        //   break;
         case 'image':
           dialogComponent = AddimageComponent;
           break;
@@ -36,19 +36,35 @@ export class UiService {
           dialogComponent = AddreviewComponent;
           break;
       }
-    } else {
-      dialogComponent = LoginComponent;
-      localStorage.setItem('redirectTo', this.router.url);
-      console.log(localStorage.getItem('redirectTo'));
-      //this.router.navigate([decodeURIComponent(this.router.url.split('?')[0])], { relativeTo: this.route, queryParams: { add: 'login' } });
-    }
 
+    } else {
+  
+      dialogComponent = LoginComponent;
+      if(!this.isOpen){
+        sessionStorage.setItem('component',component);
+        sessionStorage.setItem('redirectTo', decodeURIComponent(this.router.url.split('?')[0]));
+        console.log(sessionStorage.getItem('redirectTo'));
+        this.router.navigate([decodeURIComponent(this.router.url.split('?')[0])], { relativeTo: this.route, queryParams: { add: 'login' } });
+       } else {
+         return;
+       }
+    }
+    this.isOpen = true;
     const dialogRef = this.dialog.open(dialogComponent, {
       width: '250px'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.router.navigate([decodeURIComponent(this.router.url.split('?')[0]) ]);
+      sessionStorage.removeItem('redirectTo');
+      sessionStorage.removeItem('component');
+      this.isOpen = false;
     });
+
+
+  }
+
+  closeDialog(){
+    this.dialog.closeAll();
   }
 
   checkLogin(){

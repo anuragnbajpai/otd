@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SessionService } from '../../state/session/session.service';
 
 @Component({
   selector: 'app-leftnav',
@@ -9,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LeftnavComponent implements OnInit {
   @Output() public leftNav = new EventEmitter();
   
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, private stateSession: SessionService) { }
 
   ngOnInit() {
   }
@@ -19,6 +20,10 @@ export class LeftnavComponent implements OnInit {
   }
   login(){
     const url = this.router.url.split('?')[0];
-    this.router.navigate([ decodeURIComponent(url) ], { queryParams: { login: true } });
+    this.router.navigate([ decodeURIComponent(url) ], { queryParams: { add: 'login' } });
+  }
+  logout(){
+    localStorage.removeItem('user');
+    this.stateSession.updateUser(null);
   }
 }

@@ -9,6 +9,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { FirestoreService } from './firestore.service';
 import * as firebase from 'firebase/app';
 import { User } from '../model/Session.model';
+import { SessionService } from '../state/session/session.service';
+import { UiService } from './ui.service';
+import { SnackbarService } from './snackbar.service';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
@@ -21,6 +24,9 @@ export class LoginService {
     private http: HttpClient,
     public afAuth: AngularFireAuth,
     public svcFirestore: FirestoreService,
+    private stateSession: SessionService,
+    public dialog: MatDialog,
+    private svcSnackbar: SnackbarService
   ) {
     this.afAuth.auth.getRedirectResult().then((result) => {
 
@@ -37,23 +43,30 @@ export class LoginService {
    }
 
  login(result){
-  let accountInfo: User;
+  let accountInfo = new User();
   accountInfo.name = result.user.displayName;
   accountInfo.email = result.user.email;
   accountInfo.picture = result.user.photoURL;
+  accountInfo.role = 'read';
 
   this.svcFirestore.getCollectionCondition('users', ref => ref.where('email', '==', accountInfo.email) )
   .pipe(take(1)).subscribe((res: any) =>
   {
     if(res.length > 0){
-      accountInfo.id = res[0].id;
+      let user = res.map(r => r.payload.doc.data());
+      accountInfo = user[0];
+    } else {
+      accountInfo.id = this.svcFirestore.createItem('users', accountInfo);
     }
    // this.gApi.AccountInfo = accountInfo;
-    localStorage.setItem('AccountInfo', JSON.stringify(accountInfo));
-
-    this.router.navigate([localStorage.getItem('redirect').toString()]);
-
-  })
+    this.stateSession.updateUser(accountInfo);
+    localStorage.setItem('user', JSON.stringify(accountInfo));
+    let url = decodeURIComponent(sessionStorage.getItem('redirectTo').toString());
+    this.dialog.closeAll();
+    this.svcSnackbar.Confirmation('Successfully logged in');
+    //localStorage.removeItem('redirectTo');
+    this.router.navigate([url], { relativeTo: this.route, queryParams: { add: sessionStorage.getItem('component') } });    
+  });
 }
 
  isRunningStandalone() {
@@ -131,15 +144,15 @@ export class LoginService {
       if(this.isRunningStandalone())
       {
         this.afAuth.auth
-        .signInWithRedirect(provider);
-        // .then(res => {
-        //   console.log('google success');
-        //   resolve(res);
-        // }, err => {
-        //   console.log('google error');
-        //   console.log(err);
-        //   reject(err);
-        // })
+        .signInWithRedirect(provider)
+        .then(res => {
+          console.log('google success');
+          resolve(res);
+        }, err => {
+          console.log('google error');
+          console.log(err);
+          reject(err);
+        });
       }  else{
         {
           this.afAuth.auth

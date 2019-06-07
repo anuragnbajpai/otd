@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../service/login.service';
-import { CoreService } from '../../service/core.service';
 
 @Component({
   selector: 'app-login',
@@ -10,35 +9,35 @@ import { CoreService } from '../../service/core.service';
 export class LoginComponent implements OnInit {
 
   constructor(
-   // private svcCore: CoreService
+    private svcLogin: LoginService
     ) { }
 
   ngOnInit() {
   }
 
-  // tryFacebookLogin(){
-  //   this.svcCore.login.doFacebookLogin()
-  //   .then(res => {
-  //     console.log(res);
-  //     this.svcCore.login.login(res);
-  //   }, error =>{
-  //   });
-  // }
+  tryFacebookLogin(){
+    this.svcLogin.doFacebookLogin()
+    .then(res => {
+      console.log(res);
+      this.svcLogin.login(res);
+    }, error =>{
+    });
+  }
 
-  // tryTwitterLogin(){
-  //   this.svcCore.login.doTwitterLogin()
-  //   .then(res => {
-  //     this.svcCore.login.login(res);
-  //   }, error =>{
-  //   });
-  // }
+  tryTwitterLogin(){
+    this.svcLogin.doTwitterLogin()
+    .then(res => {
+      this.svcLogin.login(res);
+    }, error =>{
+    });
+  }
 
-  // tryGoogleLogin(){
-  //   this.svcCore.login.doGoogleLogin()
-  //   .then(res => {
-  //     this.svcCore.login.login(res);
-  //   }, error =>{
-  //   });
-  // }
+  tryGoogleLogin(){
+    this.svcLogin.doGoogleLogin()
+    .then(res => {
+      this.svcLogin.login(res);
+    }, error =>{
+    });
+  }
 
 }

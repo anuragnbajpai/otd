@@ -1,4 +1,4 @@
-export interface SessionState {
+export class SessionState {
     device: string;
     page: string;
     item: string;
@@ -6,7 +6,7 @@ export interface SessionState {
     user: User;
  }
 
-export interface User {
+export class User {
     id: string;
     name: string;
     picture: string;
