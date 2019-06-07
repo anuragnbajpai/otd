@@ -53,6 +53,9 @@
               <fa-icon [icon]="['fas', 'bookmark']"></fa-icon>
             </button>
           </span>
+          <button  [fxHide.gt-xs]="true" mat-icon-button (click)="shared()">
+            <fa-icon [icon]="['fas', 'share-alt']"></fa-icon>
+          </button>
         </h4>
 
       </div>
