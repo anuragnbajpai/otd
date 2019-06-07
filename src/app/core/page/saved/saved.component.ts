@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { FirestoreService } from '../../service/firestore.service';
+import { User } from '../../model/Session.model';
 
 @Component({
   selector: 'app-saved',
@@ -12,7 +13,7 @@ export class SavedComponent implements OnInit {
   users: User[];
   constructor(private svcFirestore: FirestoreService) {
     this.svcFirestore.getCollection('users').subscribe(u => {
-      this.users = u.map(e => e.payload.doc.data());
+      this.users = u.map(e => e.payload.doc.data()) as User[];
     });
   }
 

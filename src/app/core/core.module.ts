@@ -21,9 +21,12 @@ import { AboutusComponent } from './page/aboutus/aboutus.component';
 import { SavedComponent } from './page/saved/saved.component';
 import { SortPipe } from './pipe/sort.pipe';
 import { HttpClientModule } from "@angular/common/http";
+import { LoginComponent } from './page/login/login.component';
+
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, FooterComponent, SearchinputComponent, 
-    LeftnavComponent, ContactusComponent, AboutusComponent, SavedComponent, SortPipe],
+    LeftnavComponent, ContactusComponent, AboutusComponent, SavedComponent, SortPipe, LoginComponent
+ ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -60,6 +63,7 @@ import { HttpClientModule } from "@angular/common/http";
   ],
   providers: [
     {provide: ErrorHandler, useClass: AppErrorHandler}
-  ]
+  ],
+  entryComponents: [ LoginComponent]
 })
 export class CoreModule { }

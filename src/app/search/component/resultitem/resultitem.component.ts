@@ -31,7 +31,7 @@ export class ResultitemComponent implements OnInit {
 
     if (!this.product.isCompare) {
       if (this.stateSearch.compareProducts.length > 1) {
-        this.svcCore.toast.showToast(this.svcCore.toast.toastStatus.Error, 'Please unselect,We compare only two products');
+        this.svcCore.snackbar.Confirmation('Only two products can be compared');
         return;
       }
       this.stateSearch.compareProducts.push(this.product);

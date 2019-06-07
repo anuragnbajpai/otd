@@ -6,15 +6,16 @@ export function createInitialState(): SessionState {
   return {
     device: 'xs',
     page: 'home',
+    item: '',
     user: null,
     country: null
-  };
+  } as SessionState;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-@StoreConfig({ name: 'Session', idKey: 'title' })
+@StoreConfig({ name: 'Session' })
 export class SessionStore extends Store<SessionState> {
 
   constructor() {

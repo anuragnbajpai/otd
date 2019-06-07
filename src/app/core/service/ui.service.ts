@@ -1,0 +1,62 @@
+import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SessionService } from 'src/app/core/state/session/session.service';
+import { LoginComponent } from '../page/login/login.component';
+import { AddimageComponent } from 'src/app/core/component/addimage/addimage.component';
+import { AdddealComponent } from 'src/app/core/component/adddeal/adddeal.component';
+import { AddreviewComponent } from 'src/app/core/component/addreview/addreview.component';
+
+@Injectable({ providedIn: 'root' })
+export class UiService {
+
+  constructor(    
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute,
+    private stateSession: SessionService) {
+  }
+
+
+  openDialog(component): void {
+
+    let dialogComponent: any;
+    if(this.checkLogin()){
+      switch (component) {
+        case 'login':
+          dialogComponent = LoginComponent;
+          break;
+        case 'image':
+          dialogComponent = AddimageComponent;
+          break;
+        case 'deal':
+          dialogComponent = AdddealComponent;
+          break;
+        case 'image':
+          dialogComponent = AddreviewComponent;
+          break;
+      }
+    } else {
+      dialogComponent = LoginComponent;
+      localStorage.setItem('redirectTo', this.router.url);
+      console.log(localStorage.getItem('redirectTo'));
+      //this.router.navigate([decodeURIComponent(this.router.url.split('?')[0])], { relativeTo: this.route, queryParams: { add: 'login' } });
+    }
+
+    const dialogRef = this.dialog.open(dialogComponent, {
+      width: '250px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.router.navigate([decodeURIComponent(this.router.url.split('?')[0]) ]);
+    });
+  }
+
+  checkLogin(){
+    if (this.stateSession.getUser()) // user is logged in
+    {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}

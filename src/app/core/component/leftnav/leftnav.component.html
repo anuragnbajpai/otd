@@ -13,6 +13,11 @@
       &nbsp; Search
     </a>
 
+    <a mat-list-item  routerLinkActive="active"  (click)="login();close()">
+      <fa-icon [icon]="['fas', 'user']"></fa-icon> 
+      &nbsp; Login
+    </a>
+
     <a mat-list-item [routerLink]="['/contactus']" routerLinkActive="active" (click)="close()">
       <fa-icon [icon]="['fas', 'phone']"></fa-icon> 
       &nbsp; Contact Us
@@ -22,5 +27,7 @@
       <fa-icon [icon]="['fas', 'info']"></fa-icon> 
       &nbsp; About Us
     </a>
+
+    
 
   </mat-nav-list>

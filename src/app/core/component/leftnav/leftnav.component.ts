@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-leftnav',
@@ -8,12 +9,16 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 export class LeftnavComponent implements OnInit {
   @Output() public leftNav = new EventEmitter();
   
-  constructor() { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
   }
 
   close(){
     this.leftNav.emit(false);
+  }
+  login(){
+    const url = this.router.url.split('?')[0];
+    this.router.navigate([ decodeURIComponent(url) ], { queryParams: { login: true } });
   }
 }

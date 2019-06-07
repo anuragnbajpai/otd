@@ -56,6 +56,11 @@ const routes: Routes = [
         }
       }
     ]
+  },
+  {
+    path: '',
+    redirectTo: 'laptops',
+    pathMatch: 'full'
   }
 ];
 

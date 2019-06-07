@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { HomeComponent } from './core/page/home/home.component';
 import { AdminRouteGuard } from './core/route/adminRoute.guard';
 import { ContactusComponent } from './core/page/contactus/contactus.component';
@@ -51,13 +51,17 @@ const routes: Routes = [{
     }
   }
 },
-{ path: 'search', loadChildren: './search/search.module#SearchModule' },
+{ path: 'search', loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
+},
 
 { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 // { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AdminRouteGuard] },
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,
+    {
+      preloadingStrategy: PreloadAllModules
+    })],
   exports: [RouterModule]
 })
 

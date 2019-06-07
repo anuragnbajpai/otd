@@ -10,12 +10,18 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { StarRatingModule } from 'angular-star-rating';
+import { AddreviewComponent } from './core/component/addreview/addreview.component';
+import { AdddealComponent } from './core/component/adddeal/adddeal.component';
+import { AddimageComponent } from './core/component/addimage/addimage.component';
+
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AddimageComponent, AdddealComponent, AddreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +34,11 @@ import { StarRatingModule } from 'angular-star-rating';
     AngularFirestoreModule.enablePersistence(),
     AngularFireStorageModule,
     AngularFirestoreModule,
+    AngularFireAuthModule,
     StarRatingModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddimageComponent, AdddealComponent, AddreviewComponent]
 })
 export class AppModule { }

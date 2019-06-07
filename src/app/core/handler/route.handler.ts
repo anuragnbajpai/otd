@@ -1,17 +1,28 @@
 import { Injectable } from '@angular/core';
-import { NavigationEnd, Router, ActivationStart, ActivationEnd } from '@angular/router';
+import { NavigationEnd, Router, ActivationStart, ActivationEnd, ActivatedRoute } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { SessionService } from '../state/session/session.service';
 import { filter } from 'rxjs/operators';
 import { SearchService } from 'src/app/search/state/search.service';
+import { LoginService } from '../service/login.service';
+import { UiService } from '../service/ui.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RouteHandler {
   constructor(public router: Router, private titleService: Title, private metaService: Meta,
-              private stateSession: SessionService, private stateSearch: SearchService) {
+              private stateSession: SessionService, private stateSearch: SearchService,
+              private svcLogin: LoginService, private route: ActivatedRoute, private svcUi: UiService) {
     this.initRouteTracking();
+    this.route.queryParams.subscribe(params => {
+      // if(params.login){
+      //   this.svcLogin.openDialog();
+      // }
+      if(params.add){
+        this.svcUi.openDialog(params.add);
+      }
+    });
   }
 
   private initRouteTracking() {
@@ -45,8 +56,7 @@ export class RouteHandler {
     }
     if (event.snapshot.params.compare2) {
       this.stateSearch.updateCompare2(event.snapshot.params.compare2);
-  }
-    
+    }
   }
 
   updateTitleAndMetaTags(event) {

@@ -15,7 +15,7 @@ export class SessionService {
 
   constructor(private store: SessionStore, private svcFirestore: FirestoreService, private query: SessionQuery, private http: HttpClient) {
 
-    this.http.get('http://www.geoplugin.net/json.gp').subscribe(res => {
+    this.http.get('http://www.geoplugin.net/json.gp').subscribe( (res: any) => {
       console.log('find location success');
       this.setCountry(res.geoplugin_countryCode.toLowerCase());
     });
@@ -49,6 +49,19 @@ export class SessionService {
   getCountry(){
    return this.query.getValue().country;
   }
+  getItem(){
+    return this.query.getValue().item;
+   }
+   updateItem(item) {
+    this.store.update(state => ({ ...state, item }));
+  }
+
+  getPage(){
+    return this.query.getValue().page;
+   }
+   getUser(){
+    return this.query.getValue().user;
+   }
 
 }
 

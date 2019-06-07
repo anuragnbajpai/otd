@@ -1,6 +1,7 @@
 export interface SessionState {
     device: string;
     page: string;
+    item: string;
     country: any;
     user: User;
  }
