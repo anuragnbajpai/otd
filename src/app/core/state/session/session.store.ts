@@ -8,7 +8,8 @@ export function createInitialState(): SessionState {
     page: 'home',
     searchKeyword : '',
     user: null,
-    country: null
+    country: null,
+    saved: []
   } as SessionState;
 }
 

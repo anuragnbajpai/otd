@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { SessionQuery } from './Session.query';
 import { HttpClient } from '@angular/common/http';
 import { FirestoreService } from '../../service/firestore.service';
+import { findIndex } from 'rxjs/operators';
+import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,7 @@ export class SessionService {
   country$ = this.query.select(e => e.country);
   countries = null;
   user$ = this.query.select(e => e.user);
+  isLoggedin$ = this.query.select(e => e.user != null);
   searchKeyword$ = this.query.select(e => e.searchKeyword);
   constructor(private store: SessionStore, private svcFirestore: FirestoreService, private query: SessionQuery, private http: HttpClient) {
 
@@ -22,6 +25,10 @@ export class SessionService {
     });
     this.updateUser(JSON.parse(localStorage.getItem('user')));
     console.log(localStorage.getItem('user'));
+
+    this.user$.subscribe(u => {
+      localStorage.setItem('user', JSON.stringify(u) );
+    });
   }
 
   UpdateDevice(device) {
@@ -68,6 +75,19 @@ export class SessionService {
    updateUser(user){
     this.store.update(state => ({ ...state, user }));
    }
+
+   updateSaved(saved){
+    this.store.update(state => ({ ...state, user : { ...state.user, saved}  }));
+   }
+
+   getSaved(){
+    return this.query.getValue().user.saved;
+   }
+
+   isSaved(id){
+    return this.query.getValue().user.saved.includes(id);
+   }
+
 
 }
 

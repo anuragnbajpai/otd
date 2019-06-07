@@ -12,6 +12,7 @@ export class User {
     picture: string;
     email: string;
     role: string;
+    saved: string[];
  }
 
  

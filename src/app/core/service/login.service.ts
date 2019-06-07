@@ -48,6 +48,7 @@ export class LoginService {
   accountInfo.email = result.user.email;
   accountInfo.picture = result.user.photoURL;
   accountInfo.role = 'read';
+  accountInfo.saved = [];
 
   this.svcFirestore.getCollectionCondition('users', ref => ref.where('email', '==', accountInfo.email) )
   .pipe(take(1)).subscribe((res: any) =>

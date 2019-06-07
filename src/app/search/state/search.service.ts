@@ -4,6 +4,7 @@ import { SearchQuery } from './search.query';
 import { FirestoreService } from 'src/app/core/service/firestore.service';
 import { Product } from '../model/product.model';
 import { take, distinctUntilChanged } from 'rxjs/operators';
+import { SessionService } from 'src/app/core/state/session/session.service';
 
 
 @Injectable({
@@ -19,7 +20,8 @@ export class SearchService {
   selectedProduct: Product;
   compareProducts: Product[] = [];
 
-  constructor(private store: SearchStore, private query: SearchQuery, private svcFirestore: FirestoreService) {
+  constructor(private store: SearchStore, private query: SearchQuery,
+              private svcFirestore: FirestoreService, private stateSession: SessionService) {
     this.query.select(e => e.category).pipe(distinctUntilChanged()).subscribe(c => {
       if (c !== '') {
         this.searchResult = null;
@@ -28,7 +30,16 @@ export class SearchService {
         this.updateProduct(null);
         this.svcFirestore.getCollectionCondition('products', ref => ref.where('tags', 'array-contains', c.toLowerCase())
           .orderBy('avgRating', 'desc').limit(10)).pipe(take(1)).subscribe(data => {
-            this.searchResult = data.map(e => e.payload.doc.data()) as Product[];
+            let user = this.stateSession.getUser();
+            this.searchResult = data.map(e => {
+              let d = e.payload.doc.data() as Product;
+              if(user!= null){
+                d.isSelected = user.saved.indexOf(d.id) > -1;
+              } else {
+                d.isSelected = false;
+              }
+              return d;
+            }) as Product[];
             if (this.searchResult[0]) {
               if (this.getCompare1Product()) {
                 this.getCompareList();
@@ -132,6 +143,9 @@ export class SearchService {
     this.updateCompare2(null);
     this.selectedProduct = this.searchResult.find(f => f.title === title);
   }
+  updateSavedStatusInSearchResult(){
+    this.searchResult.find(f => f.title === this.selectedProduct.title).isSelected = this.selectedProduct.isSelected;
+  }
 
   UpdateCategory(category) {
     this.store.update(state => ({ ...state, category }));
@@ -177,6 +191,8 @@ export class SearchService {
   updateTab(tab) {
     this.store.update(state => ({ ...state, tab }));
   }
+
+
 
 
 

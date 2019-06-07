@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBars, faAddressBook, faInfo, faSearch, 
-  faHome, faPhone, faSort, faPlus, faList, faUser, faSlidersH} from '@fortawesome/free-solid-svg-icons';
+import { faBars, faAddressBook, faInfo, faSearch, faArrowLeft,
+  faHome, faPhone, faSort, faPlus, faList, faUser, faSlidersH, 
+  faBookmark as faCircleSolid} from '@fortawesome/free-solid-svg-icons';
 import { faFacebookSquare , faTwitterSquare, faInstagram} from '@fortawesome/free-brands-svg-icons';
-import {  faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
+import {  faThumbsUp, faThumbsDown, faBookmark as faCircleRegular } from '@fortawesome/free-regular-svg-icons';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -28,7 +30,10 @@ export class FontawesomeModule {
       faThumbsUp,
       faList,
       faUser,
-      faSlidersH
+      faSlidersH,
+      faArrowLeft,
+      faCircleSolid,
+      faCircleRegular
       );
   }
 }

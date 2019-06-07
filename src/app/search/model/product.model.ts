@@ -17,6 +17,7 @@ export interface Product {
   reviews: Review[];
   deals: Deal[];
   isCompare: boolean;
+  isSelected: boolean;
 }
 
 export interface Feature {
