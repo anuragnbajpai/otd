@@ -41,7 +41,7 @@
     <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
       <div>
         <h4 style="margin:0"> {{stateSearch.selectedProduct.brand}} {{stateSearch.selectedProduct.title}}
-          &nbsp;&nbsp;({{(stateSession.country$| async)?.currencySymbol }} {{stateSearch.selectedProduct.price}} {{(stateSession.country$| async)?.currency }})</h4>
+          &nbsp;&nbsp;({{(stateSession.country$| async)?.currencySymbol}}{{stateSearch.selectedProduct.price}} {{(stateSession.country$| async)?.currency }})</h4>
       </div>
     </mat-card-title>
     <mat-card-subtitle style="margin-top:-10px">{{stateSearch.selectedProduct.description}}</mat-card-subtitle>
@@ -67,11 +67,17 @@
           <app-feature></app-feature>
         </ng-template>
       </mat-tab>
+      <mat-tab label="Reviews">
+          <ng-template matTabContent>
+            <app-review></app-review>
+          </ng-template>
+        </mat-tab>
       <mat-tab label="Images">
         <ng-template matTabContent>
           <app-image></app-image>
         </ng-template>
       </mat-tab>
+      
 
     </mat-tab-group>
 

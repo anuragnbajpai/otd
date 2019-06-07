@@ -32,7 +32,7 @@ export class UiService {
         case 'deal':
           dialogComponent = AdddealComponent;
           break;
-        case 'image':
+        case 'review':
           dialogComponent = AddreviewComponent;
           break;
       }

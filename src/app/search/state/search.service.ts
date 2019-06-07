@@ -29,24 +29,24 @@ export class SearchService {
         this.svcFirestore.getCollectionCondition('products', ref => ref.where('tags', 'array-contains', c.toLowerCase())
           .orderBy('avgRating', 'desc').limit(10)).pipe(take(1)).subscribe(data => {
             this.searchResult = data.map(e => e.payload.doc.data()) as Product[];
-            if (this.searchResult[0] ) {
-              if(this.getCompare1Product()){
+            if (this.searchResult[0]) {
+              if (this.getCompare1Product()) {
                 this.getCompareList();
               } else {
-              if(this.query.getValue().product !== '' &&
-               this.searchResult.findIndex(f => f.title === this.query.getValue().product) !== -1) {
-                this.updateProduct(this.query.getValue().product);
-                this.updateProductValue(this.query.getValue().product);
-                this.getTabData();
-                setTimeout(() => {
-                  let el = document.getElementById(this.query.getValue().product);
-                  el.scrollIntoView();
-                },
-                  50);
-              } else {
-                this.updateProduct(this.searchResult[0].title);
+                if (this.query.getValue().product !== '' &&
+                  this.searchResult.findIndex(f => f.title === this.query.getValue().product) !== -1) {
+                  this.updateProduct(this.query.getValue().product);
+                  this.updateProductValue(this.query.getValue().product);
+                  this.getTabData();
+                  setTimeout(() => {
+                    let el = document.getElementById(this.query.getValue().product);
+                    el.scrollIntoView();
+                  },
+                    50);
+                } else {
+                  this.updateProduct(this.searchResult[0].title);
+                }
               }
-            }
             }
           });
       }
@@ -66,62 +66,68 @@ export class SearchService {
     });
 
     this.query.select(e => e.compare1).pipe(distinctUntilChanged()).subscribe(c => {
-   
-        if (this.searchResult && this.searchResult.length > 0) {
-          this.getCompareList();
-        }
 
-    });
-    this.query.select(e => e.compare2).pipe(distinctUntilChanged()).subscribe(c => {
-   
       if (this.searchResult && this.searchResult.length > 0) {
         this.getCompareList();
       }
 
-  });
+    });
+    this.query.select(e => e.compare2).pipe(distinctUntilChanged()).subscribe(c => {
+
+      if (this.searchResult && this.searchResult.length > 0) {
+        this.getCompareList();
+      }
+
+    });
   }
 
-  getCompareList(){
+  getCompareList() {
     this.compareProducts = [];
     const cmpProduct1 = this.searchResult.find(f => f.title === this.getCompare1Product());
     const cmpProduct2 = this.searchResult.find(f => f.title === this.getCompare2Product());
-    if(cmpProduct1){
+    if (cmpProduct1) {
       this.compareProducts.push(cmpProduct1);
     }
-    if(cmpProduct2){
+    if (cmpProduct2) {
       this.compareProducts.push(cmpProduct2);
     }
-    if(cmpProduct1 || cmpProduct2){
+    if (cmpProduct1 || cmpProduct2) {
       this.updateProduct(null);
       this.selectedProduct = null;
     }
 
   }
-  getCompare1Product(){
+  getCompare1Product() {
     return this.query.getValue().compare1;
   }
-  getCompare2Product(){
+  getCompare2Product() {
     return this.query.getValue().compare2;
   }
-  getProduct(){
+  getProduct() {
     return this.query.getValue().product;
   }
-  getCategory(){
+  getCategory() {
     return this.query.getValue().category;
   }
-  getDeals(){
+  getDeals() {
     this.svcFirestore.getDocument('deals', this.selectedProduct.id).subscribe(d => {
       this.selectedProduct.deals = (d.payload.data() as any).deals;
       this.searchResult.find(f => f.title === this.selectedProduct.title).deals = this.selectedProduct.deals;
     });
   }
-  getImages(){
-    this.svcFirestore.getDocument('images',  this.selectedProduct.id).subscribe(d => {
-      this.selectedProduct.images =  (d.payload.data() as any).images;
+  getImages() {
+    this.svcFirestore.getDocument('images', this.selectedProduct.id).subscribe(d => {
+      this.selectedProduct.images = (d.payload.data() as any).images;
       this.searchResult.find(f => f.title === this.selectedProduct.title).images = this.selectedProduct.images;
-      });
+    });
   }
-  updateProductValue(title){
+  getReviews() {
+    this.svcFirestore.getDocument('reviews', this.selectedProduct.id).subscribe(d => {
+      this.selectedProduct.reviews = (d.payload.data() as any).reviews;
+      this.searchResult.find(f => f.title === this.selectedProduct.title).reviews = this.selectedProduct.reviews;
+    });
+  }
+  updateProductValue(title) {
     this.updateCompare1(null);
     this.updateCompare2(null);
     this.selectedProduct = this.searchResult.find(f => f.title === title);
@@ -140,24 +146,30 @@ export class SearchService {
   updateCompare2(compare2) {
     this.store.update(state => ({ ...state, compare2 }));
   }
-  
 
-  getTabValue(){
+
+  getTabValue() {
     return this.query.getValue().tab;
   }
 
-  getTabData(){
-    if(this.selectedProduct){
-      switch(this.getTabValue()){
+  getTabData() {
+    if (this.selectedProduct) {
+      switch (this.getTabValue()) {
         case 'Images':
-            if (this.selectedProduct.images == null || this.selectedProduct.images.length === 0){
-              this.getImages();
-            }
-            break;
+          if (this.selectedProduct.images == null || this.selectedProduct.images.length === 0) {
+            this.getImages();
+          }
+          break;
         case 'Deals':
-            if (this.selectedProduct.deals == null || this.selectedProduct.deals.length === 0){
-              this.getDeals();
-            }
+          if (this.selectedProduct.deals == null || this.selectedProduct.deals.length === 0) {
+            this.getDeals();
+          }
+          break;
+        case 'Reviews':
+          if (this.selectedProduct.reviews == null || this.selectedProduct.reviews.length === 0) {
+            this.getReviews();
+          }
+          break;
       }
     }
   }

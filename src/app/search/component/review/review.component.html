@@ -1,3 +1,60 @@
-<p>
-  review works!
-</p>
+<mat-card class="tab-content">
+    <mat-card fxLayout="row" fxLayoutAlign="space-between" style="background:lightcyan">
+      <div>
+          <button mat-button [matMenuTriggerFor]="menu" style="background: #d3d3d34d">
+              <span>Sort By:</span> &nbsp;<b style="padding-right: 5px">{{sortBy}}</b>
+              <fa-icon [icon]="['fas', 'sort']"></fa-icon>  
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="sortBy = 'Price'">Price</button>
+            <button mat-menu-item (click)="sortBy = 'Brand'">Brand</button>
+            <button mat-menu-item (click)="sortBy = 'Date'">Date</button>
+          </mat-menu>
+      </div> 
+      <div> <button mat-button style="background: #d3d3d34d" (click)="addReview()" >Add <fa-icon [icon]="['fas', 'plus']"></fa-icon>  </button></div>      
+       
+    </mat-card>
+  <mat-card fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
+    <mat-card *ngFor="let element of stateSearch.selectedProduct.reviews;let i = index" 
+    style="background: lightcyan; margin:5px" [ngStyle.xs]="{'width.%': 90}" [ngStyle.gt-xs]="{'width.%': 90}"> 
+     <mat-card-content fxLayout="column" fxLayoutAlign="start" style="margin-bottom: 0px">
+      <div style="margin: 10px;">
+      <div>
+           <div fxLayout="row" fxLayoutAlign="start stretch">
+<b>Rating: </b>
+                <star-rating starType="svg" [rating]="element.rating" size="small" [readOnly]="true"
+                  [showHalfStars]="true"></star-rating>
+                <div style=" align-self: center;font-size: small;"> {{stateSearch.selectedProduct?.avgRating}} </div>
+            
+           </div>
+      </div> 
+      <div>
+          <b>Comment:</b>  {{element.comments}}
+        </div>   
+      </div>
+     
+    </mat-card-content>
+      <mat-card-actions style="padding: 10px; background: #d3d3d34d;">  
+          <div fxLayout="row" fxLayoutAlign="space-between">
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <img mat-card-avatar style="width: 30px;background-size: cover;border-radius: 50%;margin-right: 10px;" 
+                src="{{element.userPicture}}">  
+                <div>
+                    <div>{{element.userName}} </div>
+                    <div style="font-size: xx-small;">{{element.dateTime.toDate() | date}} </div>
+                </div>  
+              </div>
+              <div fxLayout="row" style="width: 90px" fxLayoutAlign="space-between">
+                <div style="margin:5px">
+                    <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> {{element.review.liked.length}}
+                </div>  
+                <div style="margin:5px">
+                    <fa-icon [icon]="['far', 'thumbs-down']"></fa-icon> {{element.review.unliked.length}}
+                </div>          
+              </div>
+            </div> 
+                
+      </mat-card-actions>
+    </mat-card>
+  </mat-card>      
+</mat-card>
