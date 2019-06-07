@@ -52,14 +52,14 @@ export class SearchService {
                   this.updateProduct(this.query.getValue().product);
                   this.updateProductValue(this.query.getValue().product);
                   this.getTabData();
-                  setTimeout(() => {
-                    let el = document.getElementById(this.query.getValue().product);
-                    el.scrollIntoView();
-                  },
-                    50);
                 } else {
-                  this.updateProduct(this.searchResult[0].title);
+                  this.updateProduct(this.searchResult[0].title);                  
                 }
+                setTimeout(() => {
+                  let el = document.getElementById(this.query.getValue().product);
+                  el.scrollIntoView();
+                },
+                  50);
               }
             }
           });
@@ -204,7 +204,7 @@ export class SearchService {
     user.saved.forEach(s => {
       this.svcFirestore.getDocument('products', s).pipe( map(p => {
        let d = p.payload.data();
-       d.isSelected= true;       
+       d.isSelected= true;
        this.searchResult.push(d);
        this.selectProduct(d);
        return d;

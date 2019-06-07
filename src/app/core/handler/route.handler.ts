@@ -45,7 +45,10 @@ export class RouteHandler {
   updateStateRouteParameter(event) {
     if (event.snapshot.params.category) {
        this.stateSearch.UpdateCategory(event.snapshot.params.category);
-       this.stateSession.updateSearchKeyword(event.snapshot.params.category);
+       if(event.snapshot.params.category !== 'saved'){
+        this.stateSession.updateSearchKeyword(event.snapshot.params.category);
+       }
+       
     }
 
     if (event.snapshot.params.product) {
