@@ -35,7 +35,7 @@ const routes: Routes = [{
 },
 {
   path: 'saved',
-  component: SavedComponent
+  loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
 },
 {
   path: 'aboutus',

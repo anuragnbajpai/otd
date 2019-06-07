@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { SearchQuery } from './search.query';
 import { FirestoreService } from 'src/app/core/service/firestore.service';
 import { Product } from '../model/product.model';
-import { take, distinctUntilChanged } from 'rxjs/operators';
+import { take, distinctUntilChanged, map } from 'rxjs/operators';
 import { SessionService } from 'src/app/core/state/session/session.service';
 
 
@@ -28,6 +28,9 @@ export class SearchService {
         this.compareProducts = [];
         this.selectedProduct = null;
         this.updateProduct(null);
+        if(c !== 'saved')
+        {
+        
         this.svcFirestore.getCollectionCondition('products', ref => ref.where('tags', 'array-contains', c.toLowerCase())
           .orderBy('avgRating', 'desc').limit(10)).pipe(take(1)).subscribe(data => {
             let user = this.stateSession.getUser();
@@ -60,6 +63,9 @@ export class SearchService {
               }
             }
           });
+        } else {
+          this.getSavedResult();
+        }
       }
     });
 
@@ -192,7 +198,45 @@ export class SearchService {
     this.store.update(state => ({ ...state, tab }));
   }
 
+  getSavedResult(){
+    let user = this.stateSession.getUser();
+    this.searchResult = [];
+    user.saved.forEach(s => {
+      this.svcFirestore.getDocument('products', s).pipe( map(p => {
+       let d = p.payload.data();
+       d.isSelected= true;       
+       this.searchResult.push(d);
+       this.selectProduct(d);
+       return d;
+      })).subscribe();
+  
+      
+    });
+  
 
+
+  }
+
+  selectProduct(product){
+
+      if (this.getCompare1Product()) {
+        this.getCompareList();
+      } else {
+        if (this.query.getValue().product !== '' &&
+          this.searchResult.findIndex(f => f.title === this.query.getValue().product) !== -1) {
+          this.updateProduct(this.query.getValue().product);
+          this.updateProductValue(this.query.getValue().product);
+          this.getTabData();
+          setTimeout(() => {
+            let el = document.getElementById(this.query.getValue().product);
+            el.scrollIntoView();
+          },
+            50);
+        } else {
+          this.updateProduct(this.searchResult[0].title);
+        }   
+    }
+  }
 
 
 

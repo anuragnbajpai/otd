@@ -29,6 +29,10 @@
       <fa-icon [icon]="['fas', 'info']"></fa-icon> 
       &nbsp; About Us
     </a>
+    <a mat-list-item  *ngIf="(stateSession.user$ | async)" routerLink="/search/saved" routerLinkActive="active" (click)="close()">
+      <fa-icon [icon]="['fas', 'bookmark']"></fa-icon> 
+      &nbsp; Saved
+    </a>
     <a mat-list-item *ngIf="(stateSession.user$ | async)" routerLinkActive="active"  (click)="logout();close()">
         <fa-icon [icon]="['fas', 'user']"></fa-icon> 
         &nbsp; Logout

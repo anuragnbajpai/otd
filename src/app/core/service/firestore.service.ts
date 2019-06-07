@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -66,5 +67,7 @@ export class FirestoreService {
     // delete item.id;
     this.firestore.collection(name).doc(id).set( { reviews });
   }
+
+
   
 }
