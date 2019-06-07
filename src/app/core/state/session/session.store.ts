@@ -6,7 +6,7 @@ export function createInitialState(): SessionState {
   return {
     device: 'xs',
     page: 'home',
-    item: '',
+    searchKeyword : '',
     user: null,
     country: null
   } as SessionState;

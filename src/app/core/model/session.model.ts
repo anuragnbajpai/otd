@@ -1,9 +1,9 @@
 export class SessionState {
     device: string;
     page: string;
-    item: string;
-    country: any;
-    user: User;
+    searchKeyword: string;
+    country: Country | null;
+    user: User | null;
  }
 
 export class User {
@@ -12,4 +12,13 @@ export class User {
     picture: string;
     email: string;
     role: string;
+ }
+
+ 
+export class Country {
+    code: string;
+    currency: string;
+    currencySymbol: string;
+    image: string;
+    name: string;
  }

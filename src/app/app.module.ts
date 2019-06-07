@@ -15,13 +15,12 @@ import { StarRatingModule } from 'angular-star-rating';
 import { AddreviewComponent } from './core/component/addreview/addreview.component';
 import { AdddealComponent } from './core/component/adddeal/adddeal.component';
 import { AddimageComponent } from './core/component/addimage/addimage.component';
-
-
+import { AddfilterComponent } from './core/component/addfilter/addfilter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddimageComponent, AdddealComponent, AddreviewComponent
+    AddimageComponent, AdddealComponent, AddreviewComponent, AddfilterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +38,6 @@ import { AddimageComponent } from './core/component/addimage/addimage.component'
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [AddimageComponent, AdddealComponent, AddreviewComponent]
+  entryComponents: [AddimageComponent, AdddealComponent, AddreviewComponent, AddfilterComponent]
 })
 export class AppModule { }

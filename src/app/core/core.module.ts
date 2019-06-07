@@ -22,6 +22,7 @@ import { SavedComponent } from './page/saved/saved.component';
 import { SortPipe } from './pipe/sort.pipe';
 import { HttpClientModule } from "@angular/common/http";
 import { LoginComponent } from './page/login/login.component';
+import { AddfilterComponent } from './component/addfilter/addfilter.component';
 
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, FooterComponent, SearchinputComponent, 

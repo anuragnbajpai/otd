@@ -45,6 +45,7 @@ export class RouteHandler {
   updateStateRouteParameter(event) {
     if (event.snapshot.params.category) {
        this.stateSearch.UpdateCategory(event.snapshot.params.category);
+       this.stateSession.updateSearchKeyword(event.snapshot.params.category);
     }
 
     if (event.snapshot.params.product) {
@@ -65,7 +66,7 @@ export class RouteHandler {
       if (root.children && root.children.length) {
         root = root.children[0];
       } else if (root.data && root.data.title) {
-        this.stateSession.updatePage(root.data.page)
+        this.stateSession.updatePage(root.data.page);
         this.titleService.setTitle(root.data.title
           .replace(/{product}/g, root.params.category)
           .replace(/{item}/g, root.params.product) + ' | OnlyTopDeals');

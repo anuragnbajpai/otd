@@ -13,7 +13,7 @@ export class SessionService {
   country$ = this.query.select(e => e.country);
   countries = null;
   user$ = this.query.select(e => e.user);
-
+  searchKeyword$ = this.query.select(e => e.searchKeyword);
   constructor(private store: SessionStore, private svcFirestore: FirestoreService, private query: SessionQuery, private http: HttpClient) {
 
     this.http.get('http://www.geoplugin.net/json.gp').subscribe( (res: any) => {
@@ -52,11 +52,11 @@ export class SessionService {
   getCountry(){
    return this.query.getValue().country;
   }
-  getItem(){
-    return this.query.getValue().item;
+  getSearchKeyword(){
+    return this.query.getValue().searchKeyword;
    }
-   updateItem(item) {
-    this.store.update(state => ({ ...state, item }));
+   updateSearchKeyword(searchKeyword) {
+    this.store.update(state => ({ ...state, searchKeyword }));
   }
 
   getPage(){

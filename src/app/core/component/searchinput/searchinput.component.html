@@ -4,7 +4,9 @@
       [formControl]="searchKeyword"  [matAutocomplete]="auto"
       (click)="clear()" />
     <div matPrefix><b>Top 10 &nbsp;</b> </div>
-    <fa-icon matSuffix [icon]="['fas', 'search']" ></fa-icon> 
+    <!-- <button matSuffix (click)="filter()" style="background: white;border: none;"><fa-icon  [icon]="['fas', 'sliders-h']" ></fa-icon> </button>  -->
+    <!-- <button matSuffix (click)="search()"> <fa-icon  [icon]="['fas', 'search']" size="1x"></fa-icon> </button> -->
+    <fa-icon (click)="search()" matSuffix [icon]="['fas', 'search']" size="1x"></fa-icon>
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected()">
       <mat-option *ngFor="let option of (filteredOptions | async)" [value]="option">
         {{ option }}
