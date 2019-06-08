@@ -203,7 +203,7 @@ export class SearchService {
     this.searchResult = [];
     user.saved.forEach(s => {
       this.svcFirestore.getDocument('products', s).pipe( map(p => {
-       let d = p.payload.data();
+       let d = p.payload.data() as Product;
        d.isSelected= true;
        this.searchResult.push(d);
        this.selectProduct(d);

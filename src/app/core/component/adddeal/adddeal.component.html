@@ -1,3 +1,21 @@
-<p>
-  adddeal works!
-</p>
+<form [formGroup]="dealFormGroup" (ngSubmit)="submitForm()">
+    <mat-card-title fxLayoutAlign="center"> Deal </mat-card-title>
+          <mat-card>  
+                <div fxLayout="column">
+                    <mat-form-field>
+                        <textarea matInput placeholder="Deal Link" type="url" formControlName="link" required></textarea>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <input matInput placeholder="Price" type="number" formControlName="price" required>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <input matInput placeholder="Store" formControlName="store" required>
+                      </mat-form-field>
+                  </div>
+           </mat-card>     
+      <div style="padding-top:10px" fxLayout="row" fxLayoutAlign="space-between">
+        <button mat-raised-button  mat-dialog-close >Cancel</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!dealFormGroup.valid" >Submit</button>
+      </div>
+    </form>
+

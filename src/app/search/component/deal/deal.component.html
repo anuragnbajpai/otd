@@ -29,15 +29,18 @@
             src="{{element.userPicture}}">  
             <div>
                 <div>{{element.userName}} </div>
-                <div style="font-size: xx-small;">{{element.dateTime.toDate() | date}} </div>
+                <div style="font-size: xx-small;">{{element.dateTime.seconds*1000 | date}} </div>
             </div>  
           </div>
-            <div style="margin:5px">
-                <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> {{element.review.liked.length}}
+            <!-- <div style="margin:5px">
+                <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> {{element.review?.liked.length}}
             </div>  
             <div style="margin:5px">
-                <fa-icon [icon]="['far', 'thumbs-down']"></fa-icon> {{element.review.unliked.length}}
-            </div>          
+                <fa-icon [icon]="['far', 'thumbs-down']"></fa-icon> {{element.review?.unliked.length}}
+            </div>           -->
+            <div style="margin:5px">
+                <fa-icon [icon]="['fas', 'check-double']"></fa-icon>
+            </div> 
             
         </div> 
                 

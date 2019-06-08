@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { firestore } from 'firebase';
-
+import * as firebase from 'firebase';
 @Injectable({
   providedIn: 'root'
 })
@@ -68,6 +68,8 @@ export class FirestoreService {
     this.firestore.collection(name).doc(id).set( { reviews });
   }
 
-
-  
+  getServerDate(){
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    return timestamp;
+  }
 }

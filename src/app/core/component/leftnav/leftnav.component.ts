@@ -10,7 +10,7 @@ import { SessionService } from '../../state/session/session.service';
 export class LeftnavComponent implements OnInit {
   @Output() public leftNav = new EventEmitter();
   
-  constructor(private route: ActivatedRoute, private router: Router, private stateSession: SessionService) { }
+  constructor(private route: ActivatedRoute, private router: Router, public stateSession: SessionService) { }
 
   ngOnInit() {
   }

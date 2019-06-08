@@ -9,7 +9,7 @@ import { SessionService } from './core/state/session/session.service';
 })
 export class AppComponent {
   title = 'OTD';
-  constructor(private svcCore: CoreService, private stateSession: SessionService) {
+  constructor(private svcCore: CoreService, public stateSession: SessionService) {
 
   }
 }

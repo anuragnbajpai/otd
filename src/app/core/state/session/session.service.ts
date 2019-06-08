@@ -27,7 +27,7 @@ export class SessionService {
     console.log(localStorage.getItem('user'));
 
     this.user$.subscribe(u => {
-      localStorage.setItem('user', JSON.stringify(u) );
+      localStorage.setItem('user', JSON.stringify(u) );      
     });
   }
 
