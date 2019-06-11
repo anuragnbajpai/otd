@@ -8,18 +8,6 @@ const routes: Routes = [
     component: SearchComponent,
     children: [
       {
-        path: ':category',
-        component: SearchComponent,
-        data: {
-          page: 'search',
-          title: 'Top 10 {product}',
-          metatags: {
-            keywords: 'top {product}, top 10 {product}, best {product}, {product} deals',
-            description: 'Top 10 {product} with reviews and deals information'
-          }
-        }
-      },
-      {
         path: ':category/:product',
         component: SearchComponent,
         data: {
@@ -28,6 +16,18 @@ const routes: Routes = [
           metatags: {
             keywords: 'top {product}, top 10 {product}, best {product}, {product} deals',
             description: 'Top 10 {category} with reviews and deals information'
+          }
+        }
+      },
+      {
+        path: ':category',
+        component: SearchComponent,
+        data: {
+          page: 'search',
+          title: 'Top 10 {product}',
+          metatags: {
+            keywords: 'top {product}, top 10 {product}, best {product}, {product} deals',
+            description: 'Top 10 {product} with reviews and deals information'
           }
         }
       },
@@ -54,13 +54,13 @@ const routes: Routes = [
             description: 'Top 10 {category} with reviews and deals information'
           }
         }
+      },
+      {
+        path: '',
+        redirectTo: 'top seller',
+        pathMatch: 'full'
       }
     ]
-  },
-  {
-    path: '',
-    redirectTo: 'laptops',
-    pathMatch: 'full'
   }
 ];
 

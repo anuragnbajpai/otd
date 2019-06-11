@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { NavigationEnd, Router, ActivationStart, ActivationEnd, ActivatedRoute } from '@angular/router';
+import { Injectable, OnInit } from '@angular/core';
+import { NavigationEnd, Router, ActivationStart, ActivationEnd, ActivatedRoute, ParamMap } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { SessionService } from '../state/session/session.service';
-import { filter } from 'rxjs/operators';
+import { filter} from 'rxjs/operators';
 import { SearchService } from 'src/app/search/state/search.service';
 import { LoginService } from '../service/login.service';
 import { UiService } from '../service/ui.service';
@@ -15,24 +15,24 @@ export class RouteHandler {
               private stateSession: SessionService, private stateSearch: SearchService,
               private svcLogin: LoginService, private route: ActivatedRoute, private svcUi: UiService) {
     this.initRouteTracking();
+
     this.route.queryParams.subscribe(params => {
-      // if(params.login){
-      //   this.svcLogin.openDialog();
-      // }
       if(params.add){
         this.svcUi.openDialog(params.add);
       }
     });
+
   }
 
   private initRouteTracking() {
 
     this.router.events.subscribe(event => {
       try{
-        if(event instanceof ActivationEnd){
+        if(event instanceof ActivationStart){
           this.updateStateRouteParameter(event);
         }
         if (event instanceof NavigationEnd) {
+
           this.updateTitleAndMetaTags(event);
           this.trackGoogleAnalytics(event);
         }
@@ -44,12 +44,14 @@ export class RouteHandler {
 
   updateStateRouteParameter(event) {
     if (event.snapshot.params.category) {
-       this.stateSearch.UpdateCategory(event.snapshot.params.category);
        if(event.snapshot.params.category !== 'saved'){
+        this.stateSearch.UpdateCategory(event.snapshot.params.category);
         this.stateSession.updateSearchKeyword(event.snapshot.params.category);
+       } else{
+        this.stateSearch.UpdateCategory(event.snapshot.params.category);
+        this.stateSession.updateSearchKeyword('');
        }
-       
-    }
+    } 
 
     if (event.snapshot.params.product) {
        this.stateSearch.updateProduct(event.snapshot.params.product);

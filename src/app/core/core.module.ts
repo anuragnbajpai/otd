@@ -1,7 +1,5 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './module/material.module';
@@ -20,7 +18,7 @@ import { ContactusComponent } from './page/contactus/contactus.component';
 import { AboutusComponent } from './page/aboutus/aboutus.component';
 import { SavedComponent } from './page/saved/saved.component';
 import { SortPipe } from './pipe/sort.pipe';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './page/login/login.component';
 import { AddfilterComponent } from './component/addfilter/addfilter.component';
 
@@ -31,18 +29,13 @@ import { AddfilterComponent } from './component/addfilter/addfilter.component';
   imports: [
     CommonModule,
     MaterialModule,
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      preventDuplicates: true,
-      tapToDismiss: true
-    }),
     FormsModule,
     ReactiveFormsModule,
+    StarRatingModule.forRoot(),
     FlexLayoutModule,
     FontAwesomeModule,
     FontawesomeModule,
     RouterModule,
-    StarRatingModule,
     HttpClientModule
   ],
   exports: [

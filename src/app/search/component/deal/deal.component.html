@@ -18,6 +18,13 @@
     <mat-card *ngFor="let element of stateSearch.selectedProduct.deals | sort: sortBy"  
     style="background: lightcyan; margin:5px" [ngStyle.xs]="{'width.%': 80}" [ngStyle.gt-xs]="{'width.px': 200}"> 
      <mat-card-content fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 0px">
+      <div style="position:absolute;top:0px; right:0px;padding:10px;" [matMenuTriggerFor]="menu">
+        <fa-icon [icon]="['fas', 'ellipsis-v']"></fa-icon>
+      </div>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
       <div style=" align-self: center;font-size: x-large;margin: 10px">{{100 - ((element.price/stateSearch.selectedProduct.price)*100) | number:'1.0-0'}}%</div>
       <div> <s>{{(stateSession.country$| async)?.currencySymbol }}{{stateSearch.selectedProduct.price }}</s> &nbsp;<b>{{(stateSession.country$| async)?.currencySymbol }}{{element.price}}</b> {{(stateSession.country$| async)?.currency }}   </div>
       <a color="primary" style="margin: 10px" mat-raised-button href="{{element.link}}" target="_blank" > {{element.store}}</a>
@@ -32,16 +39,12 @@
                 <div style="font-size: xx-small;">{{element.dateTime.seconds*1000 | date}} </div>
             </div>  
           </div>
-            <!-- <div style="margin:5px">
+            <div style="margin:5px">
                 <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> {{element.review?.liked.length}}
             </div>  
             <div style="margin:5px">
                 <fa-icon [icon]="['far', 'thumbs-down']"></fa-icon> {{element.review?.unliked.length}}
-            </div>           -->
-            <div style="margin:5px">
-                <fa-icon [icon]="['fas', 'check-double']"></fa-icon>
-            </div> 
-            
+            </div>    
         </div> 
                 
       </mat-card-actions>

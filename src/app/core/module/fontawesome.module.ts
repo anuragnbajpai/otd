@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBars, faAddressBook, faInfo, faSearch, faArrowLeft,
   faHome, faPhone, faSort, faPlus, faList, faUser, faSlidersH, 
-  faBookmark as faCircleSolid, faShareAlt, faCheckDouble} from '@fortawesome/free-solid-svg-icons';
+  faBookmark as faCircleSolid, faShareAlt, faCheckDouble, faEllipsisV} from '@fortawesome/free-solid-svg-icons';
 import { faFacebookSquare , faTwitterSquare, faInstagram} from '@fortawesome/free-brands-svg-icons';
 import {  faThumbsUp, faThumbsDown, faBookmark as faCircleRegular } from '@fortawesome/free-regular-svg-icons';
 
@@ -35,7 +35,8 @@ export class FontawesomeModule {
       faCircleSolid,
       faCircleRegular,
       faShareAlt,
-      faCheckDouble
+      faCheckDouble,
+      faEllipsisV
       );
   }
 }

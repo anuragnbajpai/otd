@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { HomeComponent } from './core/page/home/home.component';
-import { AdminRouteGuard } from './core/route/adminRoute.guard';
 import { ContactusComponent } from './core/page/contactus/contactus.component';
 import { AboutusComponent } from './core/page/aboutus/aboutus.component';
-import { SavedComponent } from './core/page/saved/saved.component';
 
 const routes: Routes = [{
   path: '',
