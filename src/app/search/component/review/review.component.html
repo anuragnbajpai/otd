@@ -24,7 +24,7 @@
 <b>Rating: </b>
                 <star-rating starType="svg" [rating]="element.rating" size="small" [readOnly]="true"
                   [showHalfStars]="true"></star-rating>
-                <div style=" align-self: center;font-size: small;"> {{stateSearch.selectedProduct?.avgRating}} </div>
+                <div style=" align-self: center;font-size: small;"> {{element.rating}} </div>
             
            </div>
       </div> 
@@ -41,15 +41,15 @@
                 src="{{element.userPicture}}">  
                 <div>
                     <div>{{element.userName}} </div>
-                    <div style="font-size: xx-small;">{{element.dateTime.toDate() | date}} </div>
+                    <div style="font-size: xx-small;">{{element.dateTime.seconds*1000 | date}} </div>
                 </div>  
               </div>
               <div fxLayout="row" style="width: 90px" fxLayoutAlign="space-between">
-                <div style="margin:5px">
-                    <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> {{element.review.liked.length}}
+                <div style="margin:5px; cursor: pointer;" >
+                    <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> {{element.review?.liked.length}}
                 </div>  
-                <div style="margin:5px">
-                    <fa-icon [icon]="['far', 'thumbs-down']"></fa-icon> {{element.review.unliked.length}}
+                <div style="margin:5px; cursor: pointer;" >
+                    <fa-icon [icon]="['far', 'thumbs-down']"></fa-icon> {{element.review?.unliked.length}}
                 </div>          
               </div>
             </div> 

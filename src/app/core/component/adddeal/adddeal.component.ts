@@ -31,7 +31,7 @@ export class AdddealComponent {
     console.log('form submitted');
     this.stateSearch.selectedProduct.deals.unshift(this.dealFormGroup.value);
     this.dialog.closeAll();
-    this.svcFirestore.updateItem('deals', this.stateSearch.selectedProduct);
+    this.svcFirestore.updateDeals('deals', this.stateSearch.selectedProduct.id, this.stateSearch.selectedProduct.deals);
   }
 
 }

@@ -1,18 +1,18 @@
-<!-- <form [formGroup]="reviewFormGroup">
+<form [formGroup]="reviewFormGroup" (ngSubmit)="submitForm()">
     <mat-card-title fxLayoutAlign="center"> Review </mat-card-title>
     <mat-card>
         
 
           <div fxLayout="column">
-             Rating <star-rating starType="svg" [rating]="'0'" size="medium" [readOnly]="false"
-              [showHalfStars]="true"></star-rating>
+             Rating <star-rating starType="svg" (ratingChange)="onRatingChange($event)" [rating]="rating" size="medium" [readOnly]="false"
+              [showHalfStars]="true" style="width: 0px;margin-left: 50%;"></star-rating>
               <mat-form-field>
-                  <textarea matInput placeholder="comment" type="textarea" formControlName="Comment" required></textarea>
+                  <textarea matInput placeholder="Comment" type="textarea" formControlName="comments" required></textarea>
                </mat-form-field>               
             </div>
      </mat-card>     
      <div style="padding-top:10px" fxLayout="row" fxLayoutAlign="space-between">
         <button mat-raised-button  mat-dialog-close >Cancel</button>
-        <button mat-raised-button color="primary" >Submit</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!reviewFormGroup.valid" >Submit</button>
       </div>
-</form> -->
+</form>

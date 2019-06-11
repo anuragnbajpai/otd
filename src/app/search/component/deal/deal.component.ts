@@ -25,4 +25,8 @@ export class DealComponent implements OnInit {
     this.router.navigate([decodeURIComponent(this.router.url.split('?')[0])], { relativeTo: this.route, queryParams: { add: 'deal' } });
   }
 
+  goToLink(url: string){
+    window.open(url, '_blank');
+}
+
 }

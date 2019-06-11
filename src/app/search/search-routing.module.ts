@@ -57,8 +57,11 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'top seller',
-        pathMatch: 'full'
+        redirectTo: 'best seller',
+        pathMatch: 'full',
+        data: {
+          page: 'search'
+        }
       }
     ]
   }

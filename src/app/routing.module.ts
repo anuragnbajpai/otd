@@ -49,7 +49,10 @@ const routes: Routes = [{
     }
   }
 },
-{ path: 'search', loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
+{ path: 'search', loadChildren: () => import('./search/search.module').then(m => m.SearchModule),
+data: {
+  page: 'search'
+}
 },
 
 { path: '**', redirectTo: '', pathMatch: 'full' }

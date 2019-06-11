@@ -57,7 +57,8 @@ export class SearchService {
                 }
                 setTimeout(() => {
                   let el = document.getElementById(this.query.getValue().product);
-                  el.scrollIntoView();
+                  el.scrollIntoView(true);
+                  window.scrollBy(0, -15);
                 },
                   50);
               }
@@ -229,7 +230,8 @@ export class SearchService {
           this.getTabData();
           setTimeout(() => {
             let el = document.getElementById(this.query.getValue().product);
-            el.scrollIntoView();
+            el.scrollIntoView(true);
+            window.scrollBy(0, -15);
           },
             50);
         } else {

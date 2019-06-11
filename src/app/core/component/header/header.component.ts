@@ -22,4 +22,8 @@ export class HeaderComponent implements OnInit {
   changeCountry(country){
     this.stateSession.updateCountry(country);
   }
+  logout(){
+    localStorage.removeItem('user');
+    this.stateSession.updateUser(null);
+  }
 }

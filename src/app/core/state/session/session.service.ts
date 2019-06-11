@@ -16,6 +16,7 @@ export class SessionService {
   countries = null;
   user$ = this.query.select(e => e.user);
   isLoggedin$ = this.query.select(e => e.user != null);
+  isAdmin$ = this.query.select(e => e.user != null && e.user.role === 'admin');
   searchKeyword$ = this.query.select(e => e.searchKeyword);
   constructor(private store: SessionStore, private svcFirestore: FirestoreService, private query: SessionQuery, private http: HttpClient) {
 

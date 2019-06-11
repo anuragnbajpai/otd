@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { NavigationEnd, Router, ActivationStart, ActivationEnd, ActivatedRoute, ParamMap } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { SessionService } from '../state/session/session.service';
-import { filter} from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { SearchService } from 'src/app/search/state/search.service';
 import { LoginService } from '../service/login.service';
 import { UiService } from '../service/ui.service';
@@ -12,12 +12,12 @@ import { UiService } from '../service/ui.service';
 })
 export class RouteHandler {
   constructor(public router: Router, private titleService: Title, private metaService: Meta,
-              private stateSession: SessionService, private stateSearch: SearchService,
-              private svcLogin: LoginService, private route: ActivatedRoute, private svcUi: UiService) {
+    private stateSession: SessionService, private stateSearch: SearchService,
+    private svcLogin: LoginService, private route: ActivatedRoute, private svcUi: UiService) {
     this.initRouteTracking();
 
     this.route.queryParams.subscribe(params => {
-      if(params.add){
+      if (params.add) {
         this.svcUi.openDialog(params.add);
       }
     });
@@ -27,8 +27,8 @@ export class RouteHandler {
   private initRouteTracking() {
 
     this.router.events.subscribe(event => {
-      try{
-        if(event instanceof ActivationStart){
+      try {
+        if (event instanceof ActivationStart) {
           this.updateStateRouteParameter(event);
         }
         if (event instanceof NavigationEnd) {
@@ -36,29 +36,41 @@ export class RouteHandler {
           this.updateTitleAndMetaTags(event);
           this.trackGoogleAnalytics(event);
         }
-      } catch(e){
+      } catch (e) {
         console.log(e);
       }
     });
   }
 
   updateStateRouteParameter(event) {
+    if (event.snapshot.data.page !== 'search' && event.snapshot.data.page !== 'detail') {
+      this.stateSession.updateSearchKeyword('');
+    }
     if (event.snapshot.params.category) {
-       if(event.snapshot.params.category !== 'saved'){
-        this.stateSearch.UpdateCategory(event.snapshot.params.category);
-        this.stateSession.updateSearchKeyword(event.snapshot.params.category);
-       } else{
+      if (event.snapshot.params.category !== 'saved') {
+        if (event.snapshot.params.category === 'best seller') {
+          let search = sessionStorage.getItem('searchKeyword') ? sessionStorage.getItem('searchKeyword') : event.snapshot.params.category;
+          this.stateSearch.UpdateCategory(search);
+          this.stateSession.updateSearchKeyword(search);
+        } else {
+          this.stateSearch.UpdateCategory(event.snapshot.params.category);
+          this.stateSession.updateSearchKeyword(event.snapshot.params.category);
+          sessionStorage.setItem('searchKeyword', event.snapshot.params.category);
+        }
+      } else {
+
         this.stateSearch.UpdateCategory(event.snapshot.params.category);
         this.stateSession.updateSearchKeyword('');
-       }
-    } 
+
+      }
+    }
 
     if (event.snapshot.params.product) {
-       this.stateSearch.updateProduct(event.snapshot.params.product);
+      this.stateSearch.updateProduct(event.snapshot.params.product);
     }
 
     if (event.snapshot.params.compare1) {
-        this.stateSearch.updateCompare1(event.snapshot.params.compare1);
+      this.stateSearch.updateCompare1(event.snapshot.params.compare1);
     }
     if (event.snapshot.params.compare2) {
       this.stateSearch.updateCompare2(event.snapshot.params.compare2);

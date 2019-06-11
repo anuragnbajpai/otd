@@ -68,6 +68,10 @@ export class FirestoreService {
     this.firestore.collection(name).doc(id).set( { reviews });
   }
 
+  updateAvgRating(id, rating){
+    this.firestore.collection('products').doc(id).update( { avgRating: rating });
+  }
+
   getServerDate(){
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     return timestamp;
