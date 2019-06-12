@@ -16,17 +16,19 @@ export class SearchinputComponent implements OnInit {
   options =[];
   filteredOptions: Observable<string[]>;
   constructor(private svcCore: CoreService, private router: Router, private stateSession: SessionService ) { 
-    this.svcCore.firestore.getCollectionCondition('categories', w => w.where('active', '==', true)).subscribe(data => {
-      this.options =  data.map(e => {
-           return  (e.payload.doc.data() as any).name;
-          });
-       });
+    // this.svcCore.firestore.getCollectionCondition('categories', w => w.where('active', '==', true)).subscribe(data => {
+    //   this.options =  data.map(e => {
+    //        return  (e.payload.doc.data() as any).name;
+    //       });
+    //    });
+    
     this.stateSession.searchKeyword$.subscribe(s => {
          this.searchKeyword.setValue(s);
        });
   }
 
   ngOnInit() {
+   
      // this.searchKeyword.setValue(this.svcSearch.searchKeyword);
     this.filteredOptions = this.searchKeyword.valueChanges
       .pipe(
@@ -48,6 +50,7 @@ export class SearchinputComponent implements OnInit {
       document.getElementById('searchInput').blur();
     }
     clear(){
+      this.options = this.stateSession.application.tags;
       console.log(this.searchKeyword.value + 'call clear')
       this.searchKeyword.setValue('')
     }

@@ -10,6 +10,7 @@ import { Container } from '@angular/compiler/src/i18n/i18n_ast';
   providedIn: 'root'
 })
 export class SessionService {
+  application: any;
   device$ = this.query.select(e => e.device);
   page$ = this.query.select(e => e.page);
   country$ = this.query.select(e => e.country);
@@ -26,6 +27,9 @@ export class SessionService {
     });
     this.updateUser(JSON.parse(localStorage.getItem('user')));
     console.log(localStorage.getItem('user'));
+    this.svcFirestore.getCollection('application').subscribe(a => {
+      this.application = a.map(d => d.payload.doc.data())[0];
+    });
 
     this.user$.subscribe(u => {
       localStorage.setItem('user', JSON.stringify(u) );      

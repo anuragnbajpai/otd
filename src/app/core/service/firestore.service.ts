@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { firestore } from 'firebase';
 import * as firebase from 'firebase';
+import { AngularFireStorage } from '@angular/fire/storage';
+import {map} from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
 
-  constructor(private firestore: AngularFirestore) {
+  constructor(private firestore: AngularFirestore, private fireStorage: AngularFireStorage) {
   }
 
   getCollection(name) {
@@ -76,4 +79,31 @@ export class FirestoreService {
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     return timestamp;
   }
+
+  uploadImage(link, file){
+    try{
+      const guid = this.firestore.createId();
+      let fileRef = this.fireStorage.ref(link + guid );
+      // fileRef.put(file).then(response=>{
+      //   console.log(response);
+      // }).catch(error=>{
+      //   console.log(error);
+      // });
+      let task = fileRef.put(file);
+      let uploadProgress = task.percentageChanges();
+      return task.snapshotChanges().pipe(
+        map(() => fileRef.getDownloadURL() )
+      );
+      // .subscribe(t => {
+      //   t.subscribe(url => {
+      //     console.log(url);
+      //     return url;
+      //   });
+      //   console.log(t);
+      // });
+ 
+    } catch(e){
+      console.log(e);
+  } 
+}
 }

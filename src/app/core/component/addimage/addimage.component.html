@@ -1,21 +1,22 @@
-<form [formGroup]="imageFormGroup">
-    <mat-card-title fxLayoutAlign="center"> Image </mat-card-title>
-    <mat-card>
-        
-
-          <div fxLayout="column">
-              <mat-form-field>
-                  <textarea matInput placeholder="Image Link" type="url" formControlName="link" required></textarea>
-                </mat-form-field>
-                  Or
-                <mat-form-field>
-                  <input matInput placeholder="Upload" formControlName="link" >
-                  <button mat-raised-button matSuffix >Upload</button>
-                </mat-form-field>
-            </div>
-     </mat-card>     
-     <div style="padding-top:10px" fxLayout="row" fxLayoutAlign="space-between">
+<form [formGroup]="imageFormGroup" (ngSubmit)="submitForm()">
+    <mat-card-title fxLayoutAlign="center"> Deal </mat-card-title>
+          <mat-card>  
+                <div fxLayout="column">
+                  <div style="margin-bottom:10px">
+                      <input  placeholder="Upload Image" type="file"  (change)="uploadImage($event)" required>
+                      <div fxLayout="row" fxLayoutAlign="center center" style="margin: 10px;">
+                          <img *ngIf="image" [src]="image" style="width: 50px;height:50px;" >
+                      </div> 
+                    </div>                       
+                      
+                      <mat-form-field>
+                          <input matInput placeholder="Description" formControlName="description" required>
+                      </mat-form-field>
+                  
+                  </div>
+           </mat-card>     
+      <div style="padding-top:10px" fxLayout="row" fxLayoutAlign="space-between">
         <button mat-raised-button  mat-dialog-close >Cancel</button>
-        <button mat-raised-button color="primary" >Submit</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!imageFormGroup.valid" >Submit</button>
       </div>
-</form>
+    </form>
