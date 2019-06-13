@@ -4,6 +4,7 @@ import { FirestoreService } from '../../service/firestore.service';
 import { SearchService } from 'src/app/search/state/search.service';
 import { SessionService } from '../../state/session/session.service';
 import { MatDialog } from '@angular/material';
+import { SnackbarService } from '../../service/snackbar.service';
 
 @Component({
   selector: 'app-addreview',
@@ -15,7 +16,7 @@ export class AddreviewComponent {
   reviewFormGroup: FormGroup;
   constructor(private formBuilder: FormBuilder, private svcFirestore: FirestoreService, 
               private stateSearch: SearchService, private stateSession: SessionService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog, private svcSnackbar: SnackbarService) {
     let user = this.stateSession.getUser();
     this.reviewFormGroup = this.formBuilder.group({
       'comments': ['', [Validators.required]],
@@ -28,6 +29,7 @@ export class AddreviewComponent {
    }
 
   submitForm() {
+    this.svcSnackbar.ActionConfirmation('Image Uploaded Successfully', () => {
     console.log('form submitted');
     this.stateSearch.selectedProduct.reviews = this.stateSearch.selectedProduct.reviews? this.stateSearch.selectedProduct.reviews: [];
     this.stateSearch.selectedProduct.reviews.unshift(this.reviewFormGroup.value);
@@ -39,6 +41,7 @@ export class AddreviewComponent {
     this.stateSearch.selectedProduct.avgRating = (total / this.stateSearch.selectedProduct.reviews.length);
     this.svcFirestore.updateReviews('reviews', this.stateSearch.selectedProduct.id, this.stateSearch.selectedProduct.reviews);
     this.svcFirestore.updateAvgRating(this.stateSearch.selectedProduct.id, this.stateSearch.selectedProduct.avgRating );
+    });
   }
 
   onRatingChange(e){

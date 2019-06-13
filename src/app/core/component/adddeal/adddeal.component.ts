@@ -4,6 +4,7 @@ import { FirestoreService } from '../../service/firestore.service';
 import { SearchService } from 'src/app/search/state/search.service';
 import { SessionService } from '../../state/session/session.service';
 import { MatDialog } from '@angular/material';
+import { SnackbarService } from '../../service/snackbar.service';
 
 @Component({
   selector: 'app-adddeal',
@@ -14,7 +15,7 @@ export class AdddealComponent {
   dealFormGroup: FormGroup;
   constructor(private formBuilder: FormBuilder, private svcFirestore: FirestoreService, 
               private stateSearch: SearchService, private stateSession: SessionService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog, private svcSnackbar: SnackbarService) {
     let user = this.stateSession.getUser();
     this.dealFormGroup = this.formBuilder.group({
       'link': ['', [Validators.required]],
@@ -28,10 +29,12 @@ export class AdddealComponent {
    }
 
   submitForm() {
-    console.log('form submitted');
-    this.stateSearch.selectedProduct.deals.unshift(this.dealFormGroup.value);
-    this.dialog.closeAll();
-    this.svcFirestore.updateDeals('deals', this.stateSearch.selectedProduct.id, this.stateSearch.selectedProduct.deals);
+    this.svcSnackbar.ActionConfirmation('Deal Saved Successfully', ()=>{
+      console.log('form submitted');
+      this.stateSearch.selectedProduct.deals.unshift(this.dealFormGroup.value);
+      this.dialog.closeAll();
+      this.svcFirestore.updateDeals('deals', this.stateSearch.selectedProduct.id, this.stateSearch.selectedProduct.deals);
+    });
   }
 
 }

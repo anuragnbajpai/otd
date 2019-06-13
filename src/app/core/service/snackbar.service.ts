@@ -15,8 +15,8 @@ export class SnackbarService {
         duration: 2000
       });
     }
-  
-    ActionConfirmation(msg, func, data) {
+
+    ActionConfirmation(msg, func) {
       this.undo = false;
       const snackBarRef = this.snackBar.open(msg, 'Undo', {
         duration: 2000
@@ -24,10 +24,9 @@ export class SnackbarService {
 
       setTimeout( () => {
         if(!this.undo){
-          func(data);
+          func();
         }
       }, 3000);
-  
       snackBarRef.onAction().subscribe(() => {
         console.log('undo');
         this.undo = true;

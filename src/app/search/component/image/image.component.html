@@ -15,14 +15,14 @@
            
         </mat-card>
       <mat-card fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
-        <mat-card *ngFor="let element of stateSearch.selectedProduct.images;let i = index" 
+        <mat-card (click)="goToImage(i)" *ngFor="let element of stateSearch.selectedProduct.images;let i = index" 
         style="background: lightcyan; margin:5px" [ngStyle.xs]="{'width.%': 80}" [ngStyle.gt-xs]="{'width.px': 200}"> 
          <mat-card-content fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 0px">
             <div style="position:absolute;top:0px; right:0px;padding:10px;" [matMenuTriggerFor]="menu">
                 <fa-icon [icon]="['fas', 'ellipsis-v']"></fa-icon>
               </div>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="goToImage(element.link)">Image Detail</button>
+                <button mat-menu-item (click)="goToImage(i)">Image Detail</button>
                 <button mat-menu-item>Report It</button>
               </mat-menu>
           

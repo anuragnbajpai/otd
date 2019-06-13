@@ -14,6 +14,7 @@ import { AddreviewComponent } from './core/component/addreview/addreview.compone
 import { AdddealComponent } from './core/component/adddeal/adddeal.component';
 import { AddimageComponent } from './core/component/addimage/addimage.component';
 import { AddfilterComponent } from './core/component/addfilter/addfilter.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AddfilterComponent } from './core/component/addfilter/addfilter.compone
     AngularFirestoreModule,
     AngularFireAuthModule,
     StarRatingModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent],

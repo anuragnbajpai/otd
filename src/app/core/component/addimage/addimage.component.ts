@@ -4,6 +4,7 @@ import { FirestoreService } from '../../service/firestore.service';
 import { SearchService } from 'src/app/search/state/search.service';
 import { SessionService } from '../../state/session/session.service';
 import { MatDialog } from '@angular/material';
+import { SnackbarService } from '../../service/snackbar.service';
 
 @Component({
   selector: 'app-addimage',
@@ -17,7 +18,7 @@ export class AddimageComponent{
   image: any;
   constructor(private formBuilder: FormBuilder, private svcFirestore: FirestoreService, 
               private stateSearch: SearchService, private stateSession: SessionService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog, private svcSnackbar: SnackbarService) {
     let user = this.stateSession.getUser();
     this.imageFormGroup = this.formBuilder.group({
       'link': ['', [Validators.required]],
@@ -30,6 +31,8 @@ export class AddimageComponent{
    }
 
   submitForm() {
+
+    this.svcSnackbar.ActionConfirmation('Image Uploaded Successfully', () => {
     console.log('form submitted');
     
     this.dialog.closeAll();
@@ -42,8 +45,8 @@ export class AddimageComponent{
       });
       console.log(t);
     });
+  });
 
-   // 
   }
   uploadImage(e){
     this.imageFormGroup.get('link').setValue('link');
@@ -54,5 +57,7 @@ export class AddimageComponent{
     }
     reader.readAsDataURL(this.file);
   }
-
+  goToImage(i){
+    
+  }
 }
