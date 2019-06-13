@@ -44,14 +44,16 @@
                     <div style="font-size: xx-small;">{{element.dateTime.seconds*1000 | date}} </div>
                 </div>  
               </div>
-              <div fxLayout="row" style="width: 90px" fxLayoutAlign="space-between">
-                <div style="margin:5px; cursor: pointer;" >
-                    <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> {{element.review?.liked.length}}
+              <div fxLayout="row" style="width: 80px;" fxLayoutAlign="space-between">
+                  <div>
+                      <fa-icon *ngIf="element.review?.liked.indexOf(user.id) >= 0"  [icon]="['fas', 'thumbs-up']"  ></fa-icon>
+                      <fa-icon *ngIf="element.review?.liked.indexOf(user.id) == -1" (click)="liked(i)" [icon]="['far', 'thumbs-up']" style="cursor: pointer;"></fa-icon> {{element.review?.liked.length}}
+                  </div>  
+                  <div>
+                      <fa-icon *ngIf="element.review?.unliked.indexOf(user.id) >= 0"  [icon]="['fas', 'thumbs-down']" ></fa-icon>
+                      <fa-icon *ngIf="element.review?.unliked.indexOf(user.id) == -1" (click)="unliked(i)" [icon]="['far', 'thumbs-down']" style="cursor: pointer;"></fa-icon> {{element.review?.unliked.length}}
+                  </div>          
                 </div>  
-                <div style="margin:5px; cursor: pointer;" >
-                    <fa-icon [icon]="['far', 'thumbs-down']"></fa-icon> {{element.review?.unliked.length}}
-                </div>          
-              </div>
             </div> 
                 
       </mat-card-actions>

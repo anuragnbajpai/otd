@@ -1,0 +1,24 @@
+<mat-card-actions style="padding: 10px; background: #d3d3d34d;">  
+  <div fxLayout="row" fxLayoutAlign="space-between">
+      <div fxLayout="row">
+        <img mat-card-avatar style="width: 30px;background-size: cover;border-radius: 50%;margin-right: 10px;" 
+        src="{{element.userPicture}}">  
+        <div>
+            <div>{{element.userName}} </div>
+            <div style="font-size: xx-small;">{{element.dateTime.seconds*1000 | date}} </div>
+        </div>  
+      </div>
+      <div fxLayout="row" style="width: 90px" fxLayoutAlign="space-between">
+          <div>
+              <fa-icon *ngIf="element.review?.liked.indexOf(user.id) >= 0" (click)="like()" [icon]="['fas', 'thumbs-up']" style="margin:5px;cursor: pointer;"></fa-icon>
+              <fa-icon *ngIf="element.review?.liked.indexOf(user.id) == -1" (click)="like()" [icon]="['far', 'thumbs-up']" style="margin:5px;cursor: pointer;"></fa-icon> {{element.review?.liked.length}}
+          </div>  
+          <div>
+              <fa-icon *ngIf="element.review?.unliked.indexOf(user.id) >= 0" (click)="like()" [icon]="['fas', 'thumbs-up']" style="margin:5px;cursor: pointer;"></fa-icon>
+              <fa-icon *ngIf="element.review?.unliked.indexOf(user.id) == -1" (click)="unlike()" [icon]="['far', 'thumbs-down']" style="margin:5px;cursor: pointer;"></fa-icon> {{element.review?.unliked.length}}
+          </div>          
+        </div>      
+        
+    </div> 
+        
+</mat-card-actions>

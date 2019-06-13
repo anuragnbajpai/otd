@@ -159,3 +159,10 @@ background-color: lightcyan;
 .detail .mat-tab-label .mat-tab-label-content{
   padding: 0px 5px;
 }
+
+.content-list .only-show-on-hover {
+  visibility: hidden;
+}
+.content-list:hover .only-show-on-hover{
+  visibility: visible;
+}

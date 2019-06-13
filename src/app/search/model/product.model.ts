@@ -28,17 +28,24 @@ export interface Image {
   dateTime: Date;
   link: string;
   description: string;
+  review: Likes;
 }
 export interface Review {
   dateTime: Date;
   rating: number;
   comment: string;
+  review: Likes;
 }
 export interface Deal {
   dateTime: Date;
   link: string;
   price: number;
   store: string;
+  review: Likes;
+}
+export interface Likes {
+  liked: string[];
+  unliked: string[];
 }
 
 

@@ -15,19 +15,19 @@
        
     </mat-card>
   <mat-card fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
-    <mat-card *ngFor="let element of stateSearch.selectedProduct.deals | sort: sortBy"  
+    <mat-card *ngFor="let element of stateSearch.selectedProduct.deals | sort: sortBy; let i = index"  
     style="background: lightcyan; margin:5px" [ngStyle.xs]="{'width.%': 80}" [ngStyle.gt-xs]="{'width.px': 200}"> 
-     <mat-card-content fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 0px">
+     <mat-card-content class="content-list" fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 0px">
       <div style="position:absolute;top:0px; right:0px;padding:10px;" [matMenuTriggerFor]="menu">
-        <fa-icon [icon]="['fas', 'ellipsis-v']"></fa-icon>
+        <fa-icon class="only-show-on-hover" [icon]="['fas', 'ellipsis-v']"></fa-icon>
       </div>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="goToLink(element.link)">Open This Deal</button>
+        <button mat-menu-item (click)="goToLink(element.link)">Open</button>
         <button mat-menu-item>Report It</button>
       </mat-menu>
       <div style=" align-self: center;font-size: x-large;margin: 10px">{{100 - ((element.price/stateSearch.selectedProduct.price)*100) | number:'1.0-0'}}%</div>
       <div> <s>{{(stateSession.country$| async)?.currencySymbol }}{{stateSearch.selectedProduct.price }}</s> &nbsp;<b>{{(stateSession.country$| async)?.currencySymbol }}{{element.price}}</b> {{(stateSession.country$| async)?.currency }}   </div>
-      <a color="primary" style="margin: 10px" mat-raised-button href="{{element.link}}" target="_blank" > {{element.store}}</a>
+      <a color="primary" style="margin: 10px" mat-raised-button href="{{element.link}}" target="_blank" > {{element.store | titlecase}}</a>
     </mat-card-content>
       <mat-card-actions style="padding: 10px; background: #d3d3d34d;">  
         <div fxLayout="row" fxLayoutAlign="space-between">
@@ -35,16 +35,18 @@
             <img mat-card-avatar style="width: 30px;background-size: cover;border-radius: 50%;margin-right: 10px;" 
             src="{{element.userPicture}}">  
             <div>
-                <div>{{element.userName}} </div>
+                <div>{{element.userName | titlecase}} </div>
                 <div style="font-size: xx-small;">{{element.dateTime.seconds*1000 | date}} </div>
             </div>  
           </div>
-          <div fxLayout="row" style="width: 90px" fxLayoutAlign="space-between">
-              <div style="margin:5px;cursor: pointer;" >
-                  <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> {{element.review?.liked.length}}
+          <div fxLayout="row" style="width: 80px;" fxLayoutAlign="space-between">
+              <div>
+                  <fa-icon *ngIf="element.review?.liked.indexOf(user.id) >= 0"  [icon]="['fas', 'thumbs-up']"  ></fa-icon>
+                  <fa-icon *ngIf="element.review?.liked.indexOf(user.id) == -1" (click)="liked(i)" [icon]="['far', 'thumbs-up']" style="cursor: pointer;"></fa-icon> {{element.review?.liked.length}}
               </div>  
-              <div style="margin:5px;cursor: pointer;" >
-                  <fa-icon [icon]="['far', 'thumbs-down']"></fa-icon> {{element.review?.unliked.length}}
+              <div>
+                  <fa-icon *ngIf="element.review?.unliked.indexOf(user.id) >= 0"  [icon]="['fas', 'thumbs-down']" ></fa-icon>
+                  <fa-icon *ngIf="element.review?.unliked.indexOf(user.id) == -1" (click)="unliked(i)" [icon]="['far', 'thumbs-down']" style="cursor: pointer;"></fa-icon> {{element.review?.unliked.length}}
               </div>          
             </div>
         </div> 

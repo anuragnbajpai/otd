@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../state/search.service';
 import { SessionService } from 'src/app/core/state/session/session.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/core/model/Session.model';
+import { FirestoreService } from 'src/app/core/service/firestore.service';
+import { SnackbarService } from 'src/app/core/service/snackbar.service';
 
 @Component({
   selector: 'app-deal',
@@ -10,8 +13,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class DealComponent implements OnInit {
   sortBy = 'price';
+  user: User;
   constructor(public stateSearch: SearchService, public stateSession: SessionService,
-              private router: Router, private route: ActivatedRoute) {
+              private router: Router, private route: ActivatedRoute,
+              private svcFirestore: FirestoreService, private svcSnackbar: SnackbarService) {
+                this.user = this.stateSession.getUser();
   }
 
   ngOnInit() {
@@ -27,6 +33,23 @@ export class DealComponent implements OnInit {
 
   goToLink(url: string){
     window.open(url, '_blank');
+}
+
+liked(id){
+  let index = this.stateSearch.selectedProduct.deals[id].review.unliked.indexOf(this.user.id);
+  if(index >= 0){
+    this.stateSearch.selectedProduct.deals[id].review.unliked.splice( index, 1);
+  }
+  this.stateSearch.selectedProduct.deals[id].review.liked.push(this.user.id);
+  this.svcFirestore.updateDeals('deals', this.stateSearch.selectedProduct.id, this.stateSearch.selectedProduct.deals);
+}
+unliked(id){
+  let index = this.stateSearch.selectedProduct.deals[id].review.liked.indexOf(this.user.id);
+  if(index >= 0){
+    this.stateSearch.selectedProduct.deals[id].review.liked.splice( index , 1);
+  }
+  this.stateSearch.selectedProduct.deals[id].review.unliked.push(this.user.id);
+  this.svcFirestore.updateDeals('deals', this.stateSearch.selectedProduct.id, this.stateSearch.selectedProduct.deals);
 }
 
 }

@@ -17,16 +17,16 @@
       <mat-card fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
         <mat-card (click)="goToImage(i)" *ngFor="let element of stateSearch.selectedProduct.images;let i = index" 
         style="background: lightcyan; margin:5px" [ngStyle.xs]="{'width.%': 80}" [ngStyle.gt-xs]="{'width.px': 200}"> 
-         <mat-card-content fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 0px">
+         <mat-card-content class="content-list" fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 0px">
             <div style="position:absolute;top:0px; right:0px;padding:10px;" [matMenuTriggerFor]="menu">
-                <fa-icon [icon]="['fas', 'ellipsis-v']"></fa-icon>
+                <fa-icon class="only-show-on-hover" [icon]="['fas', 'ellipsis-v']"></fa-icon>
               </div>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="goToImage(i)">Image Detail</button>
+                <!-- <button mat-menu-item (click)="goToImage(i)">Open</button> -->
                 <button mat-menu-item>Report It</button>
               </mat-menu>
           
-            <img src="{{element.link}}" alt="{{element.description}}" width="60%" height="150px"  >
+            <img src="{{element.link}}" alt="{{element.description}}" width="100%" style="max-width: 100px"   >
          
         </mat-card-content>
           <mat-card-actions style="padding: 10px; background: #d3d3d34d;">  
@@ -39,14 +39,16 @@
                         <div style="font-size: xx-small;">{{element.dateTime.seconds*1000 | date}} </div>
                     </div>  
                   </div>
-                  <div fxLayout="row" style="width: 90px" fxLayoutAlign="space-between">
-                      <div style="margin:5px;cursor: pointer;" >
-                          <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> {{element.review?.liked.length}}
+                  <div fxLayout="row" style="width: 80px;" fxLayoutAlign="space-between">
+                      <div>
+                          <fa-icon *ngIf="element.review?.liked.indexOf(user.id) >= 0"  [icon]="['fas', 'thumbs-up']"  ></fa-icon>
+                          <fa-icon *ngIf="element.review?.liked.indexOf(user.id) == -1" (click)="liked(i)" [icon]="['far', 'thumbs-up']" style="cursor: pointer;"></fa-icon> {{element.review?.liked.length}}
                       </div>  
-                      <div style="margin:5px;cursor: pointer;" >
-                          <fa-icon [icon]="['far', 'thumbs-down']"></fa-icon> {{element.review?.unliked.length}}
+                      <div>
+                          <fa-icon *ngIf="element.review?.unliked.indexOf(user.id) >= 0"  [icon]="['fas', 'thumbs-down']" ></fa-icon>
+                          <fa-icon *ngIf="element.review?.unliked.indexOf(user.id) == -1" (click)="unliked(i)" [icon]="['far', 'thumbs-down']" style="cursor: pointer;"></fa-icon> {{element.review?.unliked.length}}
                       </div>          
-                    </div>      
+                    </div>    
                     
                 </div> 
                     

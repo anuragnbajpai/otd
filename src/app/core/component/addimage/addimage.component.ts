@@ -26,7 +26,8 @@ export class AddimageComponent{
       'dateTime': [{seconds: (Date.now()/1000)} ],
       'userId': [user.id],
       'userName': [user.name],
-      'userPicture': [user.picture]
+      'userPicture': [user.picture],
+      'review': [{liked: [], unliked: []}]
     });
    }
 

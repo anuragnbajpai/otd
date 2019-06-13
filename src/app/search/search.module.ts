@@ -13,12 +13,13 @@ import { ImageComponent } from './component/image/image.component';
 import { DealComponent } from './component/deal/deal.component';
 import { FeatureComponent } from './component/feature/feature.component';
 import { ReviewComponent } from './component/review/review.component';
+import { LikedislikeComponent } from './component/likedislike/likedislike.component';
 
 
 @NgModule({
   declarations: [SearchComponent, ResultlistComponent, ResultitemComponent, 
     DetailComponent, CompareComponent, ImageComponent, DealComponent, 
-    FeatureComponent, ReviewComponent],
+    FeatureComponent, ReviewComponent, LikedislikeComponent],
   imports: [
     CommonModule,
     SearchRoutingModule,
