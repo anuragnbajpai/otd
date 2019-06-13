@@ -21,7 +21,7 @@ export class SavedComponent implements OnInit {
   }
 
   updateProducts() {
-    const where = ref => ref.where('category', '==', 'Smartphones');
+    const where = ref => ref.where('category', '==', 'Laptops');
 
     this.svcFirestore.getCollectionCondition('products', where).pipe(take(1)).subscribe(data => {
       console.log(data.length);
@@ -32,7 +32,9 @@ export class SavedComponent implements OnInit {
           let d = {
             id: e.payload.doc.id,
             ...e.payload.doc.data(),
-            tags: [e.payload.doc.data()['category'].toLowerCase(), e.payload.doc.data()['brand'].toLowerCase()]
+            tags: [e.payload.doc.data()['category'].toLowerCase(), e.payload.doc.data()['brand'].toLowerCase(),
+                  e.payload.doc.data()['title'].toLowerCase()],
+            price: { 'us': e.payload.doc.data()['price'], 'ca': 0, 'in': 0 }
           } as any;
 
           this.svcFirestore.updateItem('products', d);
@@ -51,8 +53,8 @@ export class SavedComponent implements OnInit {
               userPicture: user.picture,
               userName: user.name,
               review: {
-                liked: Array.from({ length: Math.floor(Math.random() * 100) }, () => Math.floor(Math.random() * 100).toString()),
-                unliked: Array.from({ length: Math.floor(Math.random() * 30) }, () => Math.floor(Math.random() * 100).toString())
+                liked: Array.from({ length: Math.floor(Math.random() * 30) }, () => Math.floor(Math.random() * 100).toString()),
+                unliked: Array.from({ length: Math.floor(Math.random() * 10) }, () => Math.floor(Math.random() * 100).toString())
               }
             });
           });
@@ -80,7 +82,7 @@ export class SavedComponent implements OnInit {
               });
             });
             console.log(deals);
-            this.svcFirestore.updateDeals('deals', e.payload.doc.id, deals);
+            this.svcFirestore.updateDeals('deals', e.payload.doc.id + '-us', deals);
           });
 
            // update review
@@ -97,8 +99,8 @@ export class SavedComponent implements OnInit {
                 userPicture: user.picture,
                 userName: user.name,
                 review: {
-                  liked: Array.from({ length: Math.floor(Math.random() * 100) }, () => Math.floor(Math.random() * 100).toString()),
-                  unliked: Array.from({ length: Math.floor(Math.random() * 30) }, () => Math.floor(Math.random() * 100).toString())
+                  liked: Array.from({ length: Math.floor(Math.random() * 30) }, () => Math.floor(Math.random() * 100).toString()),
+                  unliked: Array.from({ length: Math.floor(Math.random() * 10) }, () => Math.floor(Math.random() * 100).toString())
                 }
               });
             });

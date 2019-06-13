@@ -25,8 +25,8 @@
         <button mat-menu-item (click)="goToLink(element.link)">Open</button>
         <button mat-menu-item>Report It</button>
       </mat-menu>
-      <div style=" align-self: center;font-size: x-large;margin: 10px">{{100 - ((element.price/stateSearch.selectedProduct.price)*100) | number:'1.0-0'}}%</div>
-      <div> <s>{{(stateSession.country$| async)?.currencySymbol }}{{stateSearch.selectedProduct.price }}</s> &nbsp;<b>{{(stateSession.country$| async)?.currencySymbol }}{{element.price}}</b> {{(stateSession.country$| async)?.currency }}   </div>
+      <div style=" align-self: center;font-size: x-large;margin: 10px">{{100 - ((element.price/stateSearch.selectedProduct.price[(stateSession.country$| async)?.code])*100) | number:'1.0-0'}}%</div>
+      <div> <s>{{(stateSession.country$| async)?.currencySymbol }}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code]}}</s> &nbsp;<b>{{(stateSession.country$| async)?.currencySymbol }}{{element.price}}</b> {{(stateSession.country$| async)?.currency }}   </div>
       <a color="primary" style="margin: 10px" mat-raised-button href="{{element.link}}" target="_blank" > {{element.store | titlecase}}</a>
     </mat-card-content>
       <mat-card-actions style="padding: 10px; background: #d3d3d34d;">  

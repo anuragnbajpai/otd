@@ -4,8 +4,8 @@ export interface Product {
   avgRating: number;
   brand: string;
   category: string;
-  country: string;
-  currency: string;
+ // country: string;
+ // currency: string;
   dateTime: Date;
   description: string;
   features: Feature[];

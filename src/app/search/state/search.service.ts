@@ -22,6 +22,16 @@ export class SearchService {
 
   constructor(private store: SearchStore, private query: SearchQuery,
               private svcFirestore: FirestoreService, private stateSession: SessionService) {
+
+    this.stateSession.country$.subscribe(c => {
+      if(this.searchResult && this.searchResult.length > 0) {
+        this.searchResult.forEach(p => {
+          p.deals = [];
+        });
+        this.getDeals();
+      }
+    });
+
     this.query.select(e => e.category).pipe(distinctUntilChanged()).subscribe(c => {
       if (c !== '') {
         this.searchResult = null;
@@ -128,7 +138,7 @@ export class SearchService {
     return this.query.getValue().category;
   }
   getDeals() {
-    this.svcFirestore.getDocument('deals', this.selectedProduct.id).subscribe(d => {
+    this.svcFirestore.getDocument('deals', this.selectedProduct.id + '-' +this.stateSession.getCountry().code).subscribe(d => {
       this.selectedProduct.deals = (d.payload.data() as any).deals;
       this.searchResult.find(f => f.title === this.selectedProduct.title).deals = this.selectedProduct.deals;
     });

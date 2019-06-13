@@ -3,6 +3,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { HomeComponent } from './core/page/home/home.component';
 import { ContactusComponent } from './core/page/contactus/contactus.component';
 import { AboutusComponent } from './core/page/aboutus/aboutus.component';
+import { SavedComponent } from './core/page/saved/saved.component';
 
 const routes: Routes = [{
   path: '',
@@ -54,7 +55,11 @@ data: {
   page: 'search'
 }
 },
-
+{ path: 'add', component: SavedComponent,
+data: {
+  page: 'add'
+}
+},
 { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 // { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AdminRouteGuard] },

@@ -42,7 +42,7 @@
     <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
       <div>
         <h4 style="margin:0"> {{stateSearch.selectedProduct.brand}} {{stateSearch.selectedProduct.title}}
-          &nbsp;&nbsp;({{(stateSession.country$| async)?.currencySymbol}}{{stateSearch.selectedProduct.price}}
+          &nbsp;&nbsp;({{(stateSession.country$| async)?.currencySymbol}}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code]}}
           {{(stateSession.country$| async)?.currency }})
           &nbsp;
           <span *ngIf="stateSession.isLoggedin$|async">
