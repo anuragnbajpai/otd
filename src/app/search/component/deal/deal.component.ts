@@ -17,7 +17,9 @@ export class DealComponent implements OnInit {
   constructor(public stateSearch: SearchService, public stateSession: SessionService,
               private router: Router, private route: ActivatedRoute,
               private svcFirestore: FirestoreService, private svcSnackbar: SnackbarService) {
-                this.user = this.stateSession.getUser();
+                this.stateSession.user$.subscribe(u => {
+                  this.user = u;
+                });
   }
 
   ngOnInit() {
@@ -41,7 +43,8 @@ liked(id){
     this.stateSearch.selectedProduct.deals[id].review.unliked.splice( index, 1);
   }
   this.stateSearch.selectedProduct.deals[id].review.liked.push(this.user.id);
-  this.svcFirestore.updateDeals('deals', this.stateSearch.selectedProduct.id, this.stateSearch.selectedProduct.deals);
+  this.svcFirestore.updateDeals('deals',
+  this.stateSearch.selectedProduct.id + '-' + this.stateSession.getCountry().code, this.stateSearch.selectedProduct.deals);
 }
 unliked(id){
   let index = this.stateSearch.selectedProduct.deals[id].review.liked.indexOf(this.user.id);
@@ -49,7 +52,8 @@ unliked(id){
     this.stateSearch.selectedProduct.deals[id].review.liked.splice( index , 1);
   }
   this.stateSearch.selectedProduct.deals[id].review.unliked.push(this.user.id);
-  this.svcFirestore.updateDeals('deals', this.stateSearch.selectedProduct.id, this.stateSearch.selectedProduct.deals);
+  this.svcFirestore.updateDeals('deals',
+  this.stateSearch.selectedProduct.id + '-' + this.stateSession.getCountry().code, this.stateSearch.selectedProduct.deals);
 }
 
 }

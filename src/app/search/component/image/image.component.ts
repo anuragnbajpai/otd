@@ -17,7 +17,9 @@ export class ImageComponent implements OnInit {
   constructor(public stateSession: SessionService,public stateSearch: SearchService,
               private router: Router,  private route: ActivatedRoute, 
               private svcFirestore: FirestoreService,  private svcSnackbar: SnackbarService) {
-                this.user = this.stateSession.getUser();
+                this.stateSession.user$.subscribe(u => {
+                  this.user = u;
+                });
     // if(this.stateSearch.selectedProduct.images == null
     //    || this.stateSearch.selectedProduct.images.length == 0){
     //   this.stateSearch.getImages();

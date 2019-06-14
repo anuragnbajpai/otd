@@ -31,6 +31,15 @@ export class SearchService {
         this.getDeals();
       }
     });
+    
+    // this.stateSession.user$.subscribe(c => {
+    //   if(this.searchResult && this.searchResult.length > 0) {
+    //     this.searchResult.forEach(p => {
+    //       p.deals = [];
+    //     });
+    //     this.getDeals();
+    //   }
+    // });
 
     this.query.select(e => e.category).pipe(distinctUntilChanged()).subscribe(c => {
       if (c !== '') {

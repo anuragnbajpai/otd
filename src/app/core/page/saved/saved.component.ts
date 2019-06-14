@@ -21,7 +21,7 @@ export class SavedComponent implements OnInit {
   }
 
   updateProducts() {
-    const where = ref => ref.where('category', '==', 'Laptops');
+    const where = ref => ref.where('category', '==', 'Cameras');
 
     this.svcFirestore.getCollectionCondition('products', where).pipe(take(1)).subscribe(data => {
       console.log(data.length);

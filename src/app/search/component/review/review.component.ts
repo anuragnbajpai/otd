@@ -19,7 +19,9 @@ export class ReviewComponent implements OnInit {
               private router: Router,private svcSnackbar: SnackbarService,
               private route: ActivatedRoute, private svcFirestore: FirestoreService
               ) { 
-                this.user = this.stateSession.getUser();
+                this.stateSession.user$.subscribe(u => {
+                  this.user = u;
+                });
     // if(this.stateSearch.selectedProduct.images == null
     //    || this.stateSearch.selectedProduct.images.length == 0){
     //   this.stateSearch.getImages();
