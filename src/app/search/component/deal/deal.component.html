@@ -23,7 +23,7 @@
       </div>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="goToLink(element.link)">Open</button>
-        <button mat-menu-item>Report It</button>
+        <button mat-menu-item (click)="report(element)">Report It</button>
       </mat-menu>
       <div style=" align-self: center;font-size: x-large;margin: 10px">{{100 - ((element.price/stateSearch.selectedProduct.price[(stateSession.country$| async)?.code])*100) | number:'1.0-0'}}%</div>
       <div> <s>{{(stateSession.country$| async)?.currencySymbol }}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code]}}</s> &nbsp;<b>{{(stateSession.country$| async)?.currencySymbol }}{{element.price}}</b> {{(stateSession.country$| async)?.currency }}   </div>

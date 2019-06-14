@@ -30,11 +30,12 @@ export class AddreviewComponent {
    }
 
   submitForm() {
+    this.dialog.closeAll();
     this.svcSnackbar.ActionConfirmation('Image Uploaded Successfully', () => {
     console.log('form submitted');
     this.stateSearch.selectedProduct.reviews = this.stateSearch.selectedProduct.reviews? this.stateSearch.selectedProduct.reviews: [];
     this.stateSearch.selectedProduct.reviews.unshift(this.reviewFormGroup.value);
-    this.dialog.closeAll();
+    
     let total = 0;
     this.stateSearch.selectedProduct.reviews.forEach(r => {
       total += r.rating;

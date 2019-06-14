@@ -71,6 +71,10 @@ export class FirestoreService {
     this.firestore.collection(name).doc(id).set( { reviews });
   }
 
+  updateReports(name, id, reports) {
+    this.firestore.collection(name).doc(id).set( { reports });
+  }
+
   updateAvgRating(id, rating){
     this.firestore.collection('products').doc(id).update( { avgRating: rating });
   }

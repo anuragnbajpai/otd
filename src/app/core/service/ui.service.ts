@@ -7,6 +7,7 @@ import { AddimageComponent } from 'src/app/core/component/addimage/addimage.comp
 import { AdddealComponent } from 'src/app/core/component/adddeal/adddeal.component';
 import { AddreviewComponent } from 'src/app/core/component/addreview/addreview.component';
 import { AddfilterComponent } from 'src/app/core/component/addfilter/addfilter.component';
+import { AddreportComponent } from '../component/addreport/addreport.component';
 
 @Injectable({ providedIn: 'root' })
 export class UiService {
@@ -25,9 +26,9 @@ export class UiService {
 
       if (this.checkLogin()) {
         switch (component) {
-          // case 'login':
-          //   dialogComponent = LoginComponent;
-          //   break;
+          case 'report':
+            dialogComponent = AddreportComponent;
+            break;
           case 'image':
             dialogComponent = AddimageComponent;
             break;

@@ -23,7 +23,7 @@
               </div>
               <mat-menu #menu="matMenu">
                 <!-- <button mat-menu-item (click)="goToImage(i)">Open</button> -->
-                <button mat-menu-item>Report It</button>
+                <button mat-menu-item (click)="report(element)">Report It</button>
               </mat-menu>
           
             <img (click)="goToImage(i)" src="{{element.link}}" alt="{{element.description}}" width="100%" style="max-width: 100px"   >

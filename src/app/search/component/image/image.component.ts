@@ -33,6 +33,10 @@ export class ImageComponent implements OnInit {
     this.router.navigate([decodeURIComponent(this.router.url.split('?')[0])], { relativeTo: this.route, queryParams: { add: 'image' } });
   }
 
+  report(e){
+    this.router.navigate([decodeURIComponent(this.router.url.split('?')[0])], { relativeTo: this.route, queryParams: { add: 'report' } });
+  }
+
   liked(id){
     let index = this.stateSearch.selectedProduct.images[id].review.unliked.indexOf(this.user.id);
     if(index >= 0){

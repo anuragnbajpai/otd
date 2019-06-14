@@ -36,6 +36,9 @@ export class DealComponent implements OnInit {
   goToLink(url: string){
     window.open(url, '_blank');
 }
+report(e){
+  this.router.navigate([decodeURIComponent(this.router.url.split('?')[0])], { relativeTo: this.route, queryParams: { add: 'report' } });
+}
 
 liked(id){
   let index = this.stateSearch.selectedProduct.deals[id].review.unliked.indexOf(this.user.id);

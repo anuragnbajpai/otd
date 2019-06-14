@@ -32,11 +32,11 @@ export class AddimageComponent{
    }
 
   submitForm() {
-
+    this.dialog.closeAll();
     this.svcSnackbar.ActionConfirmation('Image Uploaded Successfully', () => {
     console.log('form submitted');
     
-    this.dialog.closeAll();
+    
     this.svcFirestore.uploadImage( '/' + this.stateSearch.selectedProduct.id + '/' , this.file ).subscribe(t => {
       t.subscribe(url => {
         console.log(url);

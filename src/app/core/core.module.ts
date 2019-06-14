@@ -21,10 +21,11 @@ import { SortPipe } from './pipe/sort.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './page/login/login.component';
 import { AddfilterComponent } from './component/addfilter/addfilter.component';
+import { AddreportComponent } from './component/addreport/addreport.component';
 
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, FooterComponent, SearchinputComponent, 
-    LeftnavComponent, ContactusComponent, AboutusComponent, SavedComponent, SortPipe, LoginComponent
+    LeftnavComponent, ContactusComponent, AboutusComponent, SavedComponent, SortPipe, LoginComponent, AddreportComponent
  ],
   imports: [
     CommonModule,
@@ -58,6 +59,6 @@ import { AddfilterComponent } from './component/addfilter/addfilter.component';
   providers: [
     {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
-  entryComponents: [ LoginComponent]
+  entryComponents: [ LoginComponent, AddreportComponent]
 })
 export class CoreModule { }

@@ -1,0 +1,29 @@
+<form [formGroup]="reportFormGroup" (ngSubmit)="submitForm()">
+  <mat-card-title fxLayoutAlign="center"> Report </mat-card-title>
+  <mat-card>
+    <div fxLayout="column">
+      <mat-form-field>
+        <mat-label>Reason</mat-label>
+        <mat-select formControlName="reason">
+          <mat-option value="Expired">
+            Expired
+          </mat-option>
+          <mat-option value="Spam">
+            Spam
+          </mat-option>
+          <mat-option value="Inappropriate">
+            Inappropriate
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="Comment" formControlName="comment" required></textarea>
+      </mat-form-field>
+
+    </div>
+  </mat-card>
+  <div style="padding-top:10px" fxLayout="row" fxLayoutAlign="space-between">
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!reportFormGroup.valid">Submit</button>
+  </div>
+</form>
