@@ -1,6 +1,6 @@
 <mat-card style="background: rgb(205, 249, 249);
-  position: fixed;z-index: 10;width: 100%;padding: 0px;height: 25vh;" [ngStyle]="{'height': ((stateSession.page$ | async) == 'home') ? '25vh' : '8vh' }"  >
-  <button style="position: fixed; top:1vh; left:1vw;z-index:10; background: transparent" mat-icon-button
+  position: fixed;z-index: 10;width: 100%;padding: 0px;min-height: 50px;" [ngStyle]="{'height': ((stateSession.page$ | async) == 'home') ? '25vh' : '8vh' }"  >
+  <button style="position: fixed; top:1vh; left: 1vw;z-index:10; background: transparent" mat-icon-button
     (click)="open()">
     <fa-icon [icon]="['fas', 'bars']"></fa-icon>
   </button>
@@ -17,31 +17,46 @@
 
 
 
-    <button  mat-icon-button [matMenuTriggerFor]="menuUser" style="position: fixed; top:1vh; right:2vw;z-index:10; background: transparent">
+    <button  mat-icon-button [matMenuTriggerFor]="menuUser" style="position: fixed; top:1vh; right:1vw;z-index:10; background: transparent">
       <img *ngIf="(stateSession.isLoggedin$ | async)" style="width: 30px;border-radius: 50%;" [src]="(stateSession.user$ | async)?.picture">
       <img *ngIf="!(stateSession.isLoggedin$ | async)" style="width: 30px;border-radius: 50%;" src="/assets/images/user.png"> 
     </button>
     <mat-menu #menuUser="matMenu" style="padding-bottom: 0px;">
       <div fxLayout="row" *ngIf="(stateSession.isLoggedin$ | async)">
-          <img style="width: 50px;height: 50%;margin: 5px" [src]="(stateSession.user$ | async)?.picture">
+          <img style="width: 60px;height: 50%;margin: 5px" [src]="(stateSession.user$ | async)?.picture">
           <div style="margin: 5px">
               <div>
                   <b>{{(stateSession.user$ | async)?.name | titlecase}} </b>
                 </div>
-                <div>
+                <div style="font-size: smaller;">
                   {{(stateSession.user$ | async)?.email}}
+                </div>
+                <div style="font-size: smaller;">
+                    Country: &nbsp; <b>{{(stateSession.country$ | async)?.name}} </b>
+                  </div>
+          </div>
+
+      </div>
+      <div fxLayout="row" *ngIf="!(stateSession.isLoggedin$ | async)">
+          <img style="width: 50px;height: 50%;margin: 5px" src="/assets/images/user.png">
+          <div style="margin: 5px">
+              <div>
+                  <b>Guest </b>
+                </div>
+                <div style="font-size: smaller;">
+                  Country: &nbsp;<b>{{(stateSession.country$ | async)?.name}} </b>
                 </div>
           </div>
 
       </div>
-      <button mat-menu-item  [matMenuTriggerFor]="menu" fxLayout="row" style="line-height: 35px" >
+      <!-- <button mat-menu-item  [matMenuTriggerFor]="menu" fxLayout="row" style="line-height: 35px" >
           <img [src]="(stateSession.country$ | async)?.image" style="margin-right: 5px;">{{(stateSession.country$ | async)?.name}} 
         </button>
         <mat-menu #menu="matMenu">
           <button fxLayout="row" style="line-height: 35px" mat-menu-item (click)="changeCountry(cnt)" *ngFor="let cnt of stateSession.countries" >
            <img src="{{cnt.image}}" style="margin-right: 5px;"> <div>{{cnt.name}} </div> 
           </button>   
-        </mat-menu>
+        </mat-menu> -->
       <button *ngIf="(stateSession.isLoggedin$ | async)" mat-menu-item style="text-align: center;background:lightcyan" (click)="logout()" >
         Logout 
        </button> 

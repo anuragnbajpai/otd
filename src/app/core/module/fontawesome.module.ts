@@ -4,7 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBars, faAddressBook, faInfo, faSearch, faArrowLeft,
   faHome, faPhone, faSort, faPlus, faList, faUser, faSlidersH, 
   faBookmark as faCircleSolid, faShareAlt, faCheckDouble, faEllipsisV, faThumbsDown as fasThumbsdown,
-  faThumbsUp as fasThumbsup} from '@fortawesome/free-solid-svg-icons';
+  faThumbsUp as fasThumbsup, faAngleDown} from '@fortawesome/free-solid-svg-icons';
 import { faFacebookSquare , faTwitterSquare, faInstagram} from '@fortawesome/free-brands-svg-icons';
 import {  faThumbsUp, faThumbsDown, faBookmark as faCircleRegular } from '@fortawesome/free-regular-svg-icons';
 
@@ -39,7 +39,8 @@ export class FontawesomeModule {
       faCircleRegular,
       faShareAlt,
       faCheckDouble,
-      faEllipsisV
+      faEllipsisV,
+      faAngleDown
       );
   }
 }

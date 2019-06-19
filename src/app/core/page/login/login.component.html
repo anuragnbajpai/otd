@@ -1,18 +1,20 @@
 <div fxLayout="column" fxLayoutAlign="center center" >
-    <img mat-list-item alt="todays deals" src="assets/images/onlytopdeals_logo.png" style="width: 170px;height: 60px;">
-      <h3 style="margin:10px"> Login With </h3>
-
-      <button mat-raised-button class="social-icon" style="background-color:blueviolet;width:130px;color: white" (click)="tryFacebookLogin()">
-        <i class="fab fa-facebook-f icons-padding"></i>Facebook</button>
-
-      or
-
-      <button mat-raised-button class="social-icon" style="background-color:red;width:130px;color: white" (click)="tryGoogleLogin()">
-        <i class="fab fa-google-plus-g icons-padding"></i>Google</button>
+    <img mat-list-item alt="todays deals" src="assets/images/onlytopdeals_logo_trans.png" style="width: 180px;height: 60px;">
+      <h3 style="margin:10px"> Login/Signup </h3>
+     
+      <button mat-raised-button class="social-icon" style="background-color:white;width:180px;color: black;font-size: smaller;
+      font-weight: 600;" (click)="tryFacebookLogin()">
+        <img style="width: 15px; padding-right:10px" src="assets/images/facebook.jpg">Login with Facebook</button>
 
       or
+
+      <button mat-raised-button class="social-icon" style="background-color:white;width:180px;color: black;font-size: smaller;
+      font-weight: 600;" (click)="tryGoogleLogin()">
+          <img style="width: 15px; padding-right:10px" src="assets/images/google.png">Sign in with Google</button>
+
+      <!-- or
 
       <button mat-raised-button class="social-icon" style="background-color: #55ACEE;width:130px;color: white" (click)="tryTwitterLogin()">
-        <i class="fab fa-twitter icons-padding"></i>Twitter</button>
+        <i class="fab fa-twitter icons-padding"></i>Twitter</button> -->
 
   </div>

@@ -12,9 +12,9 @@ const routes: Routes = [
         component: SearchComponent,
         data: {
           page: 'detail',
-          title: 'Top 10 {category}',
+          title: 'Top 10 {category} : {product}',
           metatags: {
-            keywords: 'top {product}, top 10 {product}, best {product}, {product} deals',
+            keywords: 'top {category}, top 10 {category}, best {category}, {category} deals',
             description: 'Top 10 {category} with reviews and deals information'
           }
         }
@@ -24,10 +24,10 @@ const routes: Routes = [
         component: SearchComponent,
         data: {
           page: 'search',
-          title: 'Top 10 {product}',
+          title: 'Top 10 {category}',
           metatags: {
-            keywords: 'top {product}, top 10 {product}, best {product}, {product} deals',
-            description: 'Top 10 {product} with reviews and deals information'
+            keywords: 'top {category}, top 10 {category}, best {category}, {category} deals',
+            description: 'Top 10 {category} with reviews and deals information'
           }
         }
       },
@@ -38,7 +38,7 @@ const routes: Routes = [
           page: 'compare',
           title: 'Top 10 {category}',
           metatags: {
-            keywords: 'top {product}, top 10 {product}, best {product}, {product} deals',
+            keywords: 'top {category}, top 10 {category}, best {category}, {category} deals',
             description: 'Top 10 {category} with reviews and deals information'
           }
         }

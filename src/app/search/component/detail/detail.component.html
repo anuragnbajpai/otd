@@ -40,27 +40,35 @@
   <mat-card-header style="width: 100%;">
     <img mat-card-avatar [src]="stateSearch.selectedProduct.picture">
     <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
-      <div>
-        <h4 style="margin:0"> {{stateSearch.selectedProduct.brand}} {{stateSearch.selectedProduct.title}}
-          &nbsp;&nbsp;({{(stateSession.country$| async)?.currencySymbol}}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code]}}
-          {{(stateSession.country$| async)?.currency }})
-          &nbsp;
-          <span *ngIf="stateSession.isLoggedin$|async">
-            <button *ngIf="!stateSearch.selectedProduct.isSelected" mat-icon-button (click)="save()">
-              <fa-icon [icon]="['far', 'bookmark']"></fa-icon>
-            </button>
-            <button *ngIf="stateSearch.selectedProduct.isSelected" mat-icon-button (click)="unsave()">
-              <fa-icon [icon]="['fas', 'bookmark']"></fa-icon>
-            </button>
-          </span>
-          <button  [fxHide.gt-xs]="true" mat-icon-button (click)="shared()">
-            <fa-icon [icon]="['fas', 'share-alt']"></fa-icon>
-          </button>
-        </h4>
+      <div style="width: 100%">
+        <h4 style="margin:0; padding-bottom: 5px;"> {{stateSearch.selectedProduct.brand}} {{stateSearch.selectedProduct.title}}   </h4>
+         <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 5px" >
+           <div style="font-size: small;">
+              Price: <b> {{(stateSession.country$| async)?.currencySymbol}}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code]}}
+              {{(stateSession.country$| async)?.currency }} </b>
+           </div>            
+         
+                <button style="line-height: 0px; height:0px;" *ngIf="(stateSession.isLoggedin$|async) && !stateSearch.selectedProduct.isSelected" mat-icon-button (click)="save()">
+                  <fa-icon [icon]="['far', 'bookmark']"></fa-icon>
+                </button>
+                <button style="line-height: 0px; height:0px;" *ngIf="(stateSession.isLoggedin$|async) && stateSearch.selectedProduct.isSelected" mat-icon-button (click)="unsave()">
+                  <fa-icon [icon]="['fas', 'bookmark']"></fa-icon>
+                </button>             
+       
+              <button style="line-height: 0px; height:0px;" [fxHide.gt-xs]="true" mat-icon-button (click)="shared()">
+                  <fa-icon [icon]="['fas', 'share-alt']"></fa-icon>
+                </button>
+         </div> 
+ 
+ 
+  
+     
 
       </div>
     </mat-card-title>
-    <mat-card-subtitle style="margin-top:-10px">{{stateSearch.selectedProduct.description}}</mat-card-subtitle>
+    <mat-card-subtitle style="margin-top:-10px">
+      {{stateSearch.selectedProduct.description}}
+    </mat-card-subtitle>
 
   </mat-card-header>
   <mat-card-subtitle fxLayout="row" fxLayoutAlign="center stretch">

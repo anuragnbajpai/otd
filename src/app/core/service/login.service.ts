@@ -7,12 +7,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoginComponent } from '../page/login/login.component';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FirestoreService } from './firestore.service';
-import * as firebase from 'firebase/app';
 import { User } from '../model/Session.model';
 import { SessionService } from '../state/session/session.service';
 import { UiService } from './ui.service';
 import { SnackbarService } from './snackbar.service';
-
+import * as firebase from 'firebase/app';
 @Injectable({ providedIn: 'root' })
 export class LoginService {
 

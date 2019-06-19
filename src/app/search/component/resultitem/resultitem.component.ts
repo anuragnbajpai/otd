@@ -34,6 +34,12 @@ export class ResultitemComponent implements OnInit {
         this.svcCore.snackbar.Confirmation('Only two products can be compared');
         return;
       }
+      if (this.stateSearch.compareProducts.length === 1) {
+        if(this.product.category !== this.stateSearch.compareProducts[0].category){
+          this.svcCore.snackbar.Confirmation('Cant compare, product category doesnt match');
+          return;
+        }
+      }
       this.stateSearch.compareProducts.push(this.product);
 
       if (this.stateSearch.compareProducts.length === 1) {

@@ -58,7 +58,8 @@ export class UiService {
     }
     this.isOpen = true;
     const dialogRef = this.dialog.open(dialogComponent, {
-      width: '400px'
+      width: '400px',
+      autoFocus: false
     });
     dialogRef.afterClosed().subscribe(result => {
       this.router.navigate([decodeURIComponent(this.router.url.split('?')[0])]);

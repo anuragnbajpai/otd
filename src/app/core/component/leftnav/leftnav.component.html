@@ -1,9 +1,11 @@
 <mat-nav-list role="list" style="padding:0" fxLayout="column" fxFlex="100">
 
     <img mat-list-item alt="todays deals" src="assets/images/onlytopdeals_logo.png" style="width: 170px;height: 60px;">
+    <img  [matMenuTriggerFor]="menu" [src]="(stateSession.country$ | async)?.image" style="position: relative; width: 15px; height: 15px; top: -57px; right: -155px;"> 
     <div mat-list-item></div>
-
-    <a mat-list-item routerLink="/home" routerLinkActive="active" (click)="close()">
+    <button mat-button style="height: 0; position: absolute;"> <!-- 'absorbs' the auto-focus behavior -->
+    </button>
+    <a mat-list-item routerLink="/" routerLinkActive="active" (click)="close()">
          <fa-icon [icon]="['fas', 'home']"></fa-icon>  
       &nbsp; Home
     </a>
@@ -37,6 +39,17 @@
         <fa-icon [icon]="['fas', 'user']"></fa-icon> 
         &nbsp; Logout
       </a>
-    
+      <button mat-menu-item  [matMenuTriggerFor]="menu" fxLayout="row" style="line-height: 35px" >
+  
+        <img [src]="(stateSession.country$ | async)?.image" style="margin-right: 15px;"> 
+        {{(stateSession.country$ | async)?.name}} &nbsp;&nbsp;
+        <fa-icon [icon]="['fas', 'angle-down']"></fa-icon> 
+ 
+        </button>
+        <mat-menu #menu="matMenu">
+          <button fxLayout="row" style="line-height: 35px" mat-menu-item (click)="changeCountry(cnt)" *ngFor="let cnt of stateSession.countries" >
+           <img src="{{cnt.image}}" style="margin-right: 5px;"> <div>{{cnt.name}} </div> 
+          </button>   
+        </mat-menu>
 
   </mat-nav-list>

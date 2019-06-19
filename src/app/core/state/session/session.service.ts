@@ -21,9 +21,9 @@ export class SessionService {
   searchKeyword$ = this.query.select(e => e.searchKeyword);
   constructor(private store: SessionStore, private svcFirestore: FirestoreService, private query: SessionQuery, private http: HttpClient) {
 
-    this.http.get('http://www.geoplugin.net/json.gp').subscribe( (res: any) => {
+    this.http.get('https://api.ipdata.co?api-key=test').subscribe( (res: any) => {
       console.log('find location success');
-      this.setCountry(res.geoplugin_countryCode.toLowerCase());
+      this.setCountry(res.country_code.toLowerCase());
     });
     this.updateUser(JSON.parse(localStorage.getItem('user')));
     console.log(localStorage.getItem('user'));

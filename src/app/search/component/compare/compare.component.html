@@ -1,11 +1,11 @@
 <div fxLayout="row" fxLayoutAlign="space-between" >
     <div style="padding-bottom:10px;font-size: smaller;"><a routerLink="/">Home </a> / <a
-        routerLink="/search/{{stateSearch.compareProducts[0]?.category}}">{{stateSearch.compareProducts[0]?.category}}</a> /
+        routerLink="/search/{{stateSearch.category$ | async}}">{{stateSearch.category$ | async  | titlecase}}</a> /
       {{stateSearch.compareProducts[0]?.title}} <b>vs</b> {{stateSearch.compareProducts[1]?.title}} </div>
       <button  [fxHide.gt-xs]="true" mat-icon-button (click)="shared()">
         <fa-icon [icon]="['fas', 'share-alt']"></fa-icon>
       </button>
-      <button mat-icon-button fxHide.gt-xs routerLink="/search/{{stateSearch.compareProducts[0]?.category}}" >
+      <button mat-icon-button fxHide.gt-xs routerLink="/search/{{stateSearch.category$ | async}}" >
         <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon>  
       </button>
      
@@ -35,7 +35,8 @@
         </tr>
         <tr>
             <th>Price</th>
-            <td *ngFor="let d of stateSearch.compareProducts">{{d.price}}</td> 
+            <td *ngFor="let d of stateSearch.compareProducts">
+                {{d.price[(stateSession.country$| async)?.code]}}</td> 
           </tr>
         <tr  *ngFor="let p of stateSearch.compareProducts[0].features; let i = index">
           <th>{{p.key}}</th>

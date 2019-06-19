@@ -85,15 +85,15 @@ export class RouteHandler {
       } else if (root.data && root.data.title) {
         this.stateSession.updatePage(root.data.page);
         this.titleService.setTitle(root.data.title
-          .replace(/{product}/g, root.params.category)
-          .replace(/{item}/g, root.params.product) + ' | OnlyTopDeals');
+          .replace(/{category}/g, root.params.category)
+          .replace(/{product}/g, root.params.product) + ' | OnlyTopDeals');
         const tags = root.data.metatags;
         // tslint:disable-next-line:forin
         for (const tag in tags) {
           this.metaService.updateTag({
             name: tag, content: tags[tag]
-              .replace(/{product}/g, root.params.category)
-              .replace(/{item}/g, root.params.product)
+              .replace(/{category}/g, root.params.category)
+              .replace(/{product}/g, root.params.product)
           });
         }
         return;

@@ -46,9 +46,8 @@ export class DetailComponent implements OnInit {
   shared(){
     if(navigator.share) {
       navigator.share({
-        title: this.stateSearch.selectedProduct.title,
-        text: this.stateSearch.selectedProduct.description,
-        url: environment.siteUrl + this.route.url
+        title: this.stateSearch.selectedProduct.title + ' ' + this.stateSearch.selectedProduct.title,
+        url: window.location.href
       })
       .then(() => console.log('Share complete'))
       .error((error) => console.error('Could not share at this time', error))
