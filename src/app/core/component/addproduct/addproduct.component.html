@@ -1,0 +1,66 @@
+<mat-horizontal-stepper linear="true" #stepper >
+    <mat-step [stepControl]="productFormGroup">
+      <form [formGroup]="productFormGroup">
+        <ng-template matStepLabel>Product</ng-template>
+        <div fxLayout="column">
+            <mat-form-field>
+                <input matInput placeholder="Brand" formControlName="brand" required>
+              </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Product Name" formControlName="title" required>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <textarea matInput placeholder="Description" formControlName="description" required></textarea>
+          </mat-form-field>
+  
+          <mat-form-field>
+
+              <input placeholder="Category" name="category" id="category" type="text"  matInput
+                formControlName="category"  [matAutocomplete]="auto" required />     
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onCategoryChange($event)">
+                <mat-option *ngFor="let option of (filteredOptions | async)" [value]="option">
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+  
+          <mat-form-field>
+            <input matInput placeholder="Picture" type="url" formControlName="picture" required>
+          </mat-form-field>
+
+          <div formGroupName="price">          
+          <mat-form-field *ngFor="let cnt of stateSession.countries">
+            <input matInput placeholder="{{cnt.name + ' Price'}}" type="number" formControlName="{{cnt.code}}" required>
+            <span matPrefix>{{cnt.currencySymbol }}&nbsp;</span>
+            <span matSuffix>{{cnt.currency}}</span>
+          </mat-form-field>
+        </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <button mat-raised-button  mat-dialog-close >Cancel</button>
+            <button mat-raised-button color="primary" matStepperNext  >Next</button>
+         </div>
+ 
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="featuresFormGroup">
+      <form [formGroup]="featuresFormGroup">
+        <ng-template matStepLabel>Features</ng-template>
+        <div fxLayout="column" formArrayName="features">
+        <div *ngFor="let item of featuresFormGroup['controls'].features['controls']; let i = index;">
+          <mat-form-field [formGroupName]="i" style="width:100%" >
+            <input matInput placeholder="{{item.controls.key.value}}"  formControlName="value" required>
+          </mat-form-field>
+        </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <button mat-raised-button matStepperPrevious>Back</button>
+          
+          <button *ngIf="stateSearch.selectedProduct" mat-raised-button color="primary" matStepperNext (click)="updateProduct()">Update</button>
+          <button *ngIf="!stateSearch.selectedProduct"  mat-raised-button color="primary" matStepperNext (click)="addProduct()">Submit</button>
+        </div>
+      </form>
+    </mat-step>
+    </mat-horizontal-stepper>
+

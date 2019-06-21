@@ -1,11 +1,11 @@
 <mat-nav-list role="list" style="padding:0" fxLayout="column" fxFlex="100">
 
     <img mat-list-item alt="todays deals" src="assets/images/onlytopdeals_logo.png" style="width: 170px;height: 60px;">
-    <img  [matMenuTriggerFor]="menu" [src]="(stateSession.country$ | async)?.image" style="position: relative; width: 15px; height: 15px; top: -57px; right: -155px;"> 
+    <!-- <img  [matMenuTriggerFor]="menu" [src]="(stateSession.country$ | async)?.image" style="position: relative; width: 15px; height: 15px; top: -57px; right: -155px;">  -->
     <div mat-list-item></div>
     <button mat-button style="height: 0; position: absolute;"> <!-- 'absorbs' the auto-focus behavior -->
     </button>
-    <a mat-list-item routerLink="/" routerLinkActive="active" (click)="close()">
+    <a mat-list-item routerLink="/home" routerLinkActive="active" (click)="close()">
          <fa-icon [icon]="['fas', 'home']"></fa-icon>  
       &nbsp; Home
     </a>

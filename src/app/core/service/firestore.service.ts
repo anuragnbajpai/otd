@@ -9,7 +9,7 @@ import * as firebase from 'firebase/app';
 })
 export class FirestoreService {
 
-  constructor(private firestore: AngularFirestore, private fireStorage: AngularFireStorage) {
+  constructor(public firestore: AngularFirestore, private fireStorage: AngularFireStorage) {
   }
 
   getCollection(name) {

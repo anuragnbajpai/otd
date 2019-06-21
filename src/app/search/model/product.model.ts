@@ -6,6 +6,7 @@ export interface Product {
   category: string;
  // country: string;
  // currency: string;
+  tags: string[];
   dateTime: Date;
   description: string;
   features: Feature[];
@@ -18,6 +19,7 @@ export interface Product {
   deals: Deal[];
   isCompare: boolean;
   isSelected: boolean;
+  price: any;
 }
 
 export interface Feature {

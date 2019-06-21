@@ -3,7 +3,7 @@ import { SearchService } from '../../state/search.service';
 import { MatTabChangeEvent } from '@angular/material';
 import { SessionService } from 'src/app/core/state/session/session.service';
 import { environment } from 'src/environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FirestoreService } from 'src/app/core/service/firestore.service';
 declare let navigator: any;
 @Component({
@@ -14,7 +14,8 @@ declare let navigator: any;
 export class DetailComponent implements OnInit {
   isSelected = false;
   constructor(private route: ActivatedRoute, public stateSearch: SearchService, 
-              public stateSession: SessionService, private svcFirestore: FirestoreService) {
+              public stateSession: SessionService, private svcFirestore: FirestoreService,
+              private router: Router) {
 
   }
 
@@ -52,6 +53,11 @@ export class DetailComponent implements OnInit {
       .then(() => console.log('Share complete'))
       .error((error) => console.error('Could not share at this time', error))
       }
+    }
+
+    editProduct(){
+      const url = this.router.url.split('?')[0];
+      this.router.navigate([ decodeURIComponent(url) ], { queryParams: { add: 'product' } });
     }
   
 }

@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { FirestoreService } from '../../service/firestore.service';
 import { findIndex } from 'rxjs/operators';
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
+import { Country } from '../../model/Session.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,15 @@ export class SessionService {
   isAdmin$ = this.query.select(e => e.user != null && e.user.role === 'admin');
   searchKeyword$ = this.query.select(e => e.searchKeyword);
   constructor(private store: SessionStore, private svcFirestore: FirestoreService, private query: SessionQuery, private http: HttpClient) {
+     if(!localStorage.getItem('country')){
+      this.http.get('https://api.ipdata.co?api-key=test').subscribe( (res: any) => {
+        console.log('find location success');
+        this.setCountry(res.country_code.toLowerCase());
+      });
+    } else {
+      this.setCountry( (JSON.parse(localStorage.getItem('country')) as Country ).code);
+    }
 
-    this.http.get('https://api.ipdata.co?api-key=test').subscribe( (res: any) => {
-      console.log('find location success');
-      this.setCountry(res.country_code.toLowerCase());
-    });
     this.updateUser(JSON.parse(localStorage.getItem('user')));
     console.log(localStorage.getItem('user'));
     this.svcFirestore.getCollection('application').subscribe(a => {
@@ -49,6 +54,7 @@ export class SessionService {
   }
 
   updateCountry(country){
+    localStorage.setItem('country', JSON.stringify(country));
     this.store.update(state => ({ ...state, country }));
   }
   setCountry(countryCode) {
@@ -58,7 +64,7 @@ export class SessionService {
       this.svcFirestore.getCollection('countries').subscribe(c => {
         this.countries = c.map(d => d.payload.doc.data());
         this.store.update(state => ({ ...state, country: this.countries.find(r => r.code === countryCode) }));
-      })
+      });
     }
   }
   getCountry(){

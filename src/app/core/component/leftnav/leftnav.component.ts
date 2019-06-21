@@ -26,7 +26,7 @@ export class LeftnavComponent implements OnInit {
     localStorage.removeItem('user');
     this.stateSession.updateUser(null);
   }
-  changeCountry(country){
+  changeCountry(country){    
     this.stateSession.updateCountry(country);
   }
 }

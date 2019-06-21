@@ -15,11 +15,15 @@ import { AdddealComponent } from './core/component/adddeal/adddeal.component';
 import { AddimageComponent } from './core/component/addimage/addimage.component';
 import { AddfilterComponent } from './core/component/addfilter/addfilter.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AddproductComponent } from './core/component/addproduct/addproduct.component';
+import { AddreportComponent } from './core/component/addreport/addreport.component';
+import { LoginComponent } from './core/page/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddimageComponent, AdddealComponent, AddreviewComponent, AddfilterComponent
+    AddimageComponent, AdddealComponent, AddreviewComponent, AddfilterComponent, 
+     AddreportComponent, AddproductComponent, LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +39,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [AddimageComponent, AdddealComponent, AddreviewComponent, AddfilterComponent]
+  entryComponents: [AddimageComponent, AdddealComponent, AddreviewComponent, 
+    AddfilterComponent, AddreportComponent, AddproductComponent, LoginComponent]
 })
 export class AppModule { }

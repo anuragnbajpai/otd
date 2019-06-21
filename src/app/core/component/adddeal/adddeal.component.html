@@ -7,6 +7,8 @@
                       </mat-form-field>
                       <mat-form-field>
                         <input matInput placeholder="Price" type="number" formControlName="price" required>
+                        <span matPrefix>{{(stateSession.country$| async)?.currencySymbol }}&nbsp;</span>
+                        <span matSuffix>{{(stateSession.country$| async)?.currency }}</span>
                       </mat-form-field>
                       <mat-form-field>
                         <input matInput placeholder="Store" formControlName="store" required>

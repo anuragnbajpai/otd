@@ -33,6 +33,9 @@ export class AdddealComponent {
     this.dialog.closeAll();
     this.svcSnackbar.ActionConfirmation('Deal Saved Successfully', ()=>{
       console.log('form submitted');
+      if(!this.stateSearch.selectedProduct.deals){
+        this.stateSearch.selectedProduct.deals = [];
+      }
       this.stateSearch.selectedProduct.deals.unshift(this.dealFormGroup.value);
       this.svcFirestore.updateDeals('deals', 
       this.stateSearch.selectedProduct.id + '-' + this.stateSession.getCountry().code, this.stateSearch.selectedProduct.deals);

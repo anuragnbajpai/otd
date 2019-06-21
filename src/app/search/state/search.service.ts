@@ -19,11 +19,17 @@ export class SearchService {
   searchResult: Product[];
   selectedProduct: Product;
   compareProducts: Product[] = [];
-
+  categories = [];
   constructor(private store: SearchStore, private query: SearchQuery,
               private svcFirestore: FirestoreService, private stateSession: SessionService) {
 
-    this.stateSession.country$.subscribe(c => {
+                this.svcFirestore.getCollection('categories').pipe(take(1)).subscribe(data => {
+                  this.categories =  data.map(e => {
+                    return  e.payload.doc.data();
+                   });
+                 });
+
+                this.stateSession.country$.subscribe(c => {
       if(this.searchResult && this.searchResult.length > 0) {
         this.searchResult.forEach(p => {
           p.deals = [];
@@ -168,6 +174,11 @@ export class SearchService {
     this.updateCompare1(null);
     this.updateCompare2(null);
     this.selectedProduct = this.searchResult.find(f => f.title === title);
+  }
+
+  updateSearchResultItem(data){
+    let selectedItem = this.searchResult.find(f => f.id === data.id);
+    this.searchResult[this.searchResult.findIndex(f => f.id === data.id)] = {...selectedItem, ...data};
   }
   updateSavedStatusInSearchResult(){
     this.searchResult.find(f => f.title === this.selectedProduct.title).isSelected = this.selectedProduct.isSelected;

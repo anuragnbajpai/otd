@@ -8,6 +8,7 @@ import { AdddealComponent } from 'src/app/core/component/adddeal/adddeal.compone
 import { AddreviewComponent } from 'src/app/core/component/addreview/addreview.component';
 import { AddfilterComponent } from 'src/app/core/component/addfilter/addfilter.component';
 import { AddreportComponent } from '../component/addreport/addreport.component';
+import { AddproductComponent } from '../component/addproduct/addproduct.component';
 
 @Injectable({ providedIn: 'root' })
 export class UiService {
@@ -38,6 +39,9 @@ export class UiService {
           case 'review':
             dialogComponent = AddreviewComponent;
             break;
+          case 'product':
+            dialogComponent = AddproductComponent;
+            break;
         }
 
       } else {
@@ -59,6 +63,7 @@ export class UiService {
     this.isOpen = true;
     const dialogRef = this.dialog.open(dialogComponent, {
       width: '400px',
+      maxHeight: '600px',
       autoFocus: false
     });
     dialogRef.afterClosed().subscribe(result => {
