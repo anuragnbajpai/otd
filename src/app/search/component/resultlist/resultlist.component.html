@@ -40,7 +40,7 @@
           </ng-adsense>
         </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center">
+    <div fxLayout="row" fxLayoutAlign="center" *ngIf="stateSession.isAdmin$|async">
       <button (click)="addProduct()" color="primary" mat-raised-button>Add Product</button>
     </div>
     <app-footer></app-footer>

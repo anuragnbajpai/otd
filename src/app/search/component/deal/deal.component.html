@@ -24,6 +24,7 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="goToLink(element.link)">Open</button>
         <button mat-menu-item (click)="report(element)">Report It</button>
+        <button mat-menu-item (click)="delete(element)" *ngIf="stateSession.isAdmin$|async">Delete</button>
       </mat-menu>
       <div style=" align-self: center;font-size: x-large;margin: 10px; text-align: center;
       background: #dcf2f2; border-radius: 50%; padding: 15px"><div> &nbsp;{{100 - ((element.price/stateSearch.selectedProduct.price[(stateSession.country$| async)?.code])*100) | number:'1.0-0'}}% </div>

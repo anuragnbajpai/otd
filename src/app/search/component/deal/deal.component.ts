@@ -59,4 +59,12 @@ unliked(id){
   this.stateSearch.selectedProduct.id + '-' + this.stateSession.getCountry().code, this.stateSearch.selectedProduct.deals);
 }
 
+delete(e){
+  console.log(e);
+  this.stateSearch.selectedProduct.deals.splice(this.stateSearch.selectedProduct.deals.indexOf(e), 1);
+  this.stateSearch.updateSearchResultItem(this.stateSearch.selectedProduct);
+  this.svcFirestore.updateDeals('deals', 
+  this.stateSearch.selectedProduct.id + '-' + this.stateSession.getCountry().code, this.stateSearch.selectedProduct.deals);
+}
+
 }

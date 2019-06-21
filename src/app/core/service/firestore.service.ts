@@ -43,7 +43,16 @@ export class FirestoreService {
     this.firestore.collection(name).doc(id).update( {images: item} );
   }
 
-
+  addArrayItem(name, id, item){
+    this.firestore.collection(name).doc(id).update( {
+      name: firebase.firestore.FieldValue.arrayUnion(item)
+    } );
+  }
+  deleteArrayItem(name, id, item){
+    this.firestore.collection(name).doc(id).update( {
+      name: firebase.firestore.FieldValue.arrayRemove(item)
+    } );
+  }
   deleteItem(name , id: string) {
     this.firestore.doc(name + '/' + id).delete();
   }

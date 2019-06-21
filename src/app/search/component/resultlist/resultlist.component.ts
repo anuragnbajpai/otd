@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../state/search.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SessionService } from 'src/app/core/state/session/session.service';
 
 @Component({
   selector: 'app-resultlist',
@@ -9,7 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ResultlistComponent implements OnInit {
 
-  constructor(public stateSearch: SearchService,private route: ActivatedRoute, private router: Router,) { }
+  constructor(public stateSearch: SearchService,private route: ActivatedRoute, private router: Router,
+              public stateSession: SessionService) { }
 
   ngOnInit() {
   }
