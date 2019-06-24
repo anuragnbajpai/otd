@@ -13,10 +13,8 @@ const routes: Routes = [{
     title: 'One Stop Shop for Deals',
     metatags: {
       keywords: 'onlytopdeals, only top deals, top 10 items, best deals, deals',
-      description: `OnlyTopDeals is a product review platform were user can check and submit ratings.
-       find top 10 reviewed products with feature details and customer images.
-       We provide single place where user can find deals from multiple 
-       online stores with an option to post deals if they have better offer.`
+      description: `OnlyTopDeals provides a new age buyer experience on a cutting edge platform,
+       empowering you to find top deals in various categories based on reviews, price, quality....saving you time and money!`
     }
   }
 },

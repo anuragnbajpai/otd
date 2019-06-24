@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl, AbstractControl } from '@angular/forms';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SearchService } from 'src/app/search/state/search.service';
 import { SessionService } from '../../state/session/session.service';
 import { startWith, map, take } from 'rxjs/operators';
@@ -21,8 +21,8 @@ export class AddproductComponent implements OnInit {
   options =[];
   featureList = [];
   filteredOptions: Observable<string[]>;
-  constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private stateSearch: SearchService, 
-              public stateSession: SessionService, private svcFirestore: FirestoreService) {
+  constructor(public dialog: MatDialog, private formBuilder: FormBuilder, public stateSearch: SearchService, 
+              private router: Router, public stateSession: SessionService, private svcFirestore: FirestoreService) {
     if(this.stateSearch.selectedProduct){
       this.productFormGroup = this.formBuilder.group({
         brand: [this.stateSearch.selectedProduct.brand, [Validators.required]],
@@ -132,18 +132,24 @@ export class AddproductComponent implements OnInit {
     this.dialog.closeAll();
    //  console.log(this.featuresFormGroup.value);
     
-    this.productFormGroup.controls.tags.setValue([this.productFormGroup.controls.title,
-      this.productFormGroup.controls.brand,
-      this.productFormGroup.controls.category]);
+    this.productFormGroup.controls.tags.setValue([this.productFormGroup.controls.title.value.toLowerCase(),
+      this.productFormGroup.controls.brand.value.toLowerCase(),
+      this.productFormGroup.controls.category.value.toLowerCase()]);
     this.productFormGroup.value.features = this.featuresFormGroup.value.features;
     console.log(this.productFormGroup.value);
     this.stateSearch.selectedProduct = this.productFormGroup.value ;
     this.stateSearch.searchResult.push(this.productFormGroup.value);
-   // this.svcFirestore.updateItem('products', this.productFormGroup.value);
+    this.svcFirestore.createDocument('products', this.productFormGroup.value);
+    this.redirectDetail();
    }
 
    onCategoryChange(e){
     this.featureList = this.stateSearch.categories.find(c => c.name === this.productFormGroup.controls.category.value).features;
     this.initFeatures();
+  }
+  redirectDetail() {
+    this.stateSearch.compareProducts = [];
+    this.stateSearch.searchResult.map(r => r.isCompare = false);
+    this.router.navigate(['/search/' + this.stateSearch.getCategory() + '/' + this.productFormGroup.controls.title.value.toLowerCase()]);
   }
 }

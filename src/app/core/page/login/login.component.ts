@@ -7,7 +7,7 @@ import { LoginService } from '../../service/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  clicked = false;
   constructor(
     private svcLogin: LoginService
     ) { }
@@ -16,27 +16,36 @@ export class LoginComponent implements OnInit {
   }
 
   tryFacebookLogin(){
+    this.clicked = true;
     this.svcLogin.doFacebookLogin()
-    .then(res => {
+    .then(res => {      
       console.log(res);
       this.svcLogin.login(res);
+      this.clicked = false;
     }, error =>{
+      this.clicked = false;
     });
   }
 
   tryTwitterLogin(){
+    this.clicked = true;
     this.svcLogin.doTwitterLogin()
-    .then(res => {
+    .then(res => { 
       this.svcLogin.login(res);
+      this.clicked = false;
     }, error =>{
+      this.clicked = false;
     });
   }
 
   tryGoogleLogin(){
+    this.clicked = true;
     this.svcLogin.doGoogleLogin()
     .then(res => {
       this.svcLogin.login(res);
+      this.clicked = false;
     }, error =>{
+      this.clicked = false;
     });
   }
 

@@ -29,10 +29,9 @@ export class FirestoreService {
     return guid;
    // return this.firestore.collection(name).add(item);
   }
-  createDocument(name, id , item){
-    const guid = this.firestore.createId();
-    this.firestore.collection(name).doc(guid).set(item);
-    return guid;
+  createDocument(name, item){
+    this.firestore.collection(name).doc(item.id).set(item);
+    return item.id;
   }
   updateItem(name, item) {
   //  delete item.id;

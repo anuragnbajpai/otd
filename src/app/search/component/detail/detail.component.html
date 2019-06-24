@@ -46,7 +46,7 @@
         <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 5px">
           <div style="font-size: small;">
             Price: <b>
-              {{(stateSession.country$| async)?.currencySymbol}}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code]}}
+              {{(stateSession.country$| async)?.currencySymbol}}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code] | number : '1.2-2' }}
               {{(stateSession.country$| async)?.currency }} </b>
           </div>
           <div fxLayout="row" fxLayoutAlign="end" style="margin-bottom: 5px">
@@ -88,7 +88,7 @@
 
     <star-rating starType="svg" [rating]="stateSearch.selectedProduct?.avgRating" size="medium" [readOnly]="true"
       [showHalfStars]="true"></star-rating>
-    <div style=" align-self: center;font-size: large;"> {{stateSearch.selectedProduct?.avgRating}} </div>
+    <div style=" align-self: center;font-size: large;"> {{stateSearch.selectedProduct?.avgRating | number : '1.1-1' }} </div>
 
   </mat-card-subtitle>
 

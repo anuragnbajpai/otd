@@ -6,7 +6,7 @@
             <div class="ranking">#{{rank+1}}</div>
             <span style="align-self: center;padding-left: 5px;" fxFlex="80"> {{product.brand}} {{product.title}}   </span>
             
-            <span style="align-self: center;text-align: center" >{{(stateSession.country$| async)?.currencySymbol }}{{product.price[(stateSession.country$| async)?.code]}}
+            <span style="align-self: center;text-align: center" >{{(stateSession.country$| async)?.currencySymbol }}{{product.price[(stateSession.country$| async)?.code] | number : '1.2-2' }}
                <!-- <div style="font-size:10px">{{d.currency}}</div> -->
               </span>
           </mat-card-title>
@@ -21,7 +21,7 @@
               <div (click)="detail()" style="width: 80%;padding-top: 15px;" fxLayoutAlign="start stretch">
                 <star-rating             
                 starType="svg" [rating]="product.avgRating" size="medium"  [readOnly]="true" [showHalfStars]="true"></star-rating>
-              <div style=" align-self: center;padding-bottom: 4px;"> <b>{{product.avgRating}}</b> </div>
+              <div style=" align-self: center;padding-bottom: 4px;"> <b>{{product.avgRating | number : '1.1-1' }}</b> </div>
               </div> 
               <button style="z-index:2;margin-top:10px;"  (click)="addCompare()"
               [ngStyle]="{'background-color':product.isCompare ? 'lightcyan' : 'white' }"

@@ -12,6 +12,7 @@
       font-weight: 600;" (click)="tryGoogleLogin()">
           <img style="width: 15px; padding-right:10px" src="assets/images/google.png">Sign in with Google</button>
 
+          <mat-spinner *ngIf="clicked" style="width: 10px; margin:10px"></mat-spinner>
       <!-- or
 
       <button mat-raised-button class="social-icon" style="background-color: #55ACEE;width:130px;color: white" (click)="tryTwitterLogin()">

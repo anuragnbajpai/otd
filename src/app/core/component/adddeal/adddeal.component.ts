@@ -14,7 +14,7 @@ import { SnackbarService } from '../../service/snackbar.service';
 export class AdddealComponent {
   dealFormGroup: FormGroup;
   constructor(private formBuilder: FormBuilder, private svcFirestore: FirestoreService, 
-              private stateSearch: SearchService, private stateSession: SessionService,
+              private stateSearch: SearchService, public stateSession: SessionService,
               public dialog: MatDialog, private svcSnackbar: SnackbarService) {
     let user = this.stateSession.getUser();
     this.dealFormGroup = this.formBuilder.group({
@@ -40,6 +40,9 @@ export class AdddealComponent {
       this.svcFirestore.updateDeals('deals', 
       this.stateSearch.selectedProduct.id + '-' + this.stateSession.getCountry().code, this.stateSearch.selectedProduct.deals);
     });
+  }
+  changeCountry(country){
+    this.stateSession.updateCountry(country);
   }
 
 }
