@@ -6,6 +6,7 @@ import { FirestoreService } from '../../service/firestore.service';
 import { findIndex } from 'rxjs/operators';
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { Country } from '../../model/Session.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class SessionService {
   isLoggedin$ = this.query.select(e => e.user != null);
   isAdmin$ = this.query.select(e => e.user != null && e.user.role === 'admin');
   searchKeyword$ = this.query.select(e => e.searchKeyword);
-  constructor(private store: SessionStore, private svcFirestore: FirestoreService, private query: SessionQuery, private http: HttpClient) {
+  constructor(private store: SessionStore, private svcFirestore: FirestoreService, 
+    private query: SessionQuery, private http: HttpClient, private router: Router,  private route: ActivatedRoute, ) {
      if(!localStorage.getItem('country')){
       this.http.get('https://api.ipdata.co?api-key=test').subscribe( (res: any) => {
         console.log('find location success');
@@ -39,6 +41,10 @@ export class SessionService {
     this.user$.subscribe(u => {
       localStorage.setItem('user', JSON.stringify(u) );      
     });
+  }
+
+  login(){
+    this.router.navigate([decodeURIComponent(this.router.url.split('?')[0])], { relativeTo: this.route, queryParams: { add: 'login' } });
   }
 
   UpdateDevice(device) {

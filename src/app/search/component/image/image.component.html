@@ -26,7 +26,7 @@
                 <button mat-menu-item (click)="report(element)">Report It</button>
               </mat-menu>
           
-            <img (click)="goToImage(i)" src="{{element.link}}" alt="{{element.description}}" width="100%" style="max-width: 100px"   >
+            <img (click)="goToImage(i)" src="{{element.link}}" alt="{{element.description}}" width="100%" style="max-width: 200px"   >
          
         </mat-card-content>
           <mat-card-actions style="padding: 10px; background: #d3d3d34d;">  
@@ -43,13 +43,13 @@
                       <div>
                           <fa-icon *ngIf="user && element.review?.liked.indexOf(user.id) >= 0"  [icon]="['fas', 'thumbs-up']"  ></fa-icon>
                           <fa-icon *ngIf="user && element.review?.liked.indexOf(user.id) == -1" (click)="liked(i)" [icon]="['far', 'thumbs-up']" style="cursor: pointer;"></fa-icon>
-                          <fa-icon *ngIf="!user" [icon]="['far', 'thumbs-up']" ></fa-icon>
+                          <fa-icon  (click)="stateSession.login()" *ngIf="!user" [icon]="['far', 'thumbs-up']" ></fa-icon>
                            {{element.review?.liked.length}}
                       </div>  
                       <div>
                           <fa-icon *ngIf="user && element.review?.unliked.indexOf(user.id) >= 0"  [icon]="['fas', 'thumbs-down']" ></fa-icon>
                           <fa-icon *ngIf="user && element.review?.unliked.indexOf(user.id) == -1" (click)="unliked(i)" [icon]="['far', 'thumbs-down']" style="cursor: pointer;"></fa-icon>
-                          <fa-icon *ngIf="!user" [icon]="['far', 'thumbs-down']" ></fa-icon>
+                          <fa-icon  (click)="stateSession.login()" *ngIf="!user" [icon]="['far', 'thumbs-down']" ></fa-icon>
                            {{element.review?.unliked.length}}
                       </div>          
                     </div>

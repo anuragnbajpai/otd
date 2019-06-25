@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.clicked = false;
   }
 
   tryFacebookLogin(){
@@ -21,7 +22,6 @@ export class LoginComponent implements OnInit {
     .then(res => {      
       console.log(res);
       this.svcLogin.login(res);
-      this.clicked = false;
     }, error =>{
       this.clicked = false;
     });
@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
     this.svcLogin.doTwitterLogin()
     .then(res => { 
       this.svcLogin.login(res);
-      this.clicked = false;
     }, error =>{
       this.clicked = false;
     });
@@ -43,7 +42,6 @@ export class LoginComponent implements OnInit {
     this.svcLogin.doGoogleLogin()
     .then(res => {
       this.svcLogin.login(res);
-      this.clicked = false;
     }, error =>{
       this.clicked = false;
     });
