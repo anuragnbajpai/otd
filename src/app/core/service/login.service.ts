@@ -46,6 +46,7 @@ export class LoginService {
   accountInfo.name = result.user.displayName;
   accountInfo.email = result.user.email;
   accountInfo.picture = result.user.photoURL;
+  accountInfo.id = result.user.uid;
   accountInfo.role = 'read';
   accountInfo.saved = [];
 
@@ -56,7 +57,7 @@ export class LoginService {
       let user = res.map(r => r.payload.doc.data());
       accountInfo = user[0];
     } else {
-      accountInfo.id = this.svcFirestore.createItem('users', accountInfo);
+      accountInfo.id = this.svcFirestore.createDocument('users', Object.assign({}, accountInfo) );
     }
    // this.gApi.AccountInfo = accountInfo;
     this.stateSession.updateUser(accountInfo);
