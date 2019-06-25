@@ -170,3 +170,11 @@ background-color: lightcyan;
 .mat-dialog-container {
   background: lightcyan;
 }
+
+.rating.color-positive .star-container .star svg{
+  fill: red !important;
+}
+
+.rating.color-ok .star-container .star svg{
+  fill: red !important;
+}
