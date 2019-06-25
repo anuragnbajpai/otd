@@ -54,4 +54,12 @@ export class ImageComponent implements OnInit {
     this.svcFirestore.updateImages('images', this.stateSearch.selectedProduct.id, this.stateSearch.selectedProduct.images);
   }
 
+  delete(e){
+    console.log(e);
+    this.stateSearch.selectedProduct.images.splice(this.stateSearch.selectedProduct.images.indexOf(e), 1);
+    this.stateSearch.updateSearchResultItem(this.stateSearch.selectedProduct);
+    this.svcFirestore.updateImages('images', 
+    this.stateSearch.selectedProduct.id , this.stateSearch.selectedProduct.images);
+  }
+
 }
