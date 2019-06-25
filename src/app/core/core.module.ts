@@ -23,10 +23,12 @@ import { LoginComponent } from './page/login/login.component';
 import { AddfilterComponent } from './component/addfilter/addfilter.component';
 import { AddreportComponent } from './component/addreport/addreport.component';
 import { AddproductComponent } from './component/addproduct/addproduct.component';
+import { PolicyComponent } from './page/policy/policy.component';
+import { TermsComponent } from './page/terms/terms.component';
 
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, FooterComponent, SearchinputComponent, 
-    LeftnavComponent, ContactusComponent, AboutusComponent, SavedComponent, SortPipe
+    LeftnavComponent, ContactusComponent, AboutusComponent, SavedComponent, SortPipe, PolicyComponent, TermsComponent
  ],
   imports: [
     CommonModule,

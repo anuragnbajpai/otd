@@ -4,6 +4,8 @@ import { HomeComponent } from './core/page/home/home.component';
 import { ContactusComponent } from './core/page/contactus/contactus.component';
 import { AboutusComponent } from './core/page/aboutus/aboutus.component';
 import { SavedComponent } from './core/page/saved/saved.component';
+import { PolicyComponent } from './core/page/policy/policy.component';
+import { TermsComponent } from './core/page/terms/terms.component';
 
 const routes: Routes = [{
   path: '',
@@ -53,10 +55,21 @@ data: {
   page: 'search'
 }
 },
-{ path: 'add', component: SavedComponent,
-data: {
-  page: 'add'
-}
+// { path: 'add', component: SavedComponent,
+// data: {
+//   page: 'add'
+// },
+{ path: 'privacy', component: PolicyComponent,
+  data: {
+    title: 'Privacy Policy',
+    page: 'policy'
+  }
+},
+{ path: 'terms', component: TermsComponent,
+  data: {
+    title: 'Terms & Conditions',
+    page: 'terms'
+  }
 },
 { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
