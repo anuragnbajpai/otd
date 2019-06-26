@@ -64,11 +64,18 @@ export class SessionService {
     this.store.update(state => ({ ...state, country }));
   }
   setCountry(countryCode) {
+
     if (this.countries) {
+      if(this.countries.find(r => r.code === countryCode).length === 0 ){
+        countryCode = 'us';
+      }
       this.store.update(state => ({ ...state, country: this.countries.find(r => r.code === countryCode)[0] }));
     } else {
       this.svcFirestore.getCollection('countries').subscribe(c => {
         this.countries = c.map(d => d.payload.doc.data());
+        if(this.countries.find(r => r.code === countryCode).length === 0 ){
+          countryCode = 'us';
+        }
         this.store.update(state => ({ ...state, country: this.countries.find(r => r.code === countryCode) }));
       });
     }

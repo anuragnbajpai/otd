@@ -6,11 +6,9 @@ $color-positive-rating: red  !default;
 
 body {
    margin: 0;
+   font-family: sans-serif;
 }
-.search .mat-form-field-appearance-outline .mat-form-field-wrapper {
-    margin: 0;
-    padding: 0;
-}
+
 
 .search .mat-form-field-wrapper .mat-form-field-prefix{
   top: 0em;
@@ -21,7 +19,13 @@ body {
   top: 0em;
 }
 
+.search-input .mat-form-field-outline .mat-form-field-outline-start{
+  border-radius: 0;
+}
 
+.search-input .mat-form-field-outline .mat-form-field-outline-end{
+  border-radius: 0;
+}
 .mat-form-field-appearance-outline .mat-form-field-infix {
      padding: .5em 0;
      border-top: 0.5em solid transparent;
@@ -40,6 +44,11 @@ app-detail {
 }
 .mat-form-field-appearance-outline .mat-form-field-wrapper {
   margin: 0;
+}
+
+ .mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0;
+  padding: 0;
 }
 
 .active
@@ -100,7 +109,7 @@ background-color: lightcyan;
   text-align: center;
 }
 .detail .mat-tab-label-active {
-  background-color:white !important;
+  background-color:lightcyan !important;
   font-weight: bold;
 }
 
@@ -112,8 +121,12 @@ background-color: lightcyan;
 .detail .mat-tab-label{
   min-width: 25%;
   padding: 0px;
+  background: white;
 }
-
+.detailContent .mat-tab-group{
+  background: white;
+    padding: 3px;
+}
 .search .mat-card-subtitle{
   margin-bottom: 0px;
 }
@@ -177,4 +190,12 @@ background-color: lightcyan;
 
 .rating.color-ok .star-container .star svg{
   fill: red !important;
+}
+
+.mat-menu-content{
+  padding: 5px;
+}
+
+.detail .mat-card-header-text {
+  margin: 0;
 }

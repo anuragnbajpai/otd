@@ -4,6 +4,9 @@
   </mat-drawer>
   <mat-drawer-content fxLayout="column" fxLayoutAlign="stretch" class="scoll">
     <app-header (leftNav)="drawer.toggle()"></app-header>
+    <div *ngIf="!stateSession.application" fxLayout="row" fxLayoutAlign="center" style="padding-top: 170px;">
+        <img src="/assets/images/loadloop.gif" style="width: 100px">
+    </div>
     <router-outlet [ngStyle]="{'padding-top': ((stateSession.page$ | async) == 'home') ? '25vh' : '8vh' }" ></router-outlet>
     <app-footer [hidden]="(stateSession.page$ | async) == 'search' || 
     (stateSession.page$ | async) == 'detail' ||

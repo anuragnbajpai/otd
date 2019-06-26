@@ -1,155 +1,79 @@
-<div>
-    <mat-card style="background-color:white; margin:5px; padding:5px;" fxLayout="column" fxLayoutAlign="center stretch"
-      fxLayoutGap="10px">
 
-      <span fxLayoutAlign="center center">
-        <h3>Trending Categories</h3>
-      </span>
-      <div fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}" >
+<div *ngIf="stateSession.application">
+  <div style="background-color:white; padding:15px;" fxLayout="column" fxLayoutAlign="center stretch"
+    fxLayoutGap="10px">
 
-        <mat-card [routerLink]="['/search/Laptops']" fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 150px"
-          style="padding:0;background: #fafafa;margin:5px">
+    <span fxLayoutAlign="center center">
+      <h3>Trending Categories</h3>
+    </span>
+    <div fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
+      <a *ngFor="let c of stateSession.application.categories" [routerLink]="[c.link]">
+        <mat-card fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 150px"
+          style="padding:10px;background: #fafafa;margin:5px">
           <div style="text-align: center;margin: 10px;">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/61F99gFWolL._SL190_.jpg"
-              alt="best laptops 2019" width="100px">
+            <img src="{{c.image}}" alt="best laptops 2019" style="height: 60px;">
           </div>
-          <span style="text-align: center;font-weight: bold"> Laptop </span>
-          <a [routerLink]="['/search/Laptos']"> </a>
+          <span style="text-align: center;font-weight: bold"> {{c.title}} </span>
+
 
         </mat-card>
+      </a>
+    </div>
 
-        <mat-card [routerLink]="['/search/TVs']" fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 150px"
-          style="padding:0;background: #fafafa;margin:5px">
+  </div>
+
+  <!-- Deals -->
+  <div style="background-color:white; padding:15px;" fxLayout="column" fxLayoutAlign="center stretch"
+    fxLayoutGap="10px">
+
+    <span fxLayoutAlign="center center">
+      <h3>Top Deals</h3>
+    </span>
+    <div fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
+      <a *ngFor="let d of stateSession.application.deals" [routerLink]="[d.link]">
+        <mat-card fxLayout="row" fxLayoutAlign="center" fxFlex="1 1 230px"
+          style="padding:0;background: #fafafa;margin:10px">
           <div style="text-align: center;margin: 10px;">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/61XvzFZPXgL._SL190_.jpg" alt="best tv 2019"
-              width="100px">
+            <img src="{{d.image}}" alt="best laptops 2019" width="100px">
           </div>
-          <span style="text-align: center;font-weight: bold"> Tv </span>
-          <a style="display:none" [routerLink]="['/search/TVs']"> </a>
-        </mat-card>
-        <mat-card [routerLink]="['/search/Cameras']" fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 150px"
-          style="padding:0;background: #fafafa;margin:5px">
-          <div style="text-align: center;margin: 10px;">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/81dVXXd1GGL._SL190_.jpg" alt="best camera 2019"
-              width="100px">
+          <div fxLayout="column">
+            <span style="text-align: center;font-weight: bold; margin: 10px;"> {{d.title}} </span>
+            <span style="text-align: center;font-weight: bold; margin: 10px;"> <s
+                style="font-size: small;">${{d.actualPrice}}</s> ${{d.discountPrice}}</span>
           </div>
-          <span style="text-align: center;font-weight: bold"> Camera </span>
-          <a style="display:none" [routerLink]="['/search/Cameras']"> </a>
+
         </mat-card>
-        <mat-card [routerLink]="['/search/Smartphones']" fxLayout="column" fxLayoutAlign="center"
-          fxFlex="1 1 150px" style="padding:0;background: #fafafa;margin:5px">
-          <div style="text-align: center;margin: 10px;">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/6109yVrAn2L._SL190_.jpg"
-              alt="best smartphone 2019" width="100px">
-          </div>
-          <span style="text-align: center;font-weight: bold">Smartphone </span>
-          <a style="display:none" [routerLink]="['/search/Smartphones']"> </a>
-        </mat-card>
-      </div>
+      </a>
 
-    </mat-card>
+    </div>
 
-    <!-- Brand -->
+  </div>
 
-    <mat-card style="background-color:white; margin:10px" fxLayout="column" fxLayoutAlign="center stretch"
+  <!-- Brand -->
+
+  <div style="background-color:white; padding:15px;" fxLayout="column" fxLayoutAlign="center stretch"
     fxLayoutGap="10px">
 
     <span fxLayoutAlign="center center">
       <h3>Popular Brands</h3>
     </span>
-    <div fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}" >
+    <div fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
+      <a *ngFor="let b of stateSession.application.brands" [routerLink]="[b.link]">
+        <mat-card fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 130px"
+          style="padding:0;background: #fafafa;margin:10px">
+          <div style="text-align: center;margin: 5px;">
+            <img src="{{b.image}}" style="height: 80px; width: auto; max-width: 125px;" alt="apple">
+          </div>
+          <span style="text-align: center;font-weight: bold;margin: 10px;"> {{b.title}} </span>
+          <a [routerLink]="[b.link]"> </a>
 
-      <mat-card [routerLink]="['/search/apple']" fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 130px"
-        style="padding:0;background: #fafafa;margin:10px">
-        <div style="text-align: center;margin: 5px;">
-          <img src="/assets/brands/apple.png" style="height: 80px; width: auto; max-width: 125px;"
-            alt="apple" >
-        </div>
-        <span style="text-align: center;font-weight: bold;margin: 10px;"> Apple </span>
-        <a [routerLink]="['/search/apple']"> </a>
-
-      </mat-card>
-
-      <mat-card [routerLink]="['/search/samsung']" fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 130px"
-        style="padding:0;background: #fafafa;margin:10px">
-        <div style="text-align: center;margin: 5px;">
-          <img src="/assets/brands/samsung.png" alt="samsung"
-          style="height: 80px; width: auto; max-width: 125px;">
-        </div>
-        <span style="text-align: center;font-weight: bold;margin: 10px;"> Samsung </span>
-        <a style="display:none" [routerLink]="['/search/samsung']"> </a>
-      </mat-card>
-      <mat-card [routerLink]="['/search/dell']" fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 130px"
-        style="padding:0;background: #fafafa;margin:5px">
-        <div style="text-align: center;margin: 10px;">
-          <img src="/assets/brands/dell.png" alt="dell"
-          style="height: 80px; width: auto; max-width: 125px;">
-        </div>
-        <span style="text-align: center;font-weight: bold;margin: 10px;"> Dell </span>
-        <a style="display:none" [routerLink]="['/search/dell']"> </a>
-      </mat-card>
-     
+        </mat-card>
+      </a>
     </div>
 
-  </mat-card>
+  </div>
 
 
 
-    <mat-card style="background-color:white; margin:10px" fxLayout="column" fxLayoutAlign="center stretch"
-      fxLayoutGap="10px">
 
-      <span fxLayoutAlign="center center">
-        <h3>Best Deals</h3>
-      </span>
-      <div fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}" >
-
-        <mat-card [routerLink]="['/search/Smartphones/Galaxy S10 Plus']" fxLayout="row" 
-        fxLayoutAlign="center"
-          fxFlex="1 1 230px" style="padding:0;background: #fafafa;margin:10px">
-          <div style="text-align: center;margin: 10px;">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/61YVqHdFRxL._SL190_.jpg"
-              alt="best laptops 2019" width="100px">
-          </div>
-          <div fxLayout="column">
-            <span style="text-align: center;font-weight: bold; margin: 10px;"> Samsung Galaxy S10 Plus </span>
-            <span style="text-align: center;font-weight: bold; margin: 10px;"> <s style="font-size: small;">$999.99</s> $746 </span>
-          </div>
-          <a [routerLink]="['/search/Smartphones/Galaxy S10 Plus']"> </a>
-
-        </mat-card>
-
-        <mat-card [routerLink]="['/search/Smartphones/Galaxy Note 9']" fxLayout="row" 
-        fxLayoutAlign="center"
-          fxFlex="1 1 230px" style="padding:0;background: #fafafa;margin:10px">
-          <div style="text-align: center;margin: 10px;">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/71ZOFPYeXCL._SL190_.jpg"
-              alt="best laptops 2019" width="100px">
-          </div>
-          <div fxLayout="column">
-            <span style="text-align: center;font-weight: bold; margin: 10px;"> Samsung Galaxy Note 9 </span>
-            <span style="text-align: center;font-weight: bold; margin: 10px;"> 
-              <s style="font-size: small;">$799.99</s> $694 </span>
-          </div>
-          <a [routerLink]="['/search/Smartphones/Galaxy Note 9']"> </a>
-
-        </mat-card>
-
-        <mat-card [routerLink]="['/search/Laptops/XPS 13 (9380)']" fxLayout="row" 
-        fxLayoutAlign="center"
-          fxFlex="1 1 230px" style="padding:0;background: #fafafa;margin:10px">
-          <div style="text-align: center;margin: 10px;">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/71jxN6pEeNL._SL190_.jpg"
-              alt="best laptops 2019" width="100px">
-          </div>
-          <div fxLayout="column">
-            <span style="text-align: center;font-weight: bold; margin: 10px;"> Dell XPS 13 (9380) </span>
-            <span style="text-align: center;font-weight: bold; margin: 10px;">
-               <s style="font-size: small;">$1859.99</s> $1749.95 </span>
-          </div>
-          <a [routerLink]="['/search/Laptops/XPS 13 (9380)']"> </a>
-
-        </mat-card>
-      </div>
-
-    </mat-card>
 </div>

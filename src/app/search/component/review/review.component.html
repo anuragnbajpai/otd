@@ -1,5 +1,5 @@
 <mat-card class="tab-content">
-    <mat-card fxLayout="row" fxLayoutAlign="space-between" style="background:lightcyan">
+    <mat-card fxLayout="row" fxLayoutAlign="space-between" style="background:white">
       <div>
           <button mat-button [matMenuTriggerFor]="menu" style="background: #d3d3d34d">
               <span>Sort By:</span> &nbsp;<b style="padding-right: 5px">{{sortBy}}</b>
@@ -16,7 +16,7 @@
     </mat-card>
   <mat-card fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
     <mat-card *ngFor="let element of stateSearch.selectedProduct.reviews;let i = index" 
-    style="background: lightcyan; margin:5px" [ngStyle.xs]="{'width.%': 90}" [ngStyle.gt-xs]="{'width.%': 90}"> 
+    style="background: white; margin:5px" [ngStyle.xs]="{'width.%': 90}" [ngStyle.gt-xs]="{'width.%': 90}"> 
      <mat-card-content fxLayout="column" fxLayoutAlign="start" style="margin-bottom: 0px">
       <div style="margin: 10px;">
       <div>

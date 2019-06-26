@@ -38,8 +38,14 @@
     </button>
   </div>
   <mat-card-header style="width: 100%;">
-    <img mat-card-avatar [src]="stateSearch.selectedProduct.picture">
+      
+
     <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
+        <div style="width: 60px; height:50px;text-align: center;margin: auto;
+        padding-right: 10px;">
+            <img style="max-width:100%;
+            max-height:100%;" [src]="stateSearch.selectedProduct.picture">
+        </div>
       <div style="width: 100%">
         <h4 style="margin:0; padding-bottom: 5px;"> {{stateSearch.selectedProduct.brand}}
           {{stateSearch.selectedProduct.title}} </h4>
@@ -79,7 +85,7 @@
 
       </div>
     </mat-card-title>
-    <mat-card-subtitle style="margin-top:-10px">
+    <mat-card-subtitle style="margin: 10px;">
       {{stateSearch.selectedProduct.description}}
     </mat-card-subtitle>
 
@@ -92,7 +98,7 @@
 
   </mat-card-subtitle>
 
-  <mat-card-content>
+  <mat-card-content class="detailContent">
     <mat-tab-group mat-align-tabs="center" (selectedTabChange)="onSequenceChangeEvent($event)">
       <mat-tab label="Deals">
         <ng-template matTabContent>
