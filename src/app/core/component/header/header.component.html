@@ -1,6 +1,6 @@
 <mat-card style="background: rgb(205, 249, 249);
   position: fixed;z-index: 10;width: 100%;padding: 0px;min-height: 50px;" [ngStyle]="{'height': ((stateSession.page$ | async) == 'home') ? '25vh' : '8vh' }"  >
-  <button style="position: fixed; top:1vh; left: 1vw;z-index:10; background: transparent" mat-icon-button
+  <button style="position: fixed; top:1vh; left: 1vw;z-index:10; background: transparent;font-size: larger;" mat-icon-button
     (click)="open()">
     <fa-icon [icon]="['fas', 'bars']"></fa-icon>
   </button>

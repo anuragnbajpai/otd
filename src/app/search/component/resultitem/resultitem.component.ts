@@ -28,7 +28,7 @@ export class ResultitemComponent implements OnInit {
   }
 
   addCompare() {
-
+    this.stateSearch.updateProduct(null);
     if (!this.product.isCompare) {
       if (this.stateSearch.compareProducts.length > 1) {
         this.svcCore.snackbar.Confirmation('Only two products can be compared');
@@ -43,8 +43,9 @@ export class ResultitemComponent implements OnInit {
       this.stateSearch.compareProducts.push(this.product);
 
       if (this.stateSearch.compareProducts.length === 1) {
-        this.stateSearch.updateProduct(null);
+        
         if (this.stateSession.getDevice() !== 'xs') {
+         // this.stateSearch.updateProduct(null);
           this.router.navigate(['/search/' + this.stateSearch.getCategory() + '/compare/' + this.product.title]);
         }
       }
@@ -54,7 +55,7 @@ export class ResultitemComponent implements OnInit {
     }
 
     if (this.stateSearch.compareProducts.length === 2) {
-      this.stateSearch.updateProduct(null);
+      //this.stateSearch.updateProduct(null);
       // tslint:disable-next-line:max-line-length
       this.router.navigate(['/search/' + this.stateSearch.getCategory() + '/compare/' + this.stateSearch.compareProducts[0].title + '/' + this.stateSearch.compareProducts[1].title]);
     }

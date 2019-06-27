@@ -1,4 +1,6 @@
-
+<div *ngIf="!stateSession.application" fxLayout="row" fxLayoutAlign="center" style="padding: 50px;">
+    <img src="/assets/images/loadloop.gif" style="width: 50px">
+</div>
 <div *ngIf="stateSession.application">
   <div style="background-color:white; padding:15px;" fxLayout="column" fxLayoutAlign="center stretch"
     fxLayoutGap="10px">

@@ -1,21 +1,22 @@
-<div fxLayout="column" fxLayoutAlign="center center" >
-    <img mat-list-item alt="todays deals" src="assets/images/onlytopdeals_logo_trans.png" style="width: 180px;height: 60px;">
-      <h3 style="margin:10px"> Login/Signup </h3>
-     
-      <button mat-raised-button class="social-icon" style="background-color:white;width:180px;color: black;font-size: smaller;
+<div fxLayout="column" fxLayoutAlign="center center">
+  <img mat-list-item alt="todays deals" src="assets/images/onlytopdeals_logo_trans.png"
+    style="width: 180px;height: 60px;">
+  <h3 style="margin:20px"> Login/Signup </h3>
+
+  <button mat-raised-button class="social-icon" style="background-color:white;width:180px;color: black;font-size: smaller;
       font-weight: 600;" (click)="tryFacebookLogin()">
-        <img style="width: 15px; padding-right:10px" src="assets/images/facebook.jpg">Login with Facebook</button>
+    <img style="width: 15px; padding-right:10px" src="assets/images/facebook.jpg">Login with Facebook</button>
 
-      or
+  <div style="margin: 5px">or</div>
 
-      <button mat-raised-button class="social-icon" style="background-color:white;width:180px;color: black;font-size: smaller;
+  <button mat-raised-button class="social-icon" style="background-color:white;width:180px;color: black;font-size: smaller;
       font-weight: 600;" (click)="tryGoogleLogin()">
-          <img style="width: 15px; padding-right:10px" src="assets/images/google.png">Sign in with Google</button>
+    <img style="width: 15px; padding-right:10px" src="assets/images/google.png">Sign in with Google</button>
+  <div style="margin: 5px">or</div>
 
-          <mat-spinner *ngIf="clicked" style="width: 10px; margin:10px"></mat-spinner>
-      <!-- or
+  <button mat-button mat-dialog-close>
+    Cancel</button>
+  <mat-spinner *ngIf="clicked" style="width: 10px; margin:10px"></mat-spinner>
 
-      <button mat-raised-button class="social-icon" style="background-color: #55ACEE;width:130px;color: white" (click)="tryTwitterLogin()">
-        <i class="fab fa-twitter icons-padding"></i>Twitter</button> -->
 
-  </div>
+</div>
