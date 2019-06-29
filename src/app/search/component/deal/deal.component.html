@@ -2,8 +2,8 @@
     <div fxLayout="row" fxLayoutAlign="space-between" style="background:white">
       <div>
           <button mat-stroked-button [matMenuTriggerFor]="menu" >
-              <span>Sort By:</span> &nbsp;<b style="padding-right: 5px">{{sortBy}}</b>
-              <fa-icon [icon]="['fas', 'sort']"></fa-icon>  
+              <span>Sort By:</span> &nbsp;<b style="padding-right: 5px">{{sortBy | titlecase}}</b>
+             <fa-icon style="font-size: small;" [icon]="['fas', 'sort']"></fa-icon>  
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="sort('price')">Price</button>
@@ -11,7 +11,7 @@
             <button mat-menu-item (click)="sort('dateTime')">Date</button>
           </mat-menu>
       </div> 
-      <div> <button mat-stroked-button  (click)="addDeal()">Add <fa-icon [icon]="['fas', 'plus']"></fa-icon>  </button></div>      
+      <div> <button mat-stroked-button  (click)="addDeal()"> <fa-icon style="font-size: small;" [icon]="['fas', 'plus']"></fa-icon> Deal</button></div>      
        
     </div>
   <div fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >

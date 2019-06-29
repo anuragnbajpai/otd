@@ -3,7 +3,7 @@
           <div>
               <button mat-stroked-button [matMenuTriggerFor]="menu" >
                   <span>Sort By:</span> &nbsp;<b style="padding-right: 5px">{{sortBy}}</b>
-                  <fa-icon [icon]="['fas', 'sort']"></fa-icon>  
+                  <fa-icon style="font-size: small;" [icon]="['fas', 'sort']"></fa-icon>  
               </button>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="sortBy = 'Price'">Price</button>
@@ -11,13 +11,14 @@
                 <button mat-menu-item (click)="sortBy = 'Date'">Date</button>
               </mat-menu>
           </div> 
-          <div> <button mat-stroked-button  (click)="addImage()" >Add <fa-icon [icon]="['fas', 'plus']"></fa-icon>  </button></div>      
+          <div> <button mat-stroked-button  (click)="addImage()" > <fa-icon style="font-size: small;" [icon]="['fas', 'plus']"></fa-icon> Image </button></div>      
            
         </mat-card>
       <mat-card fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
         <mat-card  *ngFor="let element of stateSearch.selectedProduct.images;let i = index" 
         style="background: white; margin:5px" [ngStyle.xs]="{'width.%': 80}" [ngStyle.gt-xs]="{'width.px': 200}"> 
-         <mat-card-content class="content-list" fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 0px">
+         <mat-card-content class="content-list" fxLayout="column" fxLayoutAlign="center center"
+          style="margin-bottom: 0px; width: 200px;height: 200px;">
             <div style="position:absolute;top:0px; right:0px;padding:10px;" [matMenuTriggerFor]="menu">
                 <fa-icon class="only-show-on-hover" [icon]="['fas', 'ellipsis-v']"></fa-icon>
               </div>
@@ -27,7 +28,8 @@
                 <button mat-menu-item (click)="delete(element)" *ngIf="stateSession.isAdmin$|async">Delete</button>
               </mat-menu>
           
-            <img (click)="goToImage(i)" src="{{element.link}}" alt="{{element.description}}" width="100%" style="max-width: 200px"   >
+            <img (click)="goToImage(i)" src="{{element.link}}" alt="{{element.description}}"
+             style="max-width: 100%; max-height: 100%"   >
          
         </mat-card-content>
           <mat-card-actions style="padding: 10px; background: #d3d3d34d;">  

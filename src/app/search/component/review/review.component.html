@@ -3,7 +3,7 @@
       <div>
           <button mat-stroked-button [matMenuTriggerFor]="menu" >
               <span>Sort By:</span> &nbsp;<b style="padding-right: 5px">{{sortBy}}</b>
-              <fa-icon [icon]="['fas', 'sort']"></fa-icon>  
+              <fa-icon style="font-size: small;" [icon]="['fas', 'sort']"></fa-icon>  
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="sortBy = 'Price'">Price</button>
@@ -11,7 +11,7 @@
             <button mat-menu-item (click)="sortBy = 'Date'">Date</button>
           </mat-menu>
       </div> 
-      <div> <button mat-stroked-button (click)="addReview()" >Add <fa-icon [icon]="['fas', 'plus']"></fa-icon>  </button></div>      
+      <div> <button mat-stroked-button (click)="addReview()" ><fa-icon style="font-size: small;" [icon]="['fas', 'plus']"></fa-icon> Review  </button></div>      
        
     </mat-card>
   <mat-card fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >

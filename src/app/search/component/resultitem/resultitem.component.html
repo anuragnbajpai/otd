@@ -8,8 +8,8 @@
             
             <button mat-icon-button (click)="addCompare()"  >
               <!-- [ngStyle]="{'background-color':product.isCompare ? 'lightcyan' : 'white' }"-->
-                <fa-icon *ngIf="!product.isCompare"  [icon]="['fas', 'plus']"></fa-icon> 
-                <fa-icon *ngIf="product.isCompare" [icon]="['fas', 'minus']"></fa-icon> 
+                <fa-icon style="font-size: small"  *ngIf="!product.isCompare"  [icon]="['fas', 'plus']"></fa-icon> 
+                <fa-icon style="font-size: small"  *ngIf="product.isCompare" [icon]="['fas', 'minus']"></fa-icon> 
              </button>
           </mat-card-title>
           <mat-card-subtitle fxLayout="row" (click)="detail()">
@@ -26,20 +26,20 @@
               <div  style="width: 50%;padding-top: 15px;" fxLayoutAlign="start stretch">
                 <star-rating             
                 starType="svg" [rating]="product.avgRating" size="medium"  [readOnly]="true" [showHalfStars]="true"></star-rating>
-              <div style=" align-self: center;padding-bottom: 4px;"> <b>{{product.avgRating | number : '1.1-1' }}</b> </div>
+              <div style=" align-self: center;padding-bottom: 4px;color:black;"> <b>{{product.avgRating | number : '1.1-1' }}</b> </div>
               </div> 
               <span style="align-self: center;text-align: center" fxLayout="row" fxLayoutAlign="end" 
               style="width:50%;padding-top:15px" >
                   <s *ngIf="product.price[(stateSession.country$| async)?.code] > 0" 
                       style="font-weight: 500;font-size: small;"
                     >
-                       {{(stateSession.country$| async)?.currencySymbol}}
-                      {{product.price[(stateSession.country$| async)?.code] | number : '1.2-2'}}  
+                       {{(stateSession.country$| async)?.currencySymbol + (product.price[(stateSession.country$| async)?.code] | number : '1.2-2')}}
+   
                   </s>  &nbsp;
                   <span *ngIf="product.discountPrice && product.discountPrice[(stateSession.country$| async)?.code] > 0"
-                      style="font-weight: bold ">
-                      {{(stateSession.country$| async)?.currencySymbol}}
-                      {{product.discountPrice[(stateSession.country$| async)?.code] | number : '1.2-2'}}
+                      style="font-weight: bold;color:black ">
+                      {{(stateSession.country$| async)?.currencySymbol + (product.discountPrice[(stateSession.country$| async)?.code] | number : '1.2-2')}}
+                   
                   </span>               
                    <!-- <div style="font-size:10px">{{d.currency}}</div> -->
                 </span>
