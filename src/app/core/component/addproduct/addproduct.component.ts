@@ -31,6 +31,7 @@ export class AddproductComponent implements OnInit {
         category: [this.stateSearch.selectedProduct.category, Validators.required],
         picture: [this.stateSearch.selectedProduct.picture, [Validators.required]],
         price: this.addCountry(),
+        discountPrice: this.addDiscountCountry(),
         avgRating: [this.stateSearch.selectedProduct.avgRating, Validators.required],
         id: [this.stateSearch.selectedProduct.id, Validators.required],
         tags: [this.stateSearch.selectedProduct.tags],
@@ -80,6 +81,18 @@ export class AddproductComponent implements OnInit {
       });
       return fg;
   }
+  addDiscountCountry(){
+    let fg = this.formBuilder.group({});
+    this.stateSession.countries.forEach(c => {
+      if(this.stateSearch.selectedProduct && this.stateSearch.selectedProduct.discountPrice ){
+        fg.addControl(c.code, new FormControl(this.stateSearch.selectedProduct.discountPrice[c.code], Validators.required) );
+      } else {
+        fg.addControl(c.code, new FormControl(null, Validators.required) );
+      }
+     
+    });
+    return fg;
+}
   ngOnInit() {
     this.options = this.stateSearch.categories.map(o => o.name);
     this.filteredOptions = this.productFormGroup.get('category').valueChanges

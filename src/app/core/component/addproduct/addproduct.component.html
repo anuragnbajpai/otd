@@ -36,6 +36,13 @@
             <span matSuffix>{{cnt.currency}}</span>
           </mat-form-field>
         </div>
+        <div formGroupName="discountPrice">          
+            <mat-form-field *ngFor="let cnt of stateSession.countries">
+              <input matInput placeholder="{{cnt.name + ' Discount Price'}}" type="number" formControlName="{{cnt.code}}" required>
+              <span matPrefix>{{cnt.currencySymbol }}&nbsp;</span>
+              <span matSuffix>{{cnt.currency}}</span>
+            </mat-form-field>
+          </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
             <button mat-raised-button  mat-dialog-close >Cancel</button>

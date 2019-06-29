@@ -204,3 +204,8 @@ background-color: lightcyan;
 .ng-fa-icon{
 	font-size: larger;
 }
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #673ab7;
+  width: 0px !important;
+}

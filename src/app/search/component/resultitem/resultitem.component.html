@@ -30,11 +30,14 @@
               </div> 
               <span style="align-self: center;text-align: center" fxLayout="row" fxLayoutAlign="end" 
               style="width:50%;padding-top:15px" >
-                  <s *ngIf="product.price[(stateSession.country$| async)?.code] > 0" style="font-weight: bold ">
+                  <s *ngIf="product.price[(stateSession.country$| async)?.code] > 0" 
+                      style="font-weight: 500;font-size: small;"
+                    >
                        {{(stateSession.country$| async)?.currencySymbol}}
                       {{product.price[(stateSession.country$| async)?.code] | number : '1.2-2'}}  
                   </s>  &nbsp;
-                  <span *ngIf="product.discountPrice && product.discountPrice[(stateSession.country$| async)?.code] > 0" style="font-weight: 500;font-size: small;">
+                  <span *ngIf="product.discountPrice && product.discountPrice[(stateSession.country$| async)?.code] > 0"
+                      style="font-weight: bold ">
                       {{(stateSession.country$| async)?.currencySymbol}}
                       {{product.discountPrice[(stateSession.country$| async)?.code] | number : '1.2-2'}}
                   </span>               

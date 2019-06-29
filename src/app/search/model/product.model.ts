@@ -20,6 +20,7 @@ export interface Product {
   isCompare: boolean;
   isSelected: boolean;
   price: any;
+  discountPrice: any;
 }
 
 export interface Feature {
