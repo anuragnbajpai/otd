@@ -57,12 +57,12 @@
           </div>
           <div fxLayout="row" fxLayoutAlign="end" style="margin-bottom: 5px">
             <button style="line-height: 0px; height:0px;"
-              *ngIf="(stateSession.isLoggedin$|async) && !stateSearch.selectedProduct.isSelected" mat-icon-button
+              *ngIf=" !stateSearch.selectedProduct.isSelected" mat-icon-button
               (click)="save()">
               <fa-icon [icon]="['far', 'bookmark']"></fa-icon>
             </button>
             <button style="line-height: 0px; height:0px;"
-              *ngIf="(stateSession.isLoggedin$|async) && stateSearch.selectedProduct.isSelected" mat-icon-button
+              *ngIf=" stateSearch.selectedProduct.isSelected" mat-icon-button
               (click)="unsave()">
               <fa-icon [icon]="['fas', 'bookmark']"></fa-icon>
             </button>

@@ -29,6 +29,9 @@ export class DetailComponent implements OnInit {
   }
 
   save(){
+    if(this.stateSession.getUser() == null){
+      this.stateSession.login();
+    } else {
     let user =  JSON.parse( JSON.stringify(this.stateSession.getUser()));
     user.saved.push(this.stateSearch.selectedProduct.id);
     this.stateSession.updateUser(user);
@@ -36,13 +39,18 @@ export class DetailComponent implements OnInit {
     this.stateSearch.updateSavedStatusInSearchResult();
     this.svcFirestore.updateItem('users', user);
   }
+  }
   unsave() {
+    if(this.stateSession.getUser() == null){
+      this.stateSession.login();
+    } else {
     let user =  JSON.parse( JSON.stringify(this.stateSession.getUser()));
     user.saved.splice( user.saved.indexOf(this.stateSearch.selectedProduct.id), 1);
     this.stateSession.updateUser(user);
     this.stateSearch.selectedProduct.isSelected = false;
     this.stateSearch.updateSavedStatusInSearchResult();
     this.svcFirestore.updateItem('users', user);
+    }
   }
   shared(){
     if(navigator.share) {

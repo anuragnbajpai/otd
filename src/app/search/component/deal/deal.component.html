@@ -31,7 +31,7 @@
       <div style="font-size: small;font-weight: 900;">OFF</div>
     </div>
       <div> <s>{{(stateSession.country$| async)?.currencySymbol }}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code]}}</s> &nbsp;<b>{{(stateSession.country$| async)?.currencySymbol }}{{element.price}}</b> {{(stateSession.country$| async)?.currency }}  &nbsp;  </div>
-      <a color="primary" style="margin: 10px" mat-raised-button href="{{element.link}}" target="_blank" > {{element.store | titlecase}}</a>
+      <a  style="margin: 10px; color:white; background: #0073b1" mat-raised-button href="{{element.link}}" target="_blank" > {{element.store | titlecase}}</a>
     </mat-card-content>
       <mat-card-actions style="padding: 10px; background: #d3d3d34d;">  
         <div fxLayout="row" fxLayoutAlign="space-between">
