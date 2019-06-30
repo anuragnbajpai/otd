@@ -36,7 +36,7 @@
   </div>
 </mat-card>
 
-<mat-card class="detail" style="background-color:lightcyan;"
+<mat-card class="detail" style="background-color:#f0f0f0;"
   *ngIf="stateSearch.selectedProduct && stateSearch.compareProducts.length< 2">
 
   <mat-card-header style="width: 100%;">
@@ -96,7 +96,10 @@
 
     <star-rating starType="svg" [rating]="stateSearch.selectedProduct?.avgRating" size="medium" [readOnly]="true"
       [showHalfStars]="true"></star-rating>
-    <div style=" align-self: center;font-size: large;color:black"> {{stateSearch.selectedProduct?.avgRating | number : '1.1-1' }} </div>
+    <div style=" align-self: center;font-size: medium;
+    color: black;
+    font-weight: 600;
+    padding-top: 2px;"> {{stateSearch.selectedProduct?.avgRating | number : '1.1-1' }} </div>
 
   </mat-card-subtitle>
 
@@ -107,7 +110,7 @@
           <app-deal></app-deal>
         </ng-template>
       </mat-tab>
-      <mat-tab label="Features">
+      <mat-tab label="Details">
         <ng-template matTabContent>
           <app-feature></app-feature>
         </ng-template>

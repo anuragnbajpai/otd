@@ -1,7 +1,7 @@
 <mat-horizontal-stepper linear="true" #stepper >
     <mat-step [stepControl]="productFormGroup">
       <form [formGroup]="productFormGroup">
-        <ng-template matStepLabel>Product</ng-template>
+        <ng-template matStepLabel>Add Product</ng-template>
         <div fxLayout="column">
             <mat-form-field>
                 <input matInput placeholder="Brand" formControlName="brand" required>
@@ -46,7 +46,7 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
             <button mat-raised-button  mat-dialog-close >Cancel</button>
-            <button mat-raised-button color="primary" matStepperNext  >Next</button>
+            <button mat-raised-button style="background: rgb(0, 125, 184);color: white" matStepperNext  >Next</button>
          </div>
  
       </form>
@@ -64,8 +64,8 @@
         <div fxLayout="row" fxLayoutAlign="space-between">
           <button mat-raised-button matStepperPrevious>Back</button>
           
-          <button *ngIf="stateSearch.selectedProduct" mat-raised-button color="primary" matStepperNext (click)="updateProduct()">Update</button>
-          <button *ngIf="!stateSearch.selectedProduct"  mat-raised-button color="primary" matStepperNext (click)="addProduct()">Submit</button>
+          <button *ngIf="stateSearch.selectedProduct" mat-raised-button style="background: rgb(0, 125, 184)" matStepperNext (click)="updateProduct()">Update</button>
+          <button *ngIf="!stateSearch.selectedProduct"  mat-raised-button style="background: rgb(0, 125, 184)" matStepperNext (click)="addProduct()">Submit</button>
         </div>
       </form>
     </mat-step>

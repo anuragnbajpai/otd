@@ -1,5 +1,5 @@
 <form [formGroup]="imageFormGroup" (ngSubmit)="submitForm()">
-    <mat-card-title fxLayoutAlign="center"> Deal </mat-card-title>
+    <mat-card-title fxLayoutAlign="center"> Add Deal </mat-card-title>
           <mat-card>  
                 <div fxLayout="column">
                   <div style="margin-bottom:10px">
@@ -17,6 +17,6 @@
            </mat-card>     
       <div style="padding-top:10px" fxLayout="row" fxLayoutAlign="space-between">
         <button mat-raised-button  mat-dialog-close >Cancel</button>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!imageFormGroup.valid" >Submit</button>
+        <button mat-raised-button style="background: rgb(0, 125, 184);color: white" type="submit" [disabled]="!imageFormGroup.valid" >Submit</button>
       </div>
     </form>

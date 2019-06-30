@@ -1,5 +1,5 @@
 <form [formGroup]="reviewFormGroup" (ngSubmit)="submitForm()">
-    <mat-card-title fxLayoutAlign="center"> Review </mat-card-title>
+    <mat-card-title fxLayoutAlign="center"> Add Review </mat-card-title>
     <mat-card>
         
 
@@ -13,6 +13,6 @@
      </mat-card>     
      <div style="padding-top:10px" fxLayout="row" fxLayoutAlign="space-between">
         <button mat-raised-button  mat-dialog-close >Cancel</button>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!reviewFormGroup.valid" >Submit</button>
+        <button mat-raised-button style="background: rgb(0, 125, 184);color: white"type="submit" [disabled]="!reviewFormGroup.valid" >Submit</button>
       </div>
 </form>

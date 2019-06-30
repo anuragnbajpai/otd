@@ -1,5 +1,5 @@
 <form [formGroup]="dealFormGroup" (ngSubmit)="submitForm()">
-    <mat-card-title fxLayoutAlign="center"> Deal </mat-card-title>
+    <mat-card-title fxLayoutAlign="center"> Add Deal </mat-card-title>
           <mat-card>  
                 <div fxLayout="column">
                        <mat-menu #menu="matMenu">
@@ -12,7 +12,7 @@
                       </mat-form-field>
                       <mat-form-field>
                         <input matInput placeholder="Price" type="number" formControlName="price" required>
-                        <span matPrefix>{{(stateSession.country$| async)?.currencySymbol }}&nbsp;</span>
+                        <!-- <span matPrefix>{{(stateSession.country$| async)?.currencySymbol }}&nbsp;</span> -->
                         <span matSuffix [matMenuTriggerFor]="menu">{{(stateSession.country$| async)?.currency }}
                             <fa-icon [icon]="['fas', 'angle-down']"></fa-icon> 
                         </span>
@@ -24,7 +24,7 @@
            </mat-card>     
       <div style="padding-top:10px" fxLayout="row" fxLayoutAlign="space-between">
         <button mat-raised-button  mat-dialog-close >Cancel</button>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!dealFormGroup.valid" >Submit</button>
+        <button mat-raised-button style="background: rgb(0, 125, 184);color: white" type="submit" [disabled]="!dealFormGroup.valid" >Submit</button>
       </div>
     </form>
 

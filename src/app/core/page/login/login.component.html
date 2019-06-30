@@ -1,7 +1,12 @@
+  <div fxLayout="row" fxLayoutAlign="end">  
+  <button mat-icon-button  mat-dialog-close>
+      <fa-icon [icon]="['fas', 'times']"></fa-icon> </button>
+    </div>
 <div fxLayout="column" fxLayoutAlign="center center">
   <img mat-list-item alt="todays deals" src="assets/images/onlytopdeals_logo_trans.png"
-    style="width: 180px;height: 60px;">
-  <h3 style="margin:20px"> Login/Signup </h3>
+    style="width: 180px;height: 60px;    position: relative;
+    top: -10px;">
+  <h3 style="margin-bottom:20px"> Login/Signup </h3>
 
   <button mat-raised-button class="social-icon" style="background-color:white;width:180px;color: black;font-size: smaller;
       font-weight: 600;" (click)="tryFacebookLogin()">
@@ -12,11 +17,12 @@
   <button mat-raised-button class="social-icon" style="background-color:white;width:180px;color: black;font-size: smaller;
       font-weight: 600;" (click)="tryGoogleLogin()">
     <img style="width: 15px; padding-right:10px" src="assets/images/google.png">Sign in with Google</button>
-  <div style="margin: 5px">or</div>
+ 
 
-  <button mat-button mat-dialog-close>
-    Cancel</button>
-    <img *ngIf="clicked" src="/assets/images/loadloop.gif" style="width: 50px">
+<div style="margin:20px">
+    <img *ngIf="clicked" src="/assets/images/loadloop.gif" style="width: 50px;">
+</div>
+    
   <!-- <mat-spinner *ngIf="clicked" style="width: 10px; margin:10px"></mat-spinner> -->
 
 

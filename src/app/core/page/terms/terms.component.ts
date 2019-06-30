@@ -10,6 +10,9 @@ export class TermsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    let el = document.getElementById('top');
+    el.scrollIntoView(true);
+    document.getElementById('top').scrollTop += 100;
   }
 
 }

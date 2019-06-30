@@ -6,7 +6,7 @@
     fxLayoutGap="10px">
 
     <span fxLayoutAlign="center center">
-      <h3>Trending Categories</h3>
+      <h3 style="font-size: 1.3em;">Trending Categories</h3>
     </span>
     <div fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
       <a *ngFor="let c of stateSession.application.categories" [routerLink]="[c.link]">
@@ -29,7 +29,7 @@
     fxLayoutGap="10px">
 
     <span fxLayoutAlign="center center">
-      <h3>Top Deals</h3>
+      <h3 style="font-size: 1.3em;">Hot Deals</h3>
     </span>
     <div fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
       <a *ngFor="let d of stateSession.application.deals" [routerLink]="[d.link]">
@@ -57,7 +57,7 @@
     fxLayoutGap="10px">
 
     <span fxLayoutAlign="center center">
-      <h3>Popular Brands</h3>
+      <h3 style="font-size: 1.3em;">Popular Brands</h3>
     </span>
     <div fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
       <a *ngFor="let b of stateSession.application.brands" [routerLink]="[b.link]">

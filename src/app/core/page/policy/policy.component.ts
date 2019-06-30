@@ -10,6 +10,8 @@ export class PolicyComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    let el = document.getElementById('top');
+    el.scrollIntoView(true);
   }
 
 }
