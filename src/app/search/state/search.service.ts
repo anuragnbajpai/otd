@@ -61,8 +61,10 @@ export class SearchService {
           // .limit(10)
           ).pipe(take(1)).subscribe(data => {
             let user = this.stateSession.getUser();
+            console.log(data.length);
             this.searchResult = data.map(e => {
               let d = e.payload.doc.data() as Product;
+             
               if(user!= null){
                 d.isSelected = user.saved.indexOf(d.id) > -1;
               } else {
