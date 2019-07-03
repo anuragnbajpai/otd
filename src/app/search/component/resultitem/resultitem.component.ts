@@ -43,7 +43,7 @@ export class ResultitemComponent implements OnInit {
       this.stateSearch.compareProducts.push(this.product);
 
       if (this.stateSearch.compareProducts.length === 1) {
-        
+        this.svcCore.snackbar.Confirmation('Added, Please add one more product to compare');
         if (this.stateSession.getDevice() !== 'xs') {
          // this.stateSearch.updateProduct(null);
           this.router.navigate(['/search/' + this.stateSearch.getCategory() + '/compare/' + this.product.title]);
