@@ -6,15 +6,15 @@
   <app-resultlist  ></app-resultlist>
 </mat-card >
   <div class="scoll" *ngIf="stateSearch.selectedProduct" [fxFlex.gt-xs]="60" 
-  style="overflow-y:scroll;height: 92vh;" 
+  style="overflow-y:scroll;height: 92vh;background: white" 
   [ngStyle.xs]="{'display': ((stateSession.page$| async) == 'detail' ? 'block' : 'none')}">
     
    <app-detail></app-detail>
 </div>
-  <mat-card class="scoll" *ngIf="stateSearch.compareProducts.length > 0" [fxFlex.gt-xs]="60" 
-    style="overflow-y:scroll;width: 100%;height: 92vh;" 
+  <div class="scoll" *ngIf="stateSearch.compareProducts.length > 0" [fxFlex.gt-xs]="60" 
+    style="overflow-y:scroll;height: 92vh;background: white" 
       [ngStyle.xs]="{'display': ((stateSession.page$| async) == 'compare' ? 'block' : 'none')}">
    <app-compare></app-compare>
-  </mat-card>
+  </div>
 </div>
 

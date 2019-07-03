@@ -1,3 +1,4 @@
+<div style="margin:2vh">
 <div fxLayout="row" fxLayoutAlign="space-between" >
     <div style="padding-bottom:10px;font-size: smaller;"><a routerLink="/">Home </a> / <a
         routerLink="/search/{{stateSearch.category$ | async}}">{{stateSearch.category$ | async  | titlecase}}</a> /
@@ -46,4 +47,5 @@
         </tr>
       </table>
       <app-footer fxHide.gt-xs></app-footer>
+    </div>
 
