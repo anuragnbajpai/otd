@@ -23,15 +23,15 @@ export class SessionService {
   searchKeyword$ = this.query.select(e => e.searchKeyword);
   constructor(private store: SessionStore, private svcFirestore: FirestoreService, 
     private query: SessionQuery, private http: HttpClient, private router: Router,  private route: ActivatedRoute, ) {
-     if(!localStorage.getItem('country')){
-      this.http.get('https://api.ipdata.co?api-key=test').subscribe( (res: any) => {
-        console.log('find location success');
-        this.setCountry(res.country_code.toLowerCase());
-      });
-    } else {
-      this.setCountry( (JSON.parse(localStorage.getItem('country')) as Country ).code);
-    }
-
+    //  if(!localStorage.getItem('country')){
+    //   this.http.get('https://api.ipdata.co?api-key=test').subscribe( (res: any) => {
+    //     console.log('find location success');
+    //     this.setCountry(res.country_code.toLowerCase());
+    //   });
+    // } else {
+    //   this.setCountry( (JSON.parse(localStorage.getItem('country')) as Country ).code);
+    // }
+    this.setCountry('us');
     this.updateUser(JSON.parse(localStorage.getItem('user')));
     console.log(localStorage.getItem('user'));
     this.svcFirestore.getCollection('application').subscribe(a => {
