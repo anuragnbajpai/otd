@@ -2,12 +2,14 @@
   <mat-drawer #drawer mode="over">
     <app-leftnav (leftNav)="drawer.toggle()"></app-leftnav>
   </mat-drawer>
-  <mat-drawer-content fxLayout="column" fxLayoutAlign="stretch" class="scoll">
-    <app-header (leftNav)="drawer.toggle()"></app-header>
+  <mat-drawer-content fxLayout="column" fxLayoutAlign="stretch"  style="overflow:hidden">
+    <app-header (leftNav)="drawer.toggle()" [ngStyle]="{'height': ((stateSession.page$ | async) == 'home') ? '25vh' : '8vh' }"></app-header>
+    <div class="scoll" style="overflow: auto" [ngStyle]="{'height': ((stateSession.page$ | async) == 'home') ? '75vh' : '92vh' }" >
+        <router-outlet [ngStyle]="{'padding-top': ((stateSession.page$ | async) == 'home') ? '25vh' : '8vh' }" ></router-outlet>
+        <app-footer [hidden]="(stateSession.page$ | async) == 'search' || 
+        (stateSession.page$ | async) == 'detail' ||
+        (stateSession.page$ | async) == 'compare'"> </app-footer>
+    </div>
 
-    <router-outlet [ngStyle]="{'padding-top': ((stateSession.page$ | async) == 'home') ? '25vh' : '8vh' }" ></router-outlet>
-    <app-footer [hidden]="(stateSession.page$ | async) == 'search' || 
-    (stateSession.page$ | async) == 'detail' ||
-    (stateSession.page$ | async) == 'compare'"> </app-footer>
   </mat-drawer-content>
 </mat-drawer-container>
