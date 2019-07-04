@@ -12,10 +12,10 @@ const routes: Routes = [
         component: SearchComponent,
         data: {
           page: 'detail',
-          title: 'Top 10 {category} : {product}',
+          title: '{category} : {product}',
           metatags: {
-            keywords: 'top {category}, top 10 {category}, best {category}, {category} deals',
-            description: 'Top 10 {category} with reviews and deals information'
+            keywords: 'top {category}, {category}, best {category}, {category} deals',
+            description: '{category} with reviews and deals information'
           }
         }
       },
@@ -24,10 +24,10 @@ const routes: Routes = [
         component: SearchComponent,
         data: {
           page: 'search',
-          title: 'Top 10 {category}',
+          title: '{category}',
           metatags: {
-            keywords: 'top {category}, top 10 {category}, best {category}, {category} deals',
-            description: 'Top 10 {category} with reviews and deals information'
+            keywords: 'top {category}, {category}, best {category}, {category} deals',
+            description: '{category} with reviews and deals information'
           }
         }
       },
@@ -36,10 +36,10 @@ const routes: Routes = [
         component: SearchComponent,
         data: {
           page: 'compare',
-          title: 'Top 10 {category}',
+          title: '{category}',
           metatags: {
-            keywords: 'top {category}, top 10 {category}, best {category}, {category} deals',
-            description: 'Top 10 {category} with reviews and deals information'
+            keywords: 'top {category}, {category}, best {category}, {category} deals',
+            description: '{category} with reviews and deals information'
           }
         }
       },
@@ -48,10 +48,10 @@ const routes: Routes = [
         component: SearchComponent,
         data: {
           page: 'compare',
-          title: 'Top 10 {category}',
+          title: '{category}',
           metatags: {
-            keywords: 'top {product}, top 10 {product}, best {product}, {product} deals',
-            description: 'Top 10 {category} with reviews and deals information'
+            keywords: 'top {product}, {product}, best {product}, {product} deals',
+            description: '{category} with reviews and deals information'
           }
         }
       },

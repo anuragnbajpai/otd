@@ -59,7 +59,7 @@ export class SearchService {
         this.svcFirestore.getCollectionCondition('products', ref => ref.where('tags', 'array-contains', c.toLowerCase())
           .orderBy('avgRating', 'desc')
           // .limit(10)
-          ).pipe(take(1)).subscribe(data => {
+          ).subscribe(data => {
             let user = this.stateSession.getUser();
             console.log(data.length);
             this.searchResult = data.map(e => {
