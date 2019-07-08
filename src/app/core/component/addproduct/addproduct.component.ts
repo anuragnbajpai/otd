@@ -51,6 +51,7 @@ export class AddproductComponent implements OnInit {
         category: ['', Validators.required],
         picture: ['', [Validators.required]],
         price: this.addCountry(),
+        discountPrice: this.addDiscountCountry(),
         id : this.svcFirestore.firestore.createId(),
         avgRating: [0, Validators.required],
         tags: [ []],
