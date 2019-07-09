@@ -1,14 +1,14 @@
-<div *ngIf="!stateSession.application" fxLayout="row" fxLayoutAlign="center" style="padding: 50px;">
+<!-- <div  fxLayout="row" fxLayoutAlign="center" style="padding: 50px;">
     <img src="/assets/images/loadloop.gif" style="width: 50px">
-</div>
-<div *ngIf="stateSession.application">
+</div> -->
+<div>
   <div style="background-color:white; padding:15px;" fxLayout="column" fxLayoutAlign="center stretch"
     fxLayoutGap="10px">
 
     <span fxLayoutAlign="center center">
       <h3 style="font-size: 1.3em;">Trending Categories</h3>
     </span>
-    <div fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
+    <div *ngIf="stateSession.application" fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
       <a *ngFor="let c of stateSession.application.categories" [routerLink]="[c.link]">
         <mat-card fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 150px"
           style="padding:10px;background: #fafafa;margin:5px">
@@ -22,6 +22,30 @@
       </a>
     </div>
 
+    <div *ngIf="!stateSession.application" class="ui three column stackable grid" fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
+        <!-- <div class="column" *ngFor="let i of [1,2,3,4]" fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 150px">
+          <div class="ui raised segment">
+            <div class="ui placeholder">
+              <div class="image header">
+                <div class="line"></div>
+                <div class="line"></div>
+              </div>
+              <div class="paragraph">
+                <div class="medium line"></div>
+                <div class="short line"></div>
+              </div>
+            </div>
+          </div>
+        </div>       -->
+        <div class="ui card" *ngFor="let i of [1,2,3,4]" fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 150px">
+            <div class="content" >
+              <div class="ui placeholder">
+                <div class="rectangular image"></div>
+              </div>
+            </div>
+          </div>
+      </div>     
+
   </div>
 
   <!-- Deals -->
@@ -31,7 +55,7 @@
     <span fxLayoutAlign="center center">
       <h3 style="font-size: 1.3em;">Hot Deals</h3>
     </span>
-    <div fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
+    <div *ngIf="stateSession.application" fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
       <a *ngFor="let d of stateSession.application.deals" [routerLink]="[d.link]">
         <mat-card fxLayout="row" fxLayoutAlign="center" fxFlex="1 1 230px"
           style="padding:0;background: #fafafa;margin:10px">
@@ -48,6 +72,29 @@
       </a>
 
     </div>
+    <div *ngIf="!stateSession.application" class="ui three column stackable grid" fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
+        <!-- <div class="column" *ngFor="let i of [1,2,3]" fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 230px">
+          <div class="ui raised segment">
+            <div class="ui placeholder">
+              <div class="image header">
+                <div class="line"></div>
+                <div class="line"></div>
+              </div>
+              <div class="paragraph">
+                <div class="medium line"></div>
+                <div class="short line"></div>
+              </div>
+            </div>
+          </div>
+        </div>       -->
+        <div class="ui card" *ngFor="let i of [1,2,3]" fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 230px">
+            <div class="content" >
+              <div class="ui placeholder">
+                <div class="rectangular image"></div>
+              </div>
+            </div>
+          </div>
+      </div>  
 
   </div>
 
@@ -59,7 +106,7 @@
     <span fxLayoutAlign="center center">
       <h3 style="font-size: 1.3em;">Popular Brands</h3>
     </span>
-    <div fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
+    <div *ngIf="stateSession.application" fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
       <a *ngFor="let b of stateSession.application.brands" [routerLink]="[b.link]">
         <mat-card fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 130px"
           style="padding:0;background: #fafafa;margin:10px">
@@ -72,6 +119,29 @@
         </mat-card>
       </a>
     </div>
+    <div *ngIf="!stateSession.application" class="ui three column stackable grid" fxLayout="row center" fxLayoutAlign="space-evenly" [ngStyle.gt-sm]="{'width.%': 80, 'align-self': 'center'}">
+        <!-- <div class="column" *ngFor="let i of [1,2,3,4]" fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 130px">
+          <div class="ui raised segment">
+            <div class="ui placeholder">
+              <div class="image header">
+                <div class="line"></div>
+                <div class="line"></div>
+              </div>
+              <div class="paragraph">
+                <div class="medium line"></div>
+                <div class="short line"></div>
+              </div>
+            </div>
+          </div>
+        </div>       -->
+        <div class="ui card" *ngFor="let i of [1,2,3,4]" fxLayout="column" fxLayoutAlign="center" fxFlex="1 1 130px">
+            <div class="content" >
+              <div class="ui placeholder">
+                <div class="rectangular image"></div>
+              </div>
+            </div>
+          </div>
+      </div>  
 
   </div>
 
