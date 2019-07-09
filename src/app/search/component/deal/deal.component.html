@@ -28,17 +28,24 @@
           <button mat-menu-item (click)="report(element)">Report It</button>
           <button mat-menu-item (click)="delete(element)" *ngIf="stateSession.isAdmin$|async">Delete</button>
         </mat-menu>
-        <div style="font-size: x-large;font-weight: bold;margin-top: 10px;">
+        <div style="width:100px;text-align: center;">
+            <img style="max-width: 100%;max-height:40px" src="assets/business/{{element.store.toLowerCase()}}.png"
+            onerror="if (this.src != 'error.jpg') this.src = 'assets/business/seller.png';"
+            >
+        </div>
+        
+        <div style="font-size: x-large;font-weight: bold;">
           <div>
             &nbsp;{{100 - ((element.price/stateSearch.selectedProduct.price[(stateSession.country$| async)?.code])*100) | number:'1.0-0'}}%
             Off
           </div>
           <!-- <div style="font-size: small;font-weight: 900;">OFF</div> -->
         </div>
-        <!-- <div> <s>{{(stateSession.country$| async)?.currencySymbol }}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code]}}</s> &nbsp;<b>{{(stateSession.country$| async)?.currencySymbol }}{{element.price}}</b> {{(stateSession.country$| async)?.currency }}  &nbsp;  </div> -->
+         <div style="margin: 5px"> <s>{{(stateSession.country$| async)?.currencySymbol }}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code]}}</s> &nbsp;<b>{{(stateSession.country$| async)?.currencySymbol }}{{element.price}}</b> {{(stateSession.country$| async)?.currency }}  &nbsp;  </div> 
         <a style="margin: 10px; color:white; background: linear-gradient(to bottom,#6ea204,#499b1e); font-weight: bold;"
           mat-raised-button href="{{element.link}}" target="_blank">
-          {{(stateSession.country$| async)?.currencySymbol }}{{element.price}} at {{element.store | titlecase}}</a>
+          <!-- {{(stateSession.country$| async)?.currencySymbol }}{{element.price}} at  -->
+          {{element.store | titlecase}}</a>
       </mat-card-content>
       <mat-card-actions style="padding: 10px; background: #d3d3d34d;">
         <div fxLayout="row" fxLayoutAlign="space-between">

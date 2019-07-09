@@ -9,7 +9,7 @@ import { SessionService } from 'src/app/core/state/session/session.service';
   styleUrls: ['./resultlist.component.css']
 })
 export class ResultlistComponent implements OnInit {
-
+  showmore = false;
   constructor(public stateSearch: SearchService,private route: ActivatedRoute, private router: Router,
               public stateSession: SessionService) { }
 

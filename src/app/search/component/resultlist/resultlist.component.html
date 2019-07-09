@@ -29,9 +29,9 @@
 
   <div style="margin-bottom:0" id="{{d.title}}" *ngFor="let d of stateSearch.searchResult;let i = index">
  
-      <app-resultitem [product]="d" [rank]="i"></app-resultitem>
+      <app-resultitem [hidden]="i >= 10 && !showmore" [product]="d" [rank]="i"></app-resultitem>
       <a style="display: none" href="/search/{{d.category}}/{{d.title}}">{{d.brand}} {{d.title}}</a>
-      <div *ngIf="i%5==4" style="top:10px;margin-bottom: 20px;padding: 5px; margin: 5px;" >
+      <div *ngIf="i%5==4" [hidden]="i >= 10 && !showmore" style="top:10px;margin-bottom: 20px;padding: 5px; margin: 5px;" >
           <ng-adsense
             [adClient]="'ca-pub-6469787500519130'"
             [adSlot]="3548695446"
@@ -40,6 +40,9 @@
           </ng-adsense>
         </div>
     </div>
+    <div style="margin-top:15px" fxLayout="row" fxLayoutAlign="center" *ngIf="stateSearch.searchResult.length > 10 && !showmore">
+        <button (click)="showmore = true" color="primary" mat-raised-button>Show More Products</button>
+      </div>
     <div fxLayout="row" fxLayoutAlign="center" *ngIf="stateSession.isAdmin$|async">
       <button (click)="addProduct()" color="primary" mat-raised-button>Add Product</button>
     </div>

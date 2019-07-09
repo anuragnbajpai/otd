@@ -4,7 +4,7 @@
     <input  name="searchInput" id="searchInput" type="text" placeholder="Laptop, Smartphone, etc. " matInput
       [formControl]="searchKeyword"  [matAutocomplete]="auto"
       (click)="clear()" />
-    <!-- <div matPrefix><b>Top 10 &nbsp;</b> </div> -->
+    <div matPrefix><b>Top 10 &nbsp;</b> </div>
     <!-- <button matSuffix (click)="filter()" style="background: white;border: none;"><fa-icon  [icon]="['fas', 'sliders-h']" ></fa-icon> </button>  -->
     <!-- <button matSuffix (click)="search()"> <fa-icon  [icon]="['fas', 'search']" size="1x"></fa-icon> </button> -->
     <fa-icon (click)="search()" matSuffix [icon]="['fas', 'search']" size="1x"></fa-icon>
