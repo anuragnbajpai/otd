@@ -6,7 +6,8 @@
             <!-- <div class="ranking">#{{rank+1}}</div> -->
             <span (click)="detail()" style="align-self: center;padding-left: 5px;" fxFlex="90">{{rank+1}}. {{product.brand}} {{product.title}}   </span>
             
-            <button mat-icon-button (click)="addCompare()"  >
+            <button mat-button (click)="addCompare()" style="padding:0"  >
+                Compare
               <!-- [ngStyle]="{'background-color':product.isCompare ? 'lightcyan' : 'white' }"-->
                 <fa-icon style="font-size: small"  *ngIf="!product.isCompare"  [icon]="['fas', 'plus']"></fa-icon> 
                 <fa-icon style="font-size: small"  *ngIf="product.isCompare" [icon]="['fas', 'minus']"></fa-icon> 

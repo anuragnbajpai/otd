@@ -34,7 +34,7 @@
             >
         </div>
         
-        <div style="font-size: x-large;font-weight: bold;">
+        <div style="font-size: x-large;font-weight: bold;padding-top: 5px;">
           <div>
             &nbsp;{{100 - ((element.price/stateSearch.selectedProduct.price[(stateSession.country$| async)?.code])*100) | number:'1.0-0'}}%
             Off
@@ -45,19 +45,22 @@
         <a style="margin: 10px; color:white; background: linear-gradient(to bottom,#6ea204,#499b1e); font-weight: bold;"
           mat-raised-button href="{{element.link}}" target="_blank">
           <!-- {{(stateSession.country$| async)?.currencySymbol }}{{element.price}} at  -->
-          {{element.store | titlecase}}</a>
+          <!-- {{element.store | titlecase}} -->
+          Buy Now
+        </a>
       </mat-card-content>
-      <mat-card-actions style="padding: 10px; background: #d3d3d34d;">
+      <mat-card-actions style="padding: 5px 10px; background: #d3d3d34d;">
         <div fxLayout="row" fxLayoutAlign="space-between">
           <div fxLayout="row">
-            <img mat-card-avatar style="width: 30px;background-size: cover;border-radius: 50%;margin-right: 10px;"
-              src="{{element.userPicture}}">
+            <!-- <img mat-card-avatar style="width: 30px;background-size: cover;border-radius: 50%;margin-right: 10px;"
+              src="{{element.userPicture}}"> -->
             <div>
-              <div>{{element.userName | titlecase}} </div>
-              <div style="font-size: xx-small;">{{element.dateTime.seconds*1000 | date}} </div>
+              <!-- <div>{{element.userName | titlecase}} </div> -->
+              <div style="font-size: xx-small;">Updated On:  </div>
+              <div>{{element.dateTime.seconds*1000 | date}} </div>
             </div>
           </div>
-          <div fxLayout="row" style="width: 80px;" fxLayoutAlign="space-between">
+          <div fxLayout="row" style="width: 90px;" fxLayoutAlign="space-between center">
             <div>
               <fa-icon *ngIf="user && element.review?.liked.indexOf(user.id) >= 0" [icon]="['fas', 'thumbs-up']">
               </fa-icon>
@@ -80,7 +83,7 @@
       </mat-card-actions>
     </mat-card>
     <div *ngIf="!stateSearch.selectedProduct.deals" fxLayout="row wrap" fxLayoutAlign="center center" style="padding-top: 10px">
-    <div  class="ui card" *ngFor="let i of [1,2,3,4]" style="margin:5px" [ngStyle.xs]="{'width.%': 80}" [ngStyle.gt-xs]="{'width.px': 200}">
+    <div  class="ui card" *ngFor="let i of [1,2,3,4]" style="margin:5px; width: 200px"  >
       <div class="content">
         <div class="ui placeholder">
           <div class="rectangular image"></div>
