@@ -20,6 +20,7 @@ export class SearchService {
   selectedProduct: Product;
   compareProducts: Product[] = [];
   categories = [];
+  jsonld = {};
   constructor(private store: SearchStore, private query: SearchQuery,
               private svcFirestore: FirestoreService, private stateSession: SessionService) {
 
@@ -99,10 +100,23 @@ export class SearchService {
       }
     });
 
-    this.query.select(e => e.product).pipe(distinctUntilChanged()).subscribe(p => {
+                this.query.select(e => e.product).pipe(distinctUntilChanged()).subscribe(p => {
       if (this.searchResult && this.searchResult.length > 0) {
         this.updateProductValue(p);
         this.getTabData();
+        this.jsonld = {
+          '@context': 'http://www.schema.org',
+          '@type': 'product',
+          'brand': this.selectedProduct.brand ,
+          'name': this.selectedProduct.title,
+          'image': this.selectedProduct.picture,
+          'description': this.selectedProduct.description,
+          'aggregateRating': {
+            '@type': 'aggregateRating',
+            'ratingValue': this.selectedProduct.avgRating,
+            'reviewCount': 5
+          }
+        };
       }
     });
 

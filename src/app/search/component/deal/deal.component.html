@@ -28,10 +28,11 @@
           <button mat-menu-item (click)="report(element)">Report It</button>
           <button mat-menu-item (click)="delete(element)" *ngIf="stateSession.isAdmin$|async">Delete</button>
         </mat-menu>
-        <div style="width:100px;text-align: center;">
-            <img style="max-width: 100%;max-height:40px" src="assets/business/{{element.store.toLowerCase()}}.png"
-            onerror="if (this.src != 'error.jpg') this.src = 'assets/business/seller.png';"
+        <div style="width:100px;text-align: center;font-size: large;color: darkgray;font-weight: bold;">
+            <img alt="{{element.store | titlecase}}" style="max-width: 100%;height:35px" src="assets/business/{{element.store.toLowerCase()}}.png"
+            onerror="this.parentElement.innerHTML = this.alt;"
             >
+       
         </div>
         
         <div style="font-size: x-large;font-weight: bold;padding-top: 5px;">

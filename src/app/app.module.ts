@@ -19,6 +19,7 @@ import { AddproductComponent } from './core/component/addproduct/addproduct.comp
 import { AddreportComponent } from './core/component/addreport/addreport.component';
 import { LoginComponent } from './core/page/login/login.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,7 @@ import { LoginComponent } from './core/page/login/login.component';
     AngularFirestoreModule.enablePersistence(),
     StarRatingModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    CoreModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent],

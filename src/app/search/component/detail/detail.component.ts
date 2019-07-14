@@ -13,11 +13,10 @@ declare let navigator: any;
 })
 export class DetailComponent implements OnInit {
   isSelected = false;
-  constructor(private route: ActivatedRoute, public stateSearch: SearchService, 
+  
+  constructor(private route: ActivatedRoute, public stateSearch: SearchService,
               public stateSession: SessionService, private svcFirestore: FirestoreService,
-              private router: Router) {
-
-  }
+              private router: Router) {  }
 
   ngOnInit() {
 
@@ -28,11 +27,11 @@ export class DetailComponent implements OnInit {
     this.stateSearch.updateTab(event.tab.textLabel);
   }
 
-  save(){
-    if(this.stateSession.getUser() == null){
+  save() {
+    if (this.stateSession.getUser() == null) {
       this.stateSession.login();
     } else {
-    let user =  JSON.parse( JSON.stringify(this.stateSession.getUser()));
+    const user =  JSON.parse( JSON.stringify(this.stateSession.getUser()));
     user.saved.push(this.stateSearch.selectedProduct.id);
     this.stateSession.updateUser(user);
     this.stateSearch.selectedProduct.isSelected = true;
@@ -41,10 +40,10 @@ export class DetailComponent implements OnInit {
   }
   }
   unsave() {
-    if(this.stateSession.getUser() == null){
+    if (this.stateSession.getUser() == null) {
       this.stateSession.login();
     } else {
-    let user =  JSON.parse( JSON.stringify(this.stateSession.getUser()));
+    const user =  JSON.parse( JSON.stringify(this.stateSession.getUser()));
     user.saved.splice( user.saved.indexOf(this.stateSearch.selectedProduct.id), 1);
     this.stateSession.updateUser(user);
     this.stateSearch.selectedProduct.isSelected = false;
@@ -52,20 +51,20 @@ export class DetailComponent implements OnInit {
     this.svcFirestore.updateItem('users', user);
     }
   }
-  shared(){
-    if(navigator.share) {
+  shared() {
+    if (navigator.share) {
       navigator.share({
         title: this.stateSearch.selectedProduct.title + ' ' + this.stateSearch.selectedProduct.title,
         url: window.location.href
       })
       .then(() => console.log('Share complete'))
-      .error((error) => console.error('Could not share at this time', error))
+      .error((error) => console.error('Could not share at this time', error));
       }
     }
 
-    editProduct(){
+    editProduct() {
       const url = this.router.url.split('?')[0];
       this.router.navigate([ decodeURIComponent(url) ], { queryParams: { add: 'product' } });
     }
-  
+
 }

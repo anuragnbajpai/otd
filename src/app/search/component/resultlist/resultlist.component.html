@@ -40,7 +40,7 @@
           </ng-adsense>
         </div>
     </div>
-    <div style="margin-top:15px" fxLayout="row" fxLayoutAlign="center" *ngIf="stateSearch.searchResult.length > 10 && !showmore">
+    <div style="margin-top:15px" fxLayout="row" fxLayoutAlign="center" *ngIf="stateSearch.searchResult && stateSearch.searchResult.length > 10 && !showmore">
         <button (click)="showmore = true" color="primary" mat-raised-button>Show More Products</button>
       </div>
     <div fxLayout="row" fxLayoutAlign="center" *ngIf="stateSession.isAdmin$|async">
