@@ -22,23 +22,23 @@ export class SearchService {
   categories = [];
   jsonld = {};
   constructor(private store: SearchStore, private query: SearchQuery,
-              private svcFirestore: FirestoreService, private stateSession: SessionService) {
+    private svcFirestore: FirestoreService, private stateSession: SessionService) {
 
-                this.svcFirestore.getCollection('categories').pipe(take(1)).subscribe(data => {
-                  this.categories =  data.map(e => {
-                    return  e.payload.doc.data();
-                   });
-                 });
+    this.svcFirestore.getCollection('categories').pipe(take(1)).subscribe(data => {
+      this.categories = data.map(e => {
+        return e.payload.doc.data();
+      });
+    });
 
-                this.stateSession.country$.subscribe(c => {
-      if(this.searchResult && this.searchResult.length > 0) {
+    this.stateSession.country$.subscribe(c => {
+      if (this.searchResult && this.searchResult.length > 0) {
         this.searchResult.forEach(p => {
           p.deals = [];
         });
         this.getDeals();
       }
     });
-    
+
     // this.stateSession.user$.subscribe(c => {
     //   if(this.searchResult && this.searchResult.length > 0) {
     //     this.searchResult.forEach(p => {
@@ -48,25 +48,24 @@ export class SearchService {
     //   }
     // });
 
-                this.query.select(e => e.category).pipe(distinctUntilChanged()).subscribe(c => {
+    this.query.select(e => e.category).pipe(distinctUntilChanged()).subscribe(c => {
       if (c !== '') {
         this.searchResult = null;
         this.compareProducts = [];
         this.selectedProduct = null;
         this.updateProduct(null);
-        if(c !== 'saved')
-        {
-        
-        this.svcFirestore.getCollectionCondition('products', ref => ref.where('tags', 'array-contains', c.toLowerCase())
-          .orderBy('avgRating', 'desc')
-          // .limit(10)
+        if (c !== 'saved') {
+
+          this.svcFirestore.getCollectionCondition('products', ref => ref.where('tags', 'array-contains', c.toLowerCase())
+            .orderBy('avgRating', 'desc')
+            // .limit(10)
           ).subscribe(data => {
             let user = this.stateSession.getUser();
             console.log(data.length);
             this.searchResult = data.map(e => {
               let d = e.payload.doc.data() as Product;
-             
-              if(user!= null){
+
+              if (user != null) {
                 d.isSelected = user.saved.indexOf(d.id) > -1;
               } else {
                 d.isSelected = false;
@@ -83,7 +82,7 @@ export class SearchService {
                   this.updateProductValue(this.query.getValue().product);
                   this.getTabData();
                 } else {
-                  this.updateProduct(this.searchResult[0].title);                  
+                  this.updateProduct(this.searchResult[0].title);
                 }
                 setTimeout(() => {
                   let el = document.getElementById(this.query.getValue().product);
@@ -100,23 +99,27 @@ export class SearchService {
       }
     });
 
-                this.query.select(e => e.product).pipe(distinctUntilChanged()).subscribe(p => {
+    this.query.select(e => e.product).pipe(distinctUntilChanged()).subscribe(p => {
       if (this.searchResult && this.searchResult.length > 0) {
         this.updateProductValue(p);
         this.getTabData();
-        this.jsonld = {
-          '@context': 'http://www.schema.org',
-          '@type': 'product',
-          'brand': this.selectedProduct.brand ,
-          'name': this.selectedProduct.title,
-          'image': this.selectedProduct.picture,
-          'description': this.selectedProduct.description,
-          'aggregateRating': {
-            '@type': 'aggregateRating',
-            'ratingValue': this.selectedProduct.avgRating,
-            'reviewCount': 5
-          }
-        };
+        if (this.selectedProduct) {
+
+
+          this.jsonld = {
+            '@context': 'http://www.schema.org',
+            '@type': 'product',
+            'brand': this.selectedProduct.brand,
+            'name': this.selectedProduct.title,
+            'image': this.selectedProduct.picture,
+            'description': this.selectedProduct.description,
+            'aggregateRating': {
+              '@type': 'aggregateRating',
+              'ratingValue': this.selectedProduct.avgRating,
+              'reviewCount': 5
+            }
+          };
+        }
       }
     });
 
@@ -171,7 +174,7 @@ export class SearchService {
     return this.query.getValue().category;
   }
   getDeals() {
-    this.svcFirestore.getDocument('deals', this.selectedProduct.id + '-' +this.stateSession.getCountry().code).subscribe(d => {
+    this.svcFirestore.getDocument('deals', this.selectedProduct.id + '-' + this.stateSession.getCountry().code).subscribe(d => {
       this.selectedProduct.deals = (d.payload.data() as any).deals;
       this.searchResult.find(f => f.title === this.selectedProduct.title).deals = this.selectedProduct.deals;
     });
@@ -194,11 +197,11 @@ export class SearchService {
     this.selectedProduct = this.searchResult.find(f => f.title === title);
   }
 
-  updateSearchResultItem(data){
+  updateSearchResultItem(data) {
     let selectedItem = this.searchResult.find(f => f.id === data.id);
-    this.searchResult[this.searchResult.findIndex(f => f.id === data.id)] = {...selectedItem, ...data};
+    this.searchResult[this.searchResult.findIndex(f => f.id === data.id)] = { ...selectedItem, ...data };
   }
-  updateSavedStatusInSearchResult(){
+  updateSavedStatusInSearchResult() {
     this.searchResult.find(f => f.title === this.selectedProduct.title).isSelected = this.selectedProduct.isSelected;
   }
 
@@ -247,44 +250,44 @@ export class SearchService {
     this.store.update(state => ({ ...state, tab }));
   }
 
-  getSavedResult(){
+  getSavedResult() {
     let user = this.stateSession.getUser();
     this.searchResult = [];
     user.saved.forEach(s => {
-      this.svcFirestore.getDocument('products', s).pipe( map(p => {
-       let d = p.payload.data() as Product;
-       d.isSelected= true;
-       this.searchResult.push(d);
-       this.selectProduct(d);
-       return d;
+      this.svcFirestore.getDocument('products', s).pipe(map(p => {
+        let d = p.payload.data() as Product;
+        d.isSelected = true;
+        this.searchResult.push(d);
+        this.selectProduct(d);
+        return d;
       })).subscribe();
-  
-      
+
+
     });
-  
+
 
 
   }
 
-  selectProduct(product){
+  selectProduct(product) {
 
-      if (this.getCompare1Product()) {
-        this.getCompareList();
+    if (this.getCompare1Product()) {
+      this.getCompareList();
+    } else {
+      if (this.query.getValue().product !== '' &&
+        this.searchResult.findIndex(f => f.title === this.query.getValue().product) !== -1) {
+        this.updateProduct(this.query.getValue().product);
+        this.updateProductValue(this.query.getValue().product);
+        this.getTabData();
+        setTimeout(() => {
+          let el = document.getElementById(this.query.getValue().product);
+          el.scrollIntoView(true);
+          window.scrollBy(0, -15);
+        },
+          50);
       } else {
-        if (this.query.getValue().product !== '' &&
-          this.searchResult.findIndex(f => f.title === this.query.getValue().product) !== -1) {
-          this.updateProduct(this.query.getValue().product);
-          this.updateProductValue(this.query.getValue().product);
-          this.getTabData();
-          setTimeout(() => {
-            let el = document.getElementById(this.query.getValue().product);
-            el.scrollIntoView(true);
-            window.scrollBy(0, -15);
-          },
-            50);
-        } else {
-          this.updateProduct(this.searchResult[0].title);
-        }   
+        this.updateProduct(this.searchResult[0].title);
+      }
     }
   }
 
