@@ -18,13 +18,14 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AddproductComponent } from './core/component/addproduct/addproduct.component';
 import { AddreportComponent } from './core/component/addreport/addreport.component';
 import { LoginComponent } from './core/page/login/login.component';
+import { AddvideoComponent } from './core/component/addvideo/addvideo.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AddimageComponent, AdddealComponent, AddreviewComponent, AddfilterComponent, 
-     AddreportComponent, AddproductComponent, LoginComponent
+     AddreportComponent, AddproductComponent, LoginComponent,AddvideoComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +42,7 @@ import { LoginComponent } from './core/page/login/login.component';
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [AddimageComponent, AdddealComponent, AddreviewComponent, 
-    AddfilterComponent, AddreportComponent, AddproductComponent, LoginComponent]
+    AddfilterComponent, AddreportComponent, AddproductComponent, LoginComponent,
+    AddvideoComponent]
 })
 export class AppModule { }

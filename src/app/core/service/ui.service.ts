@@ -9,6 +9,7 @@ import { AddreviewComponent } from 'src/app/core/component/addreview/addreview.c
 import { AddfilterComponent } from 'src/app/core/component/addfilter/addfilter.component';
 import { AddreportComponent } from '../component/addreport/addreport.component';
 import { AddproductComponent } from '../component/addproduct/addproduct.component';
+import { AddvideoComponent } from '../component/addvideo/addvideo.component';
 
 @Injectable({ providedIn: 'root' })
 export class UiService {
@@ -41,6 +42,9 @@ export class UiService {
             break;
           case 'product':
             dialogComponent = AddproductComponent;
+            break;
+          case 'video':
+            dialogComponent = AddvideoComponent;
             break;
         }
 

@@ -185,6 +185,12 @@ export class SearchService {
       this.searchResult.find(f => f.title === this.selectedProduct.title).images = this.selectedProduct.images;
     });
   }
+  getVideos() {
+    this.svcFirestore.getDocument('videos', this.selectedProduct.id).subscribe(d => {
+      this.selectedProduct.videos = (d.payload.data() as any).videos;
+      this.searchResult.find(f => f.title === this.selectedProduct.title).videos = this.selectedProduct.videos;
+    });
+  }
   getReviews() {
     this.svcFirestore.getDocument('reviews', this.selectedProduct.id).subscribe(d => {
       this.selectedProduct.reviews = (d.payload.data() as any).reviews;
@@ -230,6 +236,11 @@ export class SearchService {
         case 'Images':
           if (this.selectedProduct.images == null || this.selectedProduct.images.length === 0) {
             this.getImages();
+          }
+          break;
+        case 'Videos':
+          if (this.selectedProduct.videos == null || this.selectedProduct.videos.length === 0) {
+            this.getVideos();
           }
           break;
         case 'Deals':

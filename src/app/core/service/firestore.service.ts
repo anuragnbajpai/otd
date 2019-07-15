@@ -68,6 +68,10 @@ export class FirestoreService {
     this.firestore.collection(name).doc(id).set( { images });
   }
 
+  updateVideos(name, id, videos){
+    this.firestore.collection(name).doc(id).set( { videos });
+  }
+
   updateDeals(name,id, deals) {
     // delete item.id;
     this.firestore.collection(name).doc(id).set( { deals });

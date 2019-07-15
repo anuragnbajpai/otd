@@ -15,6 +15,7 @@ export interface Product {
   ranking: number;
   title: string;
   images: Image[];
+  videos: Video[];
   reviews: Review[];
   deals: Deal[];
   isCompare: boolean;
@@ -33,6 +34,10 @@ export interface Image {
   description: string;
   review: Likes;
 }
+export interface Video {
+  link: string;
+}
+
 export interface Review {
   dateTime: Date;
   rating: number;

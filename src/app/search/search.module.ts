@@ -10,6 +10,7 @@ import { CoreModule } from '../core/core.module';
 import { AdsenseModule } from 'ng2-adsense';
 import { CompareComponent } from './component/compare/compare.component';
 import { ImageComponent } from './component/image/image.component';
+import { VideoComponent } from './component/video/video.component';
 import { DealComponent } from './component/deal/deal.component';
 import { FeatureComponent } from './component/feature/feature.component';
 import { ReviewComponent } from './component/review/review.component';
@@ -18,7 +19,7 @@ import { NgxJsonLdModule } from 'ngx-json-ld';
 
 @NgModule({
   declarations: [SearchComponent, ResultlistComponent, ResultitemComponent, 
-    DetailComponent, CompareComponent, ImageComponent, DealComponent, 
+    DetailComponent, CompareComponent, ImageComponent, DealComponent, VideoComponent,
     FeatureComponent, ReviewComponent],
   imports: [
     CommonModule,

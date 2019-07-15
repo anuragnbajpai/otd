@@ -36,7 +36,7 @@
   </div>
 </mat-card>
 
-<mat-card class="detail" style="background-color:#f0f0f0;"
+<mat-card class="detail" style="background-color:#f0f0f0;padding: 10px 0px "
   *ngIf="stateSearch.selectedProduct && stateSearch.compareProducts.length< 2">
 
   <mat-card-header style="width: 100%;">
@@ -104,7 +104,7 @@
   </mat-card-subtitle>
 
   <mat-card-content class="detailContent">
-    <mat-tab-group mat-align-tabs="center" (selectedTabChange)="onSequenceChangeEvent($event)">
+    <mat-tab-group mat-align-tabs="start" (selectedTabChange)="onSequenceChangeEvent($event)">
       <mat-tab label="Deals">
         <ng-template matTabContent>
           <app-deal></app-deal>
@@ -120,11 +120,17 @@
           <app-review></app-review>
         </ng-template>
       </mat-tab>
+      <mat-tab label="Videos">
+        <ng-template matTabContent>
+          <app-video></app-video>
+        </ng-template>
+      </mat-tab>
       <mat-tab label="Images">
         <ng-template matTabContent>
           <app-image></app-image>
         </ng-template>
       </mat-tab>
+
 
 
     </mat-tab-group>

@@ -1,0 +1,67 @@
+    <mat-card class="tab-content">
+        <div fxLayout="row" fxLayoutAlign="space-between" style="background:white">
+          <div>
+              <button mat-stroked-button [matMenuTriggerFor]="menu" >
+                  <b style="padding-right: 5px">{{sortBy}}</b>
+                  <fa-icon style="font-size: small;" [icon]="['fas', 'sort']"></fa-icon>  
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="sortBy = 'Likes'">Likes</button>
+                <button mat-menu-item (click)="sortBy = 'Date'">Date</button>
+              </mat-menu>
+          </div> 
+          <div> <button mat-stroked-button  (click)="addVideo()" > <fa-icon style="font-size: small;" [icon]="['fas', 'plus']"></fa-icon>&nbsp; <b>Video</b> </button></div>      
+           
+        </div>
+      <div fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
+        <mat-card  *ngFor="let element of stateSearch.selectedProduct.videos;let i = index" 
+        style="background: white; margin:5px" [ngStyle.xs]="{'width.%': 100}" [ngStyle.gt-xs]="{'width.%': 100}"> 
+         <mat-card-content class="content-list" fxLayout="column" fxLayoutAlign="center center"
+          style="margin-bottom: 0px; ">
+            <div style="position:absolute;top:0px; right:0px;padding:10px;" [matMenuTriggerFor]="menu">
+                <fa-icon class="only-show-on-hover" [icon]="['fas', 'ellipsis-v']"></fa-icon>
+              </div>
+              <mat-menu #menu="matMenu">
+                <!-- <button mat-menu-item (click)="goToImage(i)">Open</button> -->
+                <button mat-menu-item (click)="report(element)">Report It</button>
+                <button mat-menu-item (click)="delete(element)" *ngIf="stateSession.isAdmin$|async">Delete</button>
+              </mat-menu>
+          
+            <!-- <img (click)="goToImage(i)" src="{{element.link}}" alt="{{element.description}}"
+             style="max-width: 100%; max-height: 100%"   > -->
+   
+             <iframe width="100%" height="250px" [src]='getSafeLink(element.link)' frameborder="0" allowfullscreen></iframe>
+
+        </mat-card-content>
+          <!-- <mat-card-actions style="padding: 10px; background: #d3d3d34d;">  
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                  <div fxLayout="row">
+                    <img mat-card-avatar style="width: 30px;background-size: cover;border-radius: 50%;margin-right: 10px;" 
+                    src="{{element.userPicture}}">  
+                    <div>
+                        <div>{{element.userName}} </div>
+                        <div style="font-size: xx-small;">{{element.dateTime.seconds*1000 | date}} </div>
+                    </div>  
+                  </div>
+                  <div fxLayout="row" style="width: 80px;" fxLayoutAlign="space-between">
+                      <div>
+                          <fa-icon *ngIf="user && element.review?.liked.indexOf(user.id) >= 0"  [icon]="['fas', 'thumbs-up']"  ></fa-icon>
+                          <fa-icon *ngIf="user && element.review?.liked.indexOf(user.id) == -1" (click)="liked(i)" [icon]="['far', 'thumbs-up']" style="cursor: pointer;"></fa-icon>
+                          <fa-icon  (click)="stateSession.login()" *ngIf="!user" [icon]="['far', 'thumbs-up']" ></fa-icon>
+                           {{element.review?.liked.length}}
+                      </div>  
+                      <div>
+                          <fa-icon *ngIf="user && element.review?.unliked.indexOf(user.id) >= 0"  [icon]="['fas', 'thumbs-down']" ></fa-icon>
+                          <fa-icon *ngIf="user && element.review?.unliked.indexOf(user.id) == -1" (click)="unliked(i)" [icon]="['far', 'thumbs-down']" style="cursor: pointer;"></fa-icon>
+                          <fa-icon  (click)="stateSession.login()" *ngIf="!user" [icon]="['far', 'thumbs-down']" ></fa-icon>
+                           {{element.review?.unliked.length}}
+                      </div>          
+                    </div>
+                    
+                </div> 
+                    
+          </mat-card-actions> -->
+        </mat-card>
+      </div>      
+    </mat-card>
+    
