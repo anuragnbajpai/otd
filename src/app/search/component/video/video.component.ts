@@ -16,7 +16,7 @@ export class VideoComponent implements OnInit {
   sortBy = 'Date';
   user: User;
   constructor(public stateSession: SessionService,public stateSearch: SearchService,
-              private router: Router,  private route: ActivatedRoute, public sanitizer: DomSanitizer,
+              private router: Router,  private route: ActivatedRoute,
               private svcFirestore: FirestoreService,  private svcSnackbar: SnackbarService) {
                 this.stateSession.user$.subscribe(u => {
                   this.user = u;
@@ -62,15 +62,6 @@ export class VideoComponent implements OnInit {
     this.svcFirestore.updateVideos('videos', 
     this.stateSearch.selectedProduct.id , this.stateSearch.selectedProduct.videos);
   }
-  getSafeLink(link){
-    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    var match = link.match(regExp);
-
-    if (match && match[2].length == 11) {
-        return this.sanitizer.bypassSecurityTrustResourceUrl('//www.youtube.com/embed/' + match[2]);
-    } else {
-        return 'error';
-    }
-  }
+ 
   
 }

@@ -21,17 +21,17 @@ export class SessionService {
   isLoggedin$ = this.query.select(e => e.user != null);
   isAdmin$ = this.query.select(e => e.user != null && e.user.role === 'admin');
   searchKeyword$ = this.query.select(e => e.searchKeyword);
-  constructor(private store: SessionStore, private svcFirestore: FirestoreService, 
-    private query: SessionQuery, private http: HttpClient, private router: Router,  private route: ActivatedRoute, ) {
-    //  if(!localStorage.getItem('country')){
-    //   this.http.get('https://api.ipdata.co?api-key=test').subscribe( (res: any) => {
-    //     console.log('find location success');
-    //     this.setCountry(res.country_code.toLowerCase());
-    //   });
-    // } else {
-    //   this.setCountry( (JSON.parse(localStorage.getItem('country')) as Country ).code);
-    // }
-    this.setCountry('us');
+  constructor(private store: SessionStore, private svcFirestore: FirestoreService,
+              private query: SessionQuery, private http: HttpClient, private router: Router, private route: ActivatedRoute, ) {
+    if (!localStorage.getItem('country')) {
+      this.http.get('https://api.ipdata.co?api-key=test').subscribe((res: any) => {
+        console.log('find location success');
+        this.setCountry(res.country_code.toLowerCase());
+      });
+    } else {
+      this.setCountry((JSON.parse(localStorage.getItem('country')) as Country).code);
+    }
+    // this.setCountry('us');
     this.updateUser(JSON.parse(localStorage.getItem('user')));
     console.log(localStorage.getItem('user'));
     this.svcFirestore.getCollection('application').subscribe(a => {
@@ -39,11 +39,11 @@ export class SessionService {
     });
 
     this.user$.subscribe(u => {
-      localStorage.setItem('user', JSON.stringify(u) );      
+      localStorage.setItem('user', JSON.stringify(u));
     });
   }
 
-  login(){
+  login() {
     this.router.navigate([decodeURIComponent(this.router.url.split('?')[0])], { relativeTo: this.route, queryParams: { add: 'login' } });
   }
 
@@ -59,58 +59,58 @@ export class SessionService {
     return this.query.getValue().device;
   }
 
-  updateCountry(country){
+  updateCountry(country) {
     localStorage.setItem('country', JSON.stringify(country));
     this.store.update(state => ({ ...state, country }));
   }
   setCountry(countryCode) {
 
     if (this.countries) {
-      if(this.countries.find(r => r.code === countryCode).length === 0 ){
+      if (this.countries.find(r => r.code === countryCode).length === 0) {
         countryCode = 'us';
       }
       this.store.update(state => ({ ...state, country: this.countries.find(r => r.code === countryCode)[0] }));
     } else {
       this.svcFirestore.getCollection('countries').subscribe(c => {
         this.countries = c.map(d => d.payload.doc.data());
-        if(this.countries.find(r => r.code === countryCode).length === 0 ){
+        if (this.countries.find(r => r.code === countryCode).length === 0) {
           countryCode = 'us';
         }
         this.store.update(state => ({ ...state, country: this.countries.find(r => r.code === countryCode) }));
       });
     }
   }
-  getCountry(){
-   return this.query.getValue().country;
+  getCountry() {
+    return this.query.getValue().country;
   }
-  getSearchKeyword(){
+  getSearchKeyword() {
     return this.query.getValue().searchKeyword;
-   }
-   updateSearchKeyword(searchKeyword) {
+  }
+  updateSearchKeyword(searchKeyword) {
     this.store.update(state => ({ ...state, searchKeyword }));
   }
 
-  getPage(){
+  getPage() {
     return this.query.getValue().page;
-   }
-   getUser(){
+  }
+  getUser() {
     return this.query.getValue().user;
-   }
-   updateUser(user){
+  }
+  updateUser(user) {
     this.store.update(state => ({ ...state, user }));
-   }
+  }
 
-   updateSaved(saved){
-    this.store.update(state => ({ ...state, user : { ...state.user, saved}  }));
-   }
+  updateSaved(saved) {
+    this.store.update(state => ({ ...state, user: { ...state.user, saved } }));
+  }
 
-   getSaved(){
+  getSaved() {
     return this.query.getValue().user.saved;
-   }
+  }
 
-   isSaved(id){
+  isSaved(id) {
     return this.query.getValue().user.saved.includes(id);
-   }
+  }
 
 
 }

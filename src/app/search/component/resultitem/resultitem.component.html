@@ -29,8 +29,8 @@
                 starType="svg" [rating]="product.avgRating" size="medium"  [readOnly]="true" [showHalfStars]="true"></star-rating>
               <div style=" align-self: center;padding-bottom: 4px;color:black;"> <b>{{product.avgRating | number : '1.1-1' }}</b> </div>
               </div> 
-              <span style="align-self: center;text-align: center" fxLayout="row" fxLayoutAlign="end" 
-              style="width:50%;padding-top:15px" >
+              <span style="align-self: center;text-align: center;align-items: center;width:50%;padding-top:15px" fxLayout="row" fxLayoutAlign="end center" 
+              >
                   <s *ngIf="product.price[(stateSession.country$| async)?.code] > 0" 
                       style="font-weight: 500;font-size: small;"
                     >
@@ -38,7 +38,7 @@
    
                   </s>  &nbsp;
                   <span *ngIf="product.discountPrice && product.discountPrice[(stateSession.country$| async)?.code] > 0"
-                      style="font-weight: bold;color:black ">
+                      style="font-weight: bold;color:black;font-size: medium; ">
                       {{(stateSession.country$| async)?.currencySymbol + (product.discountPrice[(stateSession.country$| async)?.code] | number : '1.2-2')}}
                    
                   </span>               

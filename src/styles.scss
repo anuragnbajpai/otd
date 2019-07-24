@@ -123,7 +123,7 @@ background-color: #f0f0f0;
 
 .detail .mat-tab-label{
   opacity: 1;
-  min-width: 24%;
+  min-width: 19%;
   padding: 0px;
   background: white;
   border: 1px solid currentColor;
@@ -178,7 +178,7 @@ background-color: #f0f0f0;
 }
 
 .detail .mat-tab-label .mat-tab-label-content{
-  padding: 0px 5px;
+  padding: 0px 10px;
   font-weight: bold;
   color: black;
 }
@@ -241,6 +241,16 @@ a:-webkit-any-link{
   font-weight: bold;
 }
 
-.detail .mat-card {
-  padding: 10px 0px !important;
-  }
+// .detail .mat-card {
+//   padding: 10px 0px !important;
+//   }
+
+
+
+// .mat-autocomplete-panel.mat-autocomplete-visible{
+//   overflow: hidden;
+// }
+
+.mat-optgroup-label{
+  font-weight: 800;
+}

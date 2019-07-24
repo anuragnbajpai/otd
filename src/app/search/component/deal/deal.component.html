@@ -42,15 +42,15 @@
           </div>
           <!-- <div style="font-size: small;font-weight: 900;">OFF</div> -->
         </div>
-         <div style="margin: 5px"> <s>{{(stateSession.country$| async)?.currencySymbol }}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code]}}</s> &nbsp;<b>{{(stateSession.country$| async)?.currencySymbol }}{{element.price}}</b> {{(stateSession.country$| async)?.currency }}  &nbsp;  </div> 
-        <a style="margin: 10px; color:white; background: linear-gradient(to bottom,#6ea204,#499b1e); font-weight: bold;"
+         <div style="margin: 5px"> <s>{{(stateSession.country$| async)?.currencySymbol }}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code]}}</s> &nbsp;<b style="font-size: medium;">{{(stateSession.country$| async)?.currencySymbol }}{{element.price}}</b> {{(stateSession.country$| async)?.currency }}  &nbsp;  </div> 
+        <a rel="noopener noreferrer" style="margin: 10px; color:white; background: linear-gradient(to bottom,#6ea204,#499b1e); font-weight: bold;"
           mat-raised-button href="{{element.link}}" target="_blank">
           <!-- {{(stateSession.country$| async)?.currencySymbol }}{{element.price}} at  -->
           <!-- {{element.store | titlecase}} -->
-          Buy Now
+          Buy at {{element.store | titlecase}} 
         </a>
       </mat-card-content>
-      <mat-card-actions style="padding: 5px 10px; background: #d3d3d34d;">
+      <mat-card-actions style="padding: 5px 10px; background: #d3d3d34d; margin: 0;">
         <div fxLayout="row" fxLayoutAlign="space-between">
           <div fxLayout="row">
             <!-- <img mat-card-avatar style="width: 30px;background-size: cover;border-radius: 50%;margin-right: 10px;"

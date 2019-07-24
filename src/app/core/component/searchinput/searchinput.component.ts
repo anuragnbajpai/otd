@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { CoreService } from '../../service/core.service';
-import {map, startWith} from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { SessionService} from '../../state/session/session.service';
+import { SessionService } from '../../state/session/session.service';
 
 @Component({
   selector: 'app-searchinput',
@@ -13,55 +13,85 @@ import { SessionService} from '../../state/session/session.service';
 })
 export class SearchinputComponent implements OnInit {
   searchKeyword = new FormControl();
-  options =[];
-  filteredOptions: Observable<string[]>;
-  constructor(private svcCore: CoreService, private router: Router, private stateSession: SessionService ) { 
+  options = [];
+  filteredOptions: Observable<any[]>;
+  constructor(private svcCore: CoreService, private router: Router, private stateSession: SessionService) {
     // this.svcCore.firestore.getCollectionCondition('categories', w => w.where('active', '==', true)).subscribe(data => {
     //   this.options =  data.map(e => {
     //        return  (e.payload.doc.data() as any).name;
     //       });
     //    });
-    
+
+    // this.options = [{
+    //   group: 'Electronics',
+    //   categories: ['Smartwatches', 'Tablets', 'Earphone', 'Smartphones', 'Laptops', 'Cameras', 'Tvs']
+    // },
+    // {
+    //   group: 'Beauty',
+    //   categories: ['Foundations for Summer', 'Foundations for Spring']
+    // }];
+
     this.stateSession.searchKeyword$.subscribe(s => {
-         this.searchKeyword.setValue(s);
-       });
+      this.searchKeyword.setValue(s);
+    });
+
+   
   }
 
   ngOnInit() {
-   
-     // this.searchKeyword.setValue(this.svcSearch.searchKeyword);
+
+    // this.searchKeyword.setValue(this.svcSearch.searchKeyword);
     this.filteredOptions = this.searchKeyword.valueChanges
       .pipe(
         startWith(''),
-        map(value => this._filter(value))
+        map(value => this._filterGroup(value))
       );
+
+    this.searchKeyword.setValue(' ');
   }
 
-   private _filter(value: string): string[] {
-      const filterValue = value.toLowerCase();
+  private _filterGroup(value: string) {
+   // if (value) {
+      return this.options
+        .map(o => ({group: o.group, categories: this._filter(o.categories, value)}))
+        .filter(o => o.categories.length > 0);
+   // }
 
-      return this.options.filter(option => option.toLowerCase().includes(filterValue));
-    }
+   // return this.stateGroups;
+  }
 
-    selected()
-    {
-      console.log(this.searchKeyword.value);
-      this.router.navigate(['/search/'+ this.searchKeyword.value]);
-      document.getElementById('searchInput').blur();
-    }
-    clear(){
-      this.options = this.stateSession.application.tags;
-      console.log(this.searchKeyword.value + 'call clear')
-      this.searchKeyword.setValue('')
-    }
+ public _filter(opt: any[], value: string): string[]{
+    const filterValue = value.toLowerCase();
+  
+    return opt.filter(item => item.toLowerCase().includes(filterValue));
+  }
 
-    search(){
-      this.router.navigate(['/search/'+ this.searchKeyword.value]);
-      document.getElementById('searchInput').blur();
-    }
-    filter(){
-      this.router.navigate(['/search/'+ this.searchKeyword.value], { queryParams: { add: 'filter' } } );
-      document.getElementById('searchInput').blur();
-    }
+  // public _filter(value: string, ): string[] {
+  //   const filterValue = value.toLowerCase();
+
+  //   return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  // }
+
+  selected() {
+    console.log(this.searchKeyword.value);
+    this.router.navigate(['/search/' + this.searchKeyword.value]);
+    document.getElementById('searchInput').blur();
+  }
+  clear() {
+    this.options = this.stateSession.application.search;
+
+
+    console.log(this.searchKeyword.value + 'call clear')
+    this.searchKeyword.setValue('')
+  }
+
+  search() {
+    this.router.navigate(['/search/' + this.searchKeyword.value]);
+    document.getElementById('searchInput').blur();
+  }
+  filter() {
+    this.router.navigate(['/search/' + this.searchKeyword.value], { queryParams: { add: 'filter' } });
+    document.getElementById('searchInput').blur();
+  }
 
 }

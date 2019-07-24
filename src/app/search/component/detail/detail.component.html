@@ -1,4 +1,4 @@
-<div style="margin:2vh">
+<div style="margin: 10px">
   <div fxLayout="row" fxLayoutAlign="space-between">
       <div style="padding-bottom:10px;font-size: smaller;"><a routerLink="/">Home </a> / <a
           routerLink="/search/{{stateSearch.category$ | async}}">{{stateSearch.category$ | async}}</a> /
@@ -36,7 +36,7 @@
   </div>
 </mat-card>
 
-<mat-card class="detail" style="background-color:#f0f0f0;padding: 10px 0px "
+<mat-card class="detail" style="background-color:#f0f0f0;padding: 10px 2px "
   *ngIf="stateSearch.selectedProduct && stateSearch.compareProducts.length< 2">
 
   <mat-card-header style="width: 100%;">
@@ -110,7 +110,7 @@
           <app-deal></app-deal>
         </ng-template>
       </mat-tab>
-      <mat-tab label="Details">
+      <mat-tab label="Specs">
         <ng-template matTabContent>
           <app-feature></app-feature>
         </ng-template>

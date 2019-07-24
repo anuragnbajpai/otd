@@ -5,6 +5,7 @@ import { FirestoreService } from 'src/app/core/service/firestore.service';
 import { Product } from '../model/product.model';
 import { take, distinctUntilChanged, map } from 'rxjs/operators';
 import { SessionService } from 'src/app/core/state/session/session.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Injectable({
@@ -21,8 +22,8 @@ export class SearchService {
   compareProducts: Product[] = [];
   categories = [];
   jsonld = {};
-  constructor(private store: SearchStore, private query: SearchQuery,
-    private svcFirestore: FirestoreService, private stateSession: SessionService) {
+  constructor(private store: SearchStore, private query: SearchQuery, public sanitizer: DomSanitizer,
+              private svcFirestore: FirestoreService, private stateSession: SessionService) {
 
     this.svcFirestore.getCollection('categories').pipe(take(1)).subscribe(data => {
       this.categories = data.map(e => {
@@ -102,6 +103,7 @@ export class SearchService {
     this.query.select(e => e.product).pipe(distinctUntilChanged()).subscribe(p => {
       if (this.searchResult && this.searchResult.length > 0) {
         this.updateProductValue(p);
+       // this.updateTab('deals');
         this.getTabData();
         if (this.selectedProduct) {
 
@@ -187,10 +189,22 @@ export class SearchService {
   }
   getVideos() {
     this.svcFirestore.getDocument('videos', this.selectedProduct.id).subscribe(d => {
-      this.selectedProduct.videos = (d.payload.data() as any).videos;
+      this.selectedProduct.videos = (d.payload.data() as any).videos.map(l => this.getSafeLink(l.link));
       this.searchResult.find(f => f.title === this.selectedProduct.title).videos = this.selectedProduct.videos;
     });
   }
+
+  getSafeLink(link){
+    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = link.match(regExp);
+
+    if (match && match[2].length == 11) {
+        return this.sanitizer.bypassSecurityTrustResourceUrl('//www.youtube.com/embed/' + match[2]);
+    } else {
+        return 'error';
+    }
+  }
+
   getReviews() {
     this.svcFirestore.getDocument('reviews', this.selectedProduct.id).subscribe(d => {
       this.selectedProduct.reviews = (d.payload.data() as any).reviews;
