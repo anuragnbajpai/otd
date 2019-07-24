@@ -34,8 +34,6 @@ export class SearchinputComponent implements OnInit {
     this.stateSession.searchKeyword$.subscribe(s => {
       this.searchKeyword.setValue(s);
     });
-
-   
   }
 
   ngOnInit() {
@@ -60,9 +58,8 @@ export class SearchinputComponent implements OnInit {
    // return this.stateGroups;
   }
 
- public _filter(opt: any[], value: string): string[]{
+ public _filter(opt: any[], value: string): string[] {
     const filterValue = value.toLowerCase();
-  
     return opt.filter(item => item.toLowerCase().includes(filterValue));
   }
 
@@ -81,8 +78,8 @@ export class SearchinputComponent implements OnInit {
     this.options = this.stateSession.application.search;
 
 
-    console.log(this.searchKeyword.value + 'call clear')
-    this.searchKeyword.setValue('')
+    console.log(this.searchKeyword.value + 'call clear');
+    this.searchKeyword.setValue('');
   }
 
   search() {
