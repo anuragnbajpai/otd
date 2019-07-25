@@ -4,12 +4,12 @@
          
           <mat-card-title fxLayout="row"   >
             <!-- <div class="ranking">#{{rank+1}}</div> -->
-            <span (click)="detail()" style="align-self: center;padding-left: 5px;margin:5px;" fxFlex="90">
+            <span (click)="detail()" style="align-self: center;padding-left: 5px;margin:5px;" fxFlex="95">
              <span style="font-weight: bolder">{{rank+1}}.</span> {{product.brand}} {{product.title}}  
              </span>
             
-            <button mat-button (click)="addCompare()" style="padding:0;width: 100px"  >
-                Compare
+            <button mat-icon-button (click)="addCompare()" style="padding:0;"  >
+                <!-- Compare -->
               <!-- [ngStyle]="{'background-color':product.isCompare ? 'lightcyan' : 'white' }"-->
                 <fa-icon style="font-size: small"  *ngIf="!product.isCompare"  [icon]="['fas', 'plus']"></fa-icon> 
                 <fa-icon style="font-size: small"  *ngIf="product.isCompare" [icon]="['fas', 'minus']"></fa-icon> 
