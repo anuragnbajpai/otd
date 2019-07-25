@@ -55,6 +55,7 @@ export class SearchService {
         this.compareProducts = [];
         this.selectedProduct = null;
         this.updateProduct(null);
+        
         if (c !== 'saved') {
 
           this.svcFirestore.getCollectionCondition('products', ref => ref.where('tags', 'array-contains', c.toLowerCase())
@@ -73,6 +74,7 @@ export class SearchService {
               }
               return d;
             }) as Product[];
+           // this.updateTab('deals');
             if (this.searchResult[0]) {
               if (this.getCompare1Product()) {
                 this.getCompareList();
