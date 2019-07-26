@@ -1,0 +1,236 @@
+<div fxLayout="column" fxLayoutAlign="space-between" style="background:white" fxLayoutGap="10px">
+
+
+<mat-card class="tab-content" style="padding: 16px;">
+    <mat-card-title style="text-align: center;">Specifications</mat-card-title>
+    <mat-card-content>
+    <table style="width:100%">
+        <tr  *ngFor="let f of stateSearch.selectedProduct.features?.slice(0,4); let i = index">
+          <th>{{f.key}}</th>
+          <td>{{f.value}}</td>
+        </tr>
+      </table>
+    </mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+        <button (click)="tabSelect(1)" mat-raised-button style="background-color: #0094e5;color:white">Show More</button>
+    </mat-card-actions>
+</mat-card>
+<mat-card *ngIf="stateSearch.selectedProduct.deals" class="tab-content" style="padding: 16px;">
+    <mat-card-title style="text-align: center;">Deals</mat-card-title>
+    <mat-card-content fxLayout="row wrap" fxLayoutAlign="center center" style="padding-top: 10px">
+    <mat-card *ngFor="let element of stateSearch.selectedProduct.deals?.slice(0,2); let i = index"
+    style="background: white; margin:5px" [ngStyle.xs]="{'width.%': 80}" [ngStyle.gt-xs]="{'width.px': 200}">
+    <mat-card-content class="content-list" fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 0px">
+      <div style="position:absolute;top:0px; right:0px;padding:10px;" [matMenuTriggerFor]="menu">
+        <fa-icon class="only-show-on-hover" [icon]="['fas', 'ellipsis-v']"></fa-icon>
+      </div>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="goToLink(element.link)">Open</button>
+        <button mat-menu-item (click)="report(element)">Report It</button>
+        <button mat-menu-item (click)="delete(element)" *ngIf="stateSession.isAdmin$|async">Delete</button>
+      </mat-menu>
+      <div style="width:100px;text-align: center;font-size: large;color: darkgray;font-weight: bold;">
+          <img alt="{{element.store | titlecase}}" style="max-width: 100%;height:35px" src="assets/business/{{element.store.toLowerCase()}}.png"
+          onerror="this.parentElement.style.padding='10px 0'; this.parentElement.innerHTML = this.alt; "
+          >
+     
+      </div>
+      
+      <div style="font-size: x-large;font-weight: bold;padding-top: 5px;">
+        <div *ngIf="((element.price/stateSearch.selectedProduct.price[(stateSession.country$| async)?.code])*100) != 100">
+          {{100 - ((element.price/stateSearch.selectedProduct.price[(stateSession.country$| async)?.code])*100) | number:'1.0-0'}}%
+          Off
+        </div>
+        <div *ngIf="((element.price/stateSearch.selectedProduct.price[(stateSession.country$| async)?.code])*100) == 100">
+         No Offer
+        </div>
+        <!-- <div style="font-size: small;font-weight: 900;">OFF</div> -->
+      </div>
+       <div style="margin: 5px"> <s *ngIf="((element.price/stateSearch.selectedProduct.price[(stateSession.country$| async)?.code])*100) != 100">{{(stateSession.country$| async)?.currencySymbol }}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code]}}</s> &nbsp;<b style="font-size: medium;">{{(stateSession.country$| async)?.currencySymbol }}{{element.price}}</b> {{(stateSession.country$| async)?.currency }}  &nbsp;  </div> 
+      <a rel="noopener noreferrer" style="margin: 10px; color:white; background: linear-gradient(to bottom,#6ea204,#499b1e); font-weight: bold;"
+        mat-raised-button href="{{element.link}}" target="_blank">
+        <!-- {{(stateSession.country$| async)?.currencySymbol }}{{element.price}} at  -->
+        <!-- {{element.store | titlecase}} -->
+        Buy at {{element.store | titlecase}} 
+      </a>
+    </mat-card-content>
+    <mat-card-actions style="padding: 5px 10px; background: #d3d3d34d; margin: 0;">
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="row">
+          <!-- <img mat-card-avatar style="width: 30px;background-size: cover;border-radius: 50%;margin-right: 10px;"
+            src="{{element.userPicture}}"> -->
+          <div>
+            <!-- <div>{{element.userName | titlecase}} </div> -->
+            <div style="font-size: xx-small;">Updated On:  </div>
+            <div>{{element.dateTime.seconds*1000 | date}} </div>
+          </div>
+        </div>
+        <div fxLayout="row" style="width: 90px;" fxLayoutAlign="space-between center">
+          <div>
+            <fa-icon *ngIf="user && element.review?.liked.indexOf(user.id) >= 0" [icon]="['fas', 'thumbs-up']">
+            </fa-icon>
+            <fa-icon *ngIf="user && element.review?.liked.indexOf(user.id) == -1" (click)="liked(i)"
+              [icon]="['far', 'thumbs-up']" style="cursor: pointer;"></fa-icon>
+            <fa-icon (click)="stateSession.login()" *ngIf="!user" [icon]="['far', 'thumbs-up']"></fa-icon>
+            {{element.review?.liked.length}}
+          </div>
+          <div>
+            <fa-icon *ngIf="user && element.review?.unliked.indexOf(user.id) >= 0" [icon]="['fas', 'thumbs-down']">
+            </fa-icon>
+            <fa-icon *ngIf="user && element.review?.unliked.indexOf(user.id) == -1" (click)="unliked(i)"
+              [icon]="['far', 'thumbs-down']" style="cursor: pointer;"></fa-icon>
+            <fa-icon (click)="stateSession.login()" *ngIf="!user" [icon]="['far', 'thumbs-down']"></fa-icon>
+            {{element.review?.unliked.length}}
+          </div>
+        </div>
+      </div>
+
+    </mat-card-actions>
+  </mat-card>
+</mat-card-content>
+<mat-card-actions fxLayout="row" fxLayoutAlign="center">
+    <button (click)="tabSelect(2)" mat-raised-button style="background-color: #0094e5;color:white">Show More</button>
+</mat-card-actions>
+</mat-card>
+<mat-card *ngIf="stateSearch.selectedProduct.reviews" class="tab-content" style="padding: 16px;">
+    <mat-card-title style="text-align: center;">Reviews</mat-card-title>
+    <mat-card-content fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
+        <mat-card *ngFor="let element of stateSearch.selectedProduct.reviews?.slice(0,2);let i = index" 
+        style="background: white; margin:5px" [ngStyle.xs]="{'width.%': 90}" [ngStyle.gt-xs]="{'width.%': 90}"> 
+         <mat-card-content fxLayout="column" fxLayoutAlign="start" style="margin-bottom: 0px">
+          <div style="margin: 10px;">
+          <div>
+               <div fxLayout="row" fxLayoutAlign="start stretch">
+    <b>Rating: </b>
+                    <star-rating starType="svg" [rating]="element.rating" size="small" [readOnly]="true"
+                      [showHalfStars]="true"></star-rating>
+                    <div style=" align-self: center;font-size: small;"> {{element.rating}} </div>
+                
+               </div>
+          </div> 
+          <div>
+              <b>Comment:</b>  {{element.comments}}
+            </div>   
+          </div>
+         
+        </mat-card-content>
+          <mat-card-actions style="padding: 10px; background: #d3d3d34d;">  
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                  <div fxLayout="row" fxLayoutAlign="space-between">
+                    <img mat-card-avatar style="width: 30px;background-size: cover;border-radius: 50%;margin-right: 10px;" 
+                    src="{{element.userPicture}}">  
+                    <div>
+                        <div>{{element.userName}} </div>
+                        <div style="font-size: xx-small;">{{element.dateTime.seconds*1000 | date}} </div>
+                    </div>  
+                  </div>
+                  <div fxLayout="row" style="width: 80px;" fxLayoutAlign="space-between">
+                      <div>
+                          <fa-icon *ngIf="user && element.review?.liked.indexOf(user.id) >= 0"  [icon]="['fas', 'thumbs-up']"  ></fa-icon>
+                          <fa-icon *ngIf="user && element.review?.liked.indexOf(user.id) == -1" (click)="liked(i)" [icon]="['far', 'thumbs-up']" style="cursor: pointer;"></fa-icon>
+                          <fa-icon (click)="stateSession.login()" *ngIf="!user" [icon]="['far', 'thumbs-up']" ></fa-icon>
+                           {{element.review?.liked.length}}
+                      </div>  
+                      <div>
+                          <fa-icon *ngIf="user && element.review?.unliked.indexOf(user.id) >= 0"  [icon]="['fas', 'thumbs-down']" ></fa-icon>
+                          <fa-icon *ngIf="user && element.review?.unliked.indexOf(user.id) == -1" (click)="unliked(i)" [icon]="['far', 'thumbs-down']" style="cursor: pointer;"></fa-icon>
+                          <fa-icon (click)="stateSession.login()" *ngIf="!user" [icon]="['far', 'thumbs-down']" ></fa-icon>
+                           {{element.review?.unliked.length}}
+                      </div>          
+                    </div>
+                </div> 
+                    
+          </mat-card-actions>
+        </mat-card>
+      </mat-card-content>  
+      <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+          <button (click)="tabSelect(3)" mat-raised-button style="background-color: #0094e5;color:white">Show More</button>
+      </mat-card-actions>
+</mat-card>
+<mat-card *ngIf="stateSearch.selectedProduct.videos" class="tab-content" style="padding: 16px;">
+    <mat-card-title style="text-align: center;">Videos</mat-card-title>
+    <mat-card-content fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
+        <mat-card  *ngFor="let element of stateSearch.selectedProduct.videos?.slice(0,2);let i = index" 
+        style="background: white; margin:5px" [ngStyle.xs]="{'width.%': 100}" [ngStyle.gt-xs]="{'width.%': 100}"> 
+         <mat-card-content class="content-list" fxLayout="column" fxLayoutAlign="center center"
+          style="margin-bottom: 0px; ">
+            <div style="position:absolute;top:0px; right:0px;padding:10px;" [matMenuTriggerFor]="menu">
+                <fa-icon class="only-show-on-hover" [icon]="['fas', 'ellipsis-v']"></fa-icon>
+              </div>
+              <mat-menu #menu="matMenu">
+                <!-- <button mat-menu-item (click)="goToImage(i)">Open</button> -->
+                <button mat-menu-item (click)="report(element)">Report It</button>
+                <button mat-menu-item (click)="delete(element)" *ngIf="stateSession.isAdmin$|async">Delete</button>
+              </mat-menu>
+          
+            <!-- <img (click)="goToImage(i)" src="{{element.link}}" alt="{{element.description}}"
+             style="max-width: 100%; max-height: 100%"   > -->
+   
+             <iframe width="100%" height="250px" [src]='element' frameborder="0" allowfullscreen></iframe>
+
+        </mat-card-content>
+
+       </mat-card>
+      </mat-card-content> 
+      <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+          <button (click)="tabSelect(4)" mat-raised-button style="background-color: #0094e5;color:white">Show More</button>
+      </mat-card-actions>
+</mat-card>
+<mat-card *ngIf="stateSearch.selectedProduct.images" class="tab-content" style="padding: 16px;">
+    <mat-card-title style="text-align: center;">Images</mat-card-title>
+    <mat-card-content fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
+        <mat-card  *ngFor="let element of stateSearch.selectedProduct.images?.slice(0,2);let i = index" 
+        style="background: white; margin:5px" [ngStyle.xs]="{'width.%': 80}" [ngStyle.gt-xs]="{'width.px': 200}"> 
+         <mat-card-content class="content-list" fxLayout="column" fxLayoutAlign="center center"
+          style="margin-bottom: 0px; width: 200px;height: 200px;">
+            <div style="position:absolute;top:0px; right:0px;padding:10px;" [matMenuTriggerFor]="menu">
+                <fa-icon class="only-show-on-hover" [icon]="['fas', 'ellipsis-v']"></fa-icon>
+              </div>
+              <mat-menu #menu="matMenu">
+                <!-- <button mat-menu-item (click)="goToImage(i)">Open</button> -->
+                <button mat-menu-item (click)="report(element)">Report It</button>
+                <button mat-menu-item (click)="delete(element)" *ngIf="stateSession.isAdmin$|async">Delete</button>
+              </mat-menu>
+          
+            <img (click)="goToImage(i)" src="{{element.link}}" alt="{{element.description}}"
+             style="max-width: 100%; max-height: 100%"   >
+         
+        </mat-card-content>
+          <mat-card-actions style="padding: 10px; background: #d3d3d34d;">  
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                  <div fxLayout="row">
+                    <img mat-card-avatar style="width: 30px;background-size: cover;border-radius: 50%;margin-right: 10px;" 
+                    src="{{element.userPicture}}">  
+                    <div>
+                        <div>{{element.userName}} </div>
+                        <div style="font-size: xx-small;">{{element.dateTime.seconds*1000 | date}} </div>
+                    </div>  
+                  </div>
+                  <div fxLayout="row" style="width: 80px;" fxLayoutAlign="space-between">
+                      <div>
+                          <fa-icon *ngIf="user && element.review?.liked.indexOf(user.id) >= 0"  [icon]="['fas', 'thumbs-up']"  ></fa-icon>
+                          <fa-icon *ngIf="user && element.review?.liked.indexOf(user.id) == -1" (click)="liked(i)" [icon]="['far', 'thumbs-up']" style="cursor: pointer;"></fa-icon>
+                          <fa-icon  (click)="stateSession.login()" *ngIf="!user" [icon]="['far', 'thumbs-up']" ></fa-icon>
+                           {{element.review?.liked.length}}
+                      </div>  
+                      <div>
+                          <fa-icon *ngIf="user && element.review?.unliked.indexOf(user.id) >= 0"  [icon]="['fas', 'thumbs-down']" ></fa-icon>
+                          <fa-icon *ngIf="user && element.review?.unliked.indexOf(user.id) == -1" (click)="unliked(i)" [icon]="['far', 'thumbs-down']" style="cursor: pointer;"></fa-icon>
+                          <fa-icon  (click)="stateSession.login()" *ngIf="!user" [icon]="['far', 'thumbs-down']" ></fa-icon>
+                           {{element.review?.unliked.length}}
+                      </div>          
+                    </div>
+                    
+                </div> 
+                    
+          </mat-card-actions>
+        </mat-card>
+      </mat-card-content>    
+      <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+          <button (click)="tabSelect(5)" mat-raised-button style="background-color: #0094e5;color:white">Show More</button>
+      </mat-card-actions>
+</mat-card>
+
+
+
+</div>

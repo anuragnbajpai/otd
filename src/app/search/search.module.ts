@@ -15,12 +15,13 @@ import { DealComponent } from './component/deal/deal.component';
 import { FeatureComponent } from './component/feature/feature.component';
 import { ReviewComponent } from './component/review/review.component';
 import { NgxJsonLdModule } from 'ngx-json-ld';
+import { OverviewComponent } from './component/overview/overview.component';
 
 
 @NgModule({
   declarations: [SearchComponent, ResultlistComponent, ResultitemComponent, 
     DetailComponent, CompareComponent, ImageComponent, DealComponent, VideoComponent,
-    FeatureComponent, ReviewComponent],
+    FeatureComponent, ReviewComponent, OverviewComponent],
   imports: [
     CommonModule,
     SearchRoutingModule,

@@ -22,6 +22,7 @@ export class SearchService {
   compareProducts: Product[] = [];
   categories = [];
   jsonld = {};
+  tabIndex = 0;
   constructor(private store: SearchStore, private query: SearchQuery, public sanitizer: DomSanitizer,
               private svcFirestore: FirestoreService, private stateSession: SessionService) {
 
@@ -248,29 +249,48 @@ export class SearchService {
 
   getTabData() {
     if (this.selectedProduct) {
-      switch (this.getTabValue()) {
-        case 'Images':
-          if (this.selectedProduct.images == null || this.selectedProduct.images.length === 0) {
-            this.getImages();
-          }
-          break;
-        case 'Videos':
-          if (this.selectedProduct.videos == null || this.selectedProduct.videos.length === 0) {
-            this.getVideos();
-          }
-          break;
-        case 'Deals':
-          if (this.selectedProduct.deals == null || this.selectedProduct.deals.length === 0) {
-            this.getDeals();
-          }
-          break;
-        case 'Reviews':
-          if (this.selectedProduct.reviews == null || this.selectedProduct.reviews.length === 0) {
-            this.getReviews();
-          }
-          break;
-      }
+      this.getProductData();
+      // switch (this.getTabValue()) {
+      //   case 'Images':
+      //     if (this.selectedProduct.images == null || this.selectedProduct.images.length === 0) {
+      //       this.getImages();
+      //     }
+      //     break;
+      //   case 'Videos':
+      //     if (this.selectedProduct.videos == null || this.selectedProduct.videos.length === 0) {
+      //       this.getVideos();
+      //     }
+      //     break;
+      //   case 'Deals':
+      //     if (this.selectedProduct.deals == null || this.selectedProduct.deals.length === 0) {
+      //       this.getDeals();
+      //     }
+      //     break;
+      //   case 'Reviews':
+      //     if (this.selectedProduct.reviews == null || this.selectedProduct.reviews.length === 0) {
+      //       this.getReviews();
+      //     }
+      //     break;
+      // }
     }
+  }
+
+  getProductData(){ 
+      if (this.selectedProduct.images == null || this.selectedProduct.images.length === 0) {
+        this.getImages();
+      }
+
+      if (this.selectedProduct.videos == null || this.selectedProduct.videos.length === 0) {
+        this.getVideos();
+      }
+
+      if (this.selectedProduct.deals == null || this.selectedProduct.deals.length === 0) {
+        this.getDeals();
+      }
+  
+      if (this.selectedProduct.reviews == null || this.selectedProduct.reviews.length === 0) {
+        this.getReviews();
+      }
   }
 
   updateTab(tab) {

@@ -1,146 +1,150 @@
 <div style="margin: 10px">
   <div fxLayout="row" fxLayoutAlign="space-between">
-      <div style="padding-bottom:10px;font-size: smaller;"><a routerLink="/">Home </a> / <a
-          routerLink="/search/{{stateSearch.category$ | async}}">{{stateSearch.category$ | async}}</a> /
-        {{stateSearch.selectedProduct?.title}}</div>
-      <button style="line-height: 0px;height: 0px;" mat-icon-button fxHide.gt-xs
-        routerLink="/search/{{stateSearch.category$ | async}}">
-        <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon>
-      </button>
-    </div>
-<mat-card [ngStyle]="{'display': stateSearch.searchResult ? 'none' : 'block' }">
-  <div class="ui placeholder">
-    <div class="image header">
-      <div class="line"></div>
-      <div class="line"></div>
-    </div>
-    <div class="paragraph">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-    </div>
-    <div class="paragraph">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-    </div>
-    <div class="paragraph">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-    </div>
+    <div style="padding-bottom:10px;font-size: smaller;"><a routerLink="/">Home </a> / <a
+        routerLink="/search/{{stateSearch.category$ | async}}">{{stateSearch.category$ | async}}</a> /
+      {{stateSearch.selectedProduct?.title}}</div>
+    <button style="line-height: 0px;height: 0px;" mat-icon-button fxHide.gt-xs
+      routerLink="/search/{{stateSearch.category$ | async}}">
+      <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon>
+    </button>
   </div>
-</mat-card>
+  <mat-card [ngStyle]="{'display': stateSearch.searchResult ? 'none' : 'block' }">
+    <div class="ui placeholder">
+      <div class="image header">
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div class="paragraph">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div class="paragraph">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div class="paragraph">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </div>
+  </mat-card>
 
-<mat-card class="detail" style="background-color:#f0f0f0;padding: 10px 2px "
-  *ngIf="stateSearch.selectedProduct && stateSearch.compareProducts.length< 2">
+  <mat-card class="detail" style="background-color:#f0f0f0;padding: 10px 2px "
+    *ngIf="stateSearch.selectedProduct && stateSearch.compareProducts.length< 2">
 
-  <mat-card-header style="width: 100%;">
-      
+    <mat-card-header style="width: 100%;">
 
-    <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
+
+      <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
         <div style="width: 60px; height:50px;text-align: center;margin: auto;
         padding-right: 10px;">
-            <img style="max-width:100%;
+          <img style="max-width:100%;
             max-height:100%;" [src]="stateSearch.selectedProduct.picture">
         </div>
-      <div style="width: 100%">
-        <h4 style="margin:0; padding-bottom: 5px;"> {{stateSearch.selectedProduct.brand}}
-          {{stateSearch.selectedProduct.title}} </h4>
-        <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 5px">
-          <div style="font-size: small;">
-            <b>
-              {{(stateSession.country$| async)?.currencySymbol}}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code] | number : '1.2-2' }}
-              {{(stateSession.country$| async)?.currency }} </b>
-          </div>
-          <div fxLayout="row" fxLayoutAlign="end" style="margin-bottom: 5px">
-            <button style="line-height: 0px; height:0px;"
-              *ngIf=" !stateSearch.selectedProduct.isSelected" mat-icon-button
-              (click)="save()">
-              <fa-icon [icon]="['far', 'bookmark']"></fa-icon>
-            </button>
-            <button style="line-height: 0px; height:0px;"
-              *ngIf=" stateSearch.selectedProduct.isSelected" mat-icon-button
-              (click)="unsave()">
-              <fa-icon [icon]="['fas', 'bookmark']"></fa-icon>
-            </button>
+        <div style="width: 100%">
+          <h4 style="margin:0; padding-bottom: 5px;"> {{stateSearch.selectedProduct.brand}}
+            {{stateSearch.selectedProduct.title}} </h4>
+          <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 5px">
+            <div style="font-size: small;">
+              <b>
+                {{(stateSession.country$| async)?.currencySymbol}}{{stateSearch.selectedProduct.price[(stateSession.country$| async)?.code] | number : '1.2-2' }}
+                {{(stateSession.country$| async)?.currency }} </b>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end" style="margin-bottom: 5px">
+              <button style="line-height: 0px; height:0px;" *ngIf=" !stateSearch.selectedProduct.isSelected"
+                mat-icon-button (click)="save()">
+                <fa-icon [icon]="['far', 'bookmark']"></fa-icon>
+              </button>
+              <button style="line-height: 0px; height:0px;" *ngIf=" stateSearch.selectedProduct.isSelected"
+                mat-icon-button (click)="unsave()">
+                <fa-icon [icon]="['fas', 'bookmark']"></fa-icon>
+              </button>
 
-            <button style="line-height: 0px; height:0px;" [fxHide.gt-xs]="true" mat-icon-button (click)="shared()">
-              <fa-icon [icon]="['fas', 'share-alt']"></fa-icon>
-            </button>
+              <button style="line-height: 0px; height:0px;" [fxHide.gt-xs]="true" mat-icon-button (click)="shared()">
+                <fa-icon [icon]="['fas', 'share-alt']"></fa-icon>
+              </button>
 
-            <button style="line-height: 0px; height:0px;" *ngIf="stateSession.isAdmin$|async" mat-icon-button
-              (click)="editProduct()">
-              <fa-icon [icon]="['fas', 'edit']"></fa-icon>
-            </button>
+              <button style="line-height: 0px; height:0px;" *ngIf="stateSession.isAdmin$|async" mat-icon-button
+                (click)="editProduct()">
+                <fa-icon [icon]="['fas', 'edit']"></fa-icon>
+              </button>
+            </div>
+
           </div>
+
+
+
+
 
         </div>
+      </mat-card-title>
+      <mat-card-subtitle style="margin: 10px;">
+        {{stateSearch.selectedProduct.description}}
+      </mat-card-subtitle>
 
+    </mat-card-header>
+    <mat-card-subtitle fxLayout="row" fxLayoutAlign="center stretch">
 
-
-
-
-      </div>
-    </mat-card-title>
-    <mat-card-subtitle style="margin: 10px;">
-      {{stateSearch.selectedProduct.description}}
-    </mat-card-subtitle>
-
-  </mat-card-header>
-  <mat-card-subtitle fxLayout="row" fxLayoutAlign="center stretch">
-
-    <star-rating starType="svg" [rating]="stateSearch.selectedProduct?.avgRating" size="medium" [readOnly]="true"
-      [showHalfStars]="true"></star-rating>
-    <div style=" align-self: center;font-size: medium;
+      <star-rating starType="svg" [rating]="stateSearch.selectedProduct?.avgRating" size="medium" [readOnly]="true"
+        [showHalfStars]="true"></star-rating>
+      <div style=" align-self: center;font-size: medium;
     color: black;
     font-weight: 600;
     padding-top: 2px;"> {{stateSearch.selectedProduct?.avgRating | number : '1.1-1' }} </div>
 
-  </mat-card-subtitle>
+    </mat-card-subtitle>
 
-  <mat-card-content class="detailContent">
-    <mat-tab-group mat-align-tabs="start" (selectedTabChange)="onSequenceChangeEvent($event)">
-      <mat-tab label="Deals">
-        <ng-template matTabContent>
-          <app-deal></app-deal>
-        </ng-template>
-      </mat-tab>
-      <mat-tab label="Specs">
-        <ng-template matTabContent>
-          <app-feature></app-feature>
-        </ng-template>
-      </mat-tab>
-      <mat-tab label="Reviews">
-        <ng-template matTabContent>
-          <app-review></app-review>
-        </ng-template>
-      </mat-tab>
-      <mat-tab label="Videos">
-        <ng-template matTabContent>
-          <app-video></app-video>
-        </ng-template>
-      </mat-tab>
-      <mat-tab label="Images">
-        <ng-template matTabContent>
-          <app-image></app-image>
-        </ng-template>
-      </mat-tab>
+    <mat-card-content class="detailContent">
+      <mat-tab-group mat-align-tabs="start" [selectedIndex]='stateSearch.tabIndex' (selectedTabChange)="onSequenceChangeEvent($event)">
+        <mat-tab label="Overview">
+          <ng-template matTabContent>
+            <app-overview></app-overview>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Specs">
+          <ng-template matTabContent>
+            <app-feature></app-feature>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Deals">
+          <ng-template matTabContent>
+            <app-deal></app-deal>
+          </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Reviews">
+          <ng-template matTabContent>
+            <app-review></app-review>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Videos">
+          <ng-template matTabContent>
+            <app-video></app-video>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Images">
+          <ng-template matTabContent>
+            <app-image></app-image>
+          </ng-template>
+        </mat-tab>
 
 
 
-    </mat-tab-group>
+      </mat-tab-group>
 
 
-  </mat-card-content>
+    </mat-card-content>
 
-</mat-card>
+  </mat-card>
 
-<app-footer fxHide.gt-xs></app-footer>
+  <app-footer fxHide.gt-xs></app-footer>
 </div>
 
 <ngx-json-ld [json]="stateSearch.jsonld"></ngx-json-ld>

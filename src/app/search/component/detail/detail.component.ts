@@ -23,6 +23,7 @@ export class DetailComponent implements OnInit {
   }
 
   onSequenceChangeEvent(event: MatTabChangeEvent) {
+    this.stateSearch.tabIndex = event.index;
     console.log(event.tab.textLabel);
     this.stateSearch.updateTab(event.tab.textLabel);
   }
