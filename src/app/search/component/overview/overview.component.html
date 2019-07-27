@@ -18,7 +18,7 @@
 <mat-card *ngIf="stateSearch.selectedProduct.deals" class="tab-content" style="padding: 16px;">
     <mat-card-title style="text-align: center;">Deals</mat-card-title>
     <mat-card-content fxLayout="row wrap" fxLayoutAlign="center center" style="padding-top: 10px">
-    <mat-card *ngFor="let element of stateSearch.selectedProduct.deals?.slice(0,2); let i = index"
+    <mat-card *ngFor="let element of stateSearch.selectedProduct.deals | sort: 'price' | slice:0:2; let i = index"
     style="background: white; margin:5px" [ngStyle.xs]="{'width.%': 80}" [ngStyle.gt-xs]="{'width.px': 200}">
     <mat-card-content class="content-list" fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 0px">
       <div style="position:absolute;top:0px; right:0px;padding:10px;" [matMenuTriggerFor]="menu">

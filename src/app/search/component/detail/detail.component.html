@@ -85,12 +85,12 @@
 
         </div>
       </mat-card-title>
-      <mat-card-subtitle style="margin: 10px;">
+      <mat-card-subtitle style="margin:10px;">
         {{stateSearch.selectedProduct.description}}
       </mat-card-subtitle>
 
     </mat-card-header>
-    <mat-card-subtitle fxLayout="row" fxLayoutAlign="center stretch">
+    <mat-card-subtitle fxLayout="row" fxLayoutAlign="center stretch" style="padding-top: 10px">
 
       <star-rating starType="svg" [rating]="stateSearch.selectedProduct?.avgRating" size="medium" [readOnly]="true"
         [showHalfStars]="true"></star-rating>
