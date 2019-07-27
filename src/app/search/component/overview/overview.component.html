@@ -2,7 +2,10 @@
 
 
 <mat-card class="tab-content" style="padding: 16px;">
-    <mat-card-title style="text-align: center;">Specifications</mat-card-title>
+    <mat-card-title style="text-align: center;" fxLayout="row" fxLayoutAlign="space-between">
+        <div>Specifications</div>
+        <button (click)="tabSelect(1)" mat-stroked-button >Show More</button>
+    </mat-card-title>
     <mat-card-content>
     <table style="width:100%">
         <tr  *ngFor="let f of stateSearch.selectedProduct.features?.slice(0,4); let i = index">
@@ -11,12 +14,16 @@
         </tr>
       </table>
     </mat-card-content>
-    <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+    <!-- <mat-card-actions fxLayout="row" fxLayoutAlign="center">
         <button (click)="tabSelect(1)" mat-raised-button style="background-color: #0094e5;color:white">Show More</button>
-    </mat-card-actions>
+    </mat-card-actions> -->
 </mat-card>
 <mat-card *ngIf="stateSearch.selectedProduct.deals" class="tab-content" style="padding: 16px;">
-    <mat-card-title style="text-align: center;">Deals</mat-card-title>
+    <!-- <mat-card-title style="text-align: center;">Deals</mat-card-title> -->
+    <mat-card-title style="text-align: center;" fxLayout="row" fxLayoutAlign="space-between">
+        <div>Deals</div>
+        <button (click)="tabSelect(2)" mat-stroked-button >Show More</button>
+    </mat-card-title>
     <mat-card-content fxLayout="row wrap" fxLayoutAlign="center center" style="padding-top: 10px">
     <mat-card *ngFor="let element of stateSearch.selectedProduct.deals | sort: 'price' | slice:0:2; let i = index"
     style="background: white; margin:5px" [ngStyle.xs]="{'width.%': 80}" [ngStyle.gt-xs]="{'width.px': 200}">
@@ -88,12 +95,16 @@
     </mat-card-actions>
   </mat-card>
 </mat-card-content>
-<mat-card-actions fxLayout="row" fxLayoutAlign="center">
+<!-- <mat-card-actions fxLayout="row" fxLayoutAlign="center">
     <button (click)="tabSelect(2)" mat-raised-button style="background-color: #0094e5;color:white">Show More</button>
-</mat-card-actions>
+</mat-card-actions> -->
 </mat-card>
 <mat-card *ngIf="stateSearch.selectedProduct.reviews" class="tab-content" style="padding: 16px;">
-    <mat-card-title style="text-align: center;">Reviews</mat-card-title>
+    <!-- <mat-card-title style="text-align: center;">Reviews</mat-card-title> -->
+    <mat-card-title style="text-align: center;" fxLayout="row" fxLayoutAlign="space-between">
+        <div>Reviews</div>
+        <button (click)="tabSelect(3)" mat-stroked-button >Show More</button>
+    </mat-card-title>
     <mat-card-content fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
         <mat-card *ngFor="let element of stateSearch.selectedProduct.reviews?.slice(0,2);let i = index" 
         style="background: white; margin:5px" [ngStyle.xs]="{'width.%': 90}" [ngStyle.gt-xs]="{'width.%': 90}"> 
@@ -143,12 +154,16 @@
           </mat-card-actions>
         </mat-card>
       </mat-card-content>  
-      <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+      <!-- <mat-card-actions fxLayout="row" fxLayoutAlign="center">
           <button (click)="tabSelect(3)" mat-raised-button style="background-color: #0094e5;color:white">Show More</button>
-      </mat-card-actions>
+      </mat-card-actions> -->
 </mat-card>
 <mat-card *ngIf="stateSearch.selectedProduct.videos" class="tab-content" style="padding: 16px;">
-    <mat-card-title style="text-align: center;">Videos</mat-card-title>
+    <!-- <mat-card-title style="text-align: center;">Videos</mat-card-title> -->
+    <mat-card-title style="text-align: center;" fxLayout="row" fxLayoutAlign="space-between">
+        <div>Videos</div>
+        <button (click)="tabSelect(4)" mat-stroked-button >Show More</button>
+    </mat-card-title>
     <mat-card-content fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
         <mat-card  *ngFor="let element of stateSearch.selectedProduct.videos?.slice(0,2);let i = index" 
         style="background: white; margin:5px" [ngStyle.xs]="{'width.%': 100}" [ngStyle.gt-xs]="{'width.%': 100}"> 
@@ -172,12 +187,16 @@
 
        </mat-card>
       </mat-card-content> 
-      <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+      <!-- <mat-card-actions fxLayout="row" fxLayoutAlign="center">
           <button (click)="tabSelect(4)" mat-raised-button style="background-color: #0094e5;color:white">Show More</button>
-      </mat-card-actions>
+      </mat-card-actions> -->
 </mat-card>
 <mat-card *ngIf="stateSearch.selectedProduct.images" class="tab-content" style="padding: 16px;">
-    <mat-card-title style="text-align: center;">Images</mat-card-title>
+    <!-- <mat-card-title style="text-align: center;">Images</mat-card-title> -->
+    <mat-card-title style="text-align: center;" fxLayout="row" fxLayoutAlign="space-between">
+        <div>Images</div>
+        <button (click)="tabSelect(5)" mat-stroked-button >Show More</button>
+    </mat-card-title>
     <mat-card-content fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
         <mat-card  *ngFor="let element of stateSearch.selectedProduct.images?.slice(0,2);let i = index" 
         style="background: white; margin:5px" [ngStyle.xs]="{'width.%': 80}" [ngStyle.gt-xs]="{'width.px': 200}"> 
@@ -226,9 +245,9 @@
           </mat-card-actions>
         </mat-card>
       </mat-card-content>    
-      <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+      <!-- <mat-card-actions fxLayout="row" fxLayoutAlign="center">
           <button (click)="tabSelect(5)" mat-raised-button style="background-color: #0094e5;color:white">Show More</button>
-      </mat-card-actions>
+      </mat-card-actions> -->
 </mat-card>
 
 
