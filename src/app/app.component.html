@@ -4,7 +4,7 @@
   </mat-drawer>
   <mat-drawer-content fxLayout="column" fxLayoutAlign="stretch"  style="overflow:hidden">
     <app-header (leftNav)="drawer.toggle()" [ngStyle]="{'height': ((stateSession.page$ | async) == 'home') ? '25vh' : '8vh' }"></app-header>
-    <div class="scoll" style="overflow: auto" [ngStyle]="{'height': ((stateSession.page$ | async) == 'home') ? '75vh' : '92vh' }" >
+    <div class="scoll" style="overflow: auto;" [ngStyle]="{'height': ((stateSession.page$ | async) == 'home') ? '75vh' : '92vh' }" >
         <router-outlet [ngStyle]="{'padding-top': ((stateSession.page$ | async) == 'home') ? '25vh' : '8vh' }" ></router-outlet>
         <app-footer [hidden]="(stateSession.page$ | async) == 'search' || 
         (stateSession.page$ | async) == 'detail' ||

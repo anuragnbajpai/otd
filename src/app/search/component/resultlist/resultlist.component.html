@@ -41,7 +41,7 @@
         </div>
     </div>
     <div style="margin-top:15px" fxLayout="row" fxLayoutAlign="center" *ngIf="stateSearch.searchResult && stateSearch.searchResult.length > 10 && !showmore">
-        <button (click)="showmore = true" color="primary" mat-raised-button>Show More Products</button>
+        <button (click)="showmore = true" mat-raised-button style="background-color: #0094e5;color:white;font-weight: bold;">Show More Products</button>
       </div>
     <div fxLayout="row" fxLayoutAlign="center" *ngIf="stateSession.isAdmin$|async">
       <button (click)="addProduct()" color="primary" mat-raised-button>Add Product</button>

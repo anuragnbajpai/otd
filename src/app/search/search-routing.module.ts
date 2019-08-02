@@ -12,7 +12,7 @@ const routes: Routes = [
         component: SearchComponent,
         data: {
           page: 'detail',
-          title: '{category} : {product}',
+          title: 'Top 10 {category} : {product}',
           metatags: {
             keywords: 'top {category}, {category}, best {category}, {category} deals',
             description: '{category} with reviews and deals information'
@@ -24,7 +24,7 @@ const routes: Routes = [
         component: SearchComponent,
         data: {
           page: 'search',
-          title: '{category}',
+          title: 'Top 10 {category}',
           metatags: {
             keywords: 'top {category}, {category}, best {category}, {category} deals',
             description: '{category} with reviews and deals information'
@@ -36,7 +36,7 @@ const routes: Routes = [
         component: SearchComponent,
         data: {
           page: 'compare',
-          title: '{category}',
+          title: 'Compare {category}',
           metatags: {
             keywords: 'top {category}, {category}, best {category}, {category} deals',
             description: '{category} with reviews and deals information'
@@ -48,7 +48,7 @@ const routes: Routes = [
         component: SearchComponent,
         data: {
           page: 'compare',
-          title: '{category}',
+          title: 'Compare {category}',
           metatags: {
             keywords: 'top {product}, {product}, best {product}, {product} deals',
             description: '{category} with reviews and deals information'
