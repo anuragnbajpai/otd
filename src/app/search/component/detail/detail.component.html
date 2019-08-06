@@ -1,6 +1,6 @@
 <div style="margin: 10px">
   <div fxLayout="row" fxLayoutAlign="space-between">
-    <div style="padding-bottom:10px;font-size: smaller;"><a routerLink="/">Home </a> / <a
+    <div style="padding-bottom:10px;font-size: smaller;width: 90%"><a routerLink="/">Home </a> / <a
         routerLink="/search/{{stateSearch.category$ | async}}">{{stateSearch.category$ | async}}</a> /
       {{stateSearch.selectedProduct?.title}}</div>
     <button style="line-height: 0px;height: 0px;position:fixed; left: 85vw;z-index: 10;" mat-icon-button fxHide.gt-xs
