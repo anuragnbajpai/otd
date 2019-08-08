@@ -1,6 +1,6 @@
-<div  fxLayout="row" >
-  <mat-card class="search scoll" [fxFlex.xs]="100" [fxFlex.gt-xs]="40" fxLayout="column" 
-  fxLayoutAlign="start" style="overflow-y:scroll;height: 92vh;"
+<div  fxLayout="row" fxLayoutAlign="center" [fxFlex.xs]="100" [fxFlex.gt-lg]="80" style="margin: 0 auto;" >
+  <mat-card class="search scoll" fxLayout="column" [fxFlex.xs]="100" [fxFlex.gt-xs]="40" 
+  fxLayoutAlign="start" style="overflow-y:scroll;height: 92vh;max-width: 600px"
   [ngStyle.xs]="{'display': ((stateSession.page$| async) == 'search' ? 'block' : 'none')}"
  >
   <app-resultlist  ></app-resultlist>
