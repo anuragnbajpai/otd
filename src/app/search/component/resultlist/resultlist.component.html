@@ -6,7 +6,7 @@
 
 
 <div [ngStyle]="{'display': stateSearch.searchResult ? 'none' : 'block' }">
-    <mat-card  *ngFor="let i of [1,2,3,4]" >
+    <mat-card  *ngFor="let i of [1,2,3,4,5]" >
       <div class="ui three column stackable grid" >
           <div class="column">
             <div class="ui raised segment">
@@ -46,5 +46,8 @@
     <div fxLayout="row" fxLayoutAlign="center" *ngIf="stateSession.isAdmin$|async">
       <button (click)="addProduct()" color="primary" mat-raised-button>Add Product</button>
     </div>
-    <app-footer></app-footer>
+    <div>
+        <app-footer></app-footer>
+    </div>
+
   

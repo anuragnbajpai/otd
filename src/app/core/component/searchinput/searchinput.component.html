@@ -1,7 +1,7 @@
 
 <mat-form-field appearance="outline" class="search-input" style="min-width: 50vw;">
 
-    <input  name="searchInput" id="searchInput" type="text"  matInput placeholder="Laptop, Smartphone, etc. "
+    <input type="text"  matInput placeholder="Laptop, Smartphone, etc. "
       [formControl]="searchKeyword"  [matAutocomplete]="autoGroup"
       (click)="clear()" />
     <div matPrefix><b>Top 10 &nbsp;</b> </div>
