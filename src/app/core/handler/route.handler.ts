@@ -48,7 +48,7 @@ export class RouteHandler {
     }
     if (event.snapshot.params.category) {
       if (event.snapshot.params.category !== 'saved') {
-        if (event.snapshot.params.category === 'best seller') {
+        if (event.snapshot.params.category === 'Deals of The Day') {
           let search = sessionStorage.getItem('searchKeyword') ? sessionStorage.getItem('searchKeyword') : event.snapshot.params.category;
           this.stateSearch.UpdateCategory(search);
           this.stateSession.updateSearchKeyword(search);
