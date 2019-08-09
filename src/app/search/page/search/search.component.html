@@ -5,7 +5,55 @@
  >
   <app-resultlist  ></app-resultlist>
 </mat-card >
-  <div class="scoll"  [fxFlex.gt-xs]="60" 
+
+<mat-card style="margin: 10px" [fxFlex.xs]="100" [fxFlex.gt-xs]="60" [ngStyle]="{'display': stateSearch.searchResult || ( (stateSession.device$|async) == 'xs' && (stateSession.page$| async) == 'search') ? 'none' : 'block' }"  >
+    <div class="ui placeholder">
+      <div class="image header">
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div class="paragraph">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div class="paragraph">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div class="paragraph">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div class="paragraph">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+        <div class="paragraph">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+        <div class="paragraph">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+    </div>
+  </mat-card>
+
+  <div class="scoll" *ngIf="stateSearch.selectedProduct"  [fxFlex.gt-xs]="60" 
   style="overflow-y:scroll;height: 92vh;background: white" 
   [ngStyle.xs]="{'display': ((stateSession.page$| async) == 'detail' ? 'block' : 'none')}">
     

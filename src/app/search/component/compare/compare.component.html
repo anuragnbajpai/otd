@@ -1,12 +1,12 @@
 <div style="margin:2vh">
 <div fxLayout="row" fxLayoutAlign="space-between" >
-    <div style="padding-bottom:10px;font-size: smaller;"><a routerLink="/">Home </a> / <a
+    <div style="padding-bottom:10px;font-size: smaller;width: 80%"><a routerLink="/">Home </a> / <a
         routerLink="/search/{{stateSearch.category$ | async}}">{{stateSearch.category$ | async  | titlecase}}</a> /
       {{stateSearch.compareProducts[0]?.title}} <b>vs</b> {{stateSearch.compareProducts[1]?.title}} </div>
-      <button  [fxHide.gt-xs]="true" mat-icon-button (click)="shared()">
+      <button  [fxHide.gt-xs]="true" mat-icon-button (click)="shared()" style="line-height: 0px;height: 0px;position:fixed; left: 75vw;z-index: 10;">
         <fa-icon [icon]="['fas', 'share-alt']"></fa-icon>
       </button>
-      <button mat-icon-button fxHide.gt-xs routerLink="/search/{{stateSearch.category$ | async}}" >
+      <button mat-icon-button fxHide.gt-xs routerLink="/search/{{stateSearch.category$ | async}}" style="line-height: 0px;height: 0px;position:fixed; left: 85vw;z-index: 10;" >
         <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon>  
       </button>
      
@@ -18,8 +18,10 @@
         <tr>
           <th>Product</th>
           <td *ngFor="let d of stateSearch.compareProducts">
-            <img src="{{d.picture}}" width="50%" style="max-width: 80px">
-            
+              <div style="height:120px;text-align: center;margin: auto;">
+            <img src="{{d.picture}}" style="max-width:100%;
+            max-height:100%;">
+              </div>
             <div><b>{{d.title}}</b></div>
          
           </td>  

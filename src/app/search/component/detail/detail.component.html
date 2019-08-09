@@ -8,33 +8,7 @@
       <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon>
     </button>
   </div>
-  <mat-card [ngStyle]="{'display': stateSearch.searchResult ? 'none' : 'block' }">
-    <div class="ui placeholder">
-      <div class="image header">
-        <div class="line"></div>
-        <div class="line"></div>
-      </div>
-      <div class="paragraph">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-      </div>
-      <div class="paragraph">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-      </div>
-      <div class="paragraph">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-      </div>
-    </div>
-  </mat-card>
+
 
   <mat-card class="detail" style="background-color:#f0f0f0;padding: 10px 2px "
     *ngIf="stateSearch.selectedProduct && stateSearch.compareProducts.length< 2">
