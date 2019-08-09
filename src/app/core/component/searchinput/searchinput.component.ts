@@ -37,7 +37,7 @@ export class SearchinputComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    // this.searchKeyword.setValue(' ');
     // this.searchKeyword.setValue(this.svcSearch.searchKeyword);
     this.filteredOptions = this.searchKeyword.valueChanges
       .pipe(
@@ -45,7 +45,7 @@ export class SearchinputComponent implements OnInit {
         map(value => this._filterGroup(value))
       );
 
-    this.searchKeyword.setValue(' ');
+    
   }
 
   private _filterGroup(value: string) {
