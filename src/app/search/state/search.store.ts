@@ -7,7 +7,7 @@ export function createInitialState(): SearchState {
   return {
     category: '',
     product: '',
-    tab: 'Deals',
+    tab: 'Overview',
     compare1: '',
     compare2: ''
   };

@@ -1,5 +1,5 @@
-<mat-card class="tab-content">
-    <div fxLayout="row" fxLayoutAlign="space-between" style="background:white">
+<div class="tab-content">
+    <div *ngIf="(stateSearch.tab$ | async) != 'Overview'" fxLayout="row" fxLayoutAlign="space-between" style="background:white">
       <div>
           <button mat-stroked-button [matMenuTriggerFor]="menu" >
               <b style="padding-right: 5px">{{sortBy}}</b>
@@ -14,8 +14,8 @@
       <div> <button mat-stroked-button (click)="addReview()" ><fa-icon style="font-size: small;" [icon]="['fas', 'plus']"></fa-icon>&nbsp;<b>Review</b>   </button></div>      
        
     </div>
-  <div fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px" >
-    <mat-card *ngFor="let element of stateSearch.selectedProduct.reviews;let i = index" 
+  <div fxLayout="row wrap"  fxLayoutAlign="center center" style="padding-top: 10px;width: 100%" >
+    <mat-card *ngFor="let element of stateSearch.selectedProduct.reviews | slice:0:((stateSearch.tab$ | async) != 'Overview'?100:2 );let i = index" 
     style="background: white; margin:5px" [ngStyle.xs]="{'width.%': 90}" [ngStyle.gt-xs]="{'width.%': 90}"> 
      <mat-card-content fxLayout="column" fxLayoutAlign="start" style="margin-bottom: 0px">
       <div style="margin: 10px;">
@@ -63,4 +63,4 @@
       </mat-card-actions>
     </mat-card>
   </div>      
-</mat-card>
+</div>

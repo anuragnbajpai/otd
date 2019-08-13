@@ -1,14 +1,14 @@
-<mat-card style="background: white">
-<mat-card  class="tab-content" style="background-color:white;"  >
+<div style="background: white">
+<div  class="tab-content" style="background-color:white;"  >
 
 
     <table style="width:100%">
-        <tr  *ngFor="let f of stateSearch.selectedProduct.features; let i = index">
+        <tr  *ngFor="let f of stateSearch.selectedProduct.features | slice:0:((stateSearch.tab$ | async) != 'Overview'?20:4 ); let i = index">
           <th>{{f.key}}</th>
           <td>{{f.value}}</td>
         </tr>
       </table>
 
 
-</mat-card>
-</mat-card>
+    </div>
+</div>
