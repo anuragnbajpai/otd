@@ -56,9 +56,11 @@ export class FirestoreService {
     this.firestore.doc(name + '/' + id).delete();
   }
   
-  // getCategory() {
-  //   return this.firestore.collection('categories').snapshotChanges();
-  // }
+  getCategory(key) {
+    return this.firestore.collection('categories', ref => 
+       ref.where('name', '>=', key).where('name', '<=', key + '\uf8ff')
+    ).snapshotChanges();
+  }
   // getSearchResult(name, where) {
   //   return this.firestore.collection(name, where).snapshotChanges();
   // }

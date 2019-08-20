@@ -50,7 +50,12 @@ export class SearchinputComponent implements OnInit {
 
   private _filterGroup(value: string) {
    // if (value) {
-      return this.options
+    //  this.svcCore.firestore.getCategory(value).subscribe(data => {
+    //   let r =  data.map(e => e.payload.doc.data() );
+    //   console.log(r);
+    //  });
+
+     return this.options
         .map(o => ({group: o.group, categories: this._filter(o.categories, value)}))
         .filter(o => o.categories.length > 0);
    // }
