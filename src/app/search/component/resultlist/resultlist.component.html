@@ -28,7 +28,7 @@
 
 
   <div style="margin-bottom:0" id="{{d.title}}" *ngFor="let d of stateSearch.searchResult;let i = index">
- 
+    <div style="height: 10px"></div>
       <app-resultitem [hidden]="i >= 10 && !showmore" [product]="d" [rank]="i"></app-resultitem>
       <a style="display: none" href="/search/{{d.category}}/{{d.title}}">{{d.brand}} {{d.title}}</a>
       <div *ngIf="i%5==4" [hidden]="i >= 10 && !showmore" style="top:10px;margin-bottom: 20px;padding: 5px; margin: 5px;" >
