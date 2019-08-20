@@ -59,8 +59,10 @@ export class VideoComponent implements OnInit {
     console.log(e);
     this.stateSearch.selectedProduct.videos.splice(this.stateSearch.selectedProduct.videos.indexOf(e), 1);
     this.stateSearch.updateSearchResultItem(this.stateSearch.selectedProduct);
-    this.svcFirestore.updateVideos('videos', 
-    this.stateSearch.selectedProduct.id , this.stateSearch.selectedProduct.videos);
+   // this.svcFirestore.updateVideos('videos', 
+   // this.stateSearch.selectedProduct.id , this.stateSearch.selectedProduct.videos);
+
+    this.svcFirestore.removeVideo('videos', this.stateSearch.selectedProduct.id , e);
   }
  
   

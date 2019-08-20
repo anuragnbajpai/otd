@@ -34,7 +34,7 @@
           <th>Rating</th>
           <td *ngFor="let d of stateSearch.compareProducts"><div fxLayout="row" fxLayoutAlign="center"><star-rating starType="svg" [rating]="d.avgRating" size="medium" [readOnly]="true"
             [showHalfStars]="true"></star-rating>
-         <span style="padding-top: 2px">{{d.avgRating}}</span>  </div> </td> 
+         <span style="padding-top: 2px">{{d.avgRating | number : '1.1-1' }}</span>  </div> </td> 
         </tr>
         <tr>
             <th>Price</th>

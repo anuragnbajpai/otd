@@ -23,6 +23,7 @@ export class SearchService {
   categories = [];
   jsonld = {};
   tabIndex = 0;
+  safeLinks = [];
   constructor(private store: SearchStore, private query: SearchQuery, public sanitizer: DomSanitizer,
               private svcFirestore: FirestoreService, private stateSession: SessionService) {
 
@@ -106,6 +107,7 @@ export class SearchService {
     this.query.select(e => e.product).pipe(distinctUntilChanged()).subscribe(p => {
       if (this.searchResult && this.searchResult.length > 0) {
         this.updateProductValue(p);
+
        // this.updateTab('deals');
         this.getTabData();
         if (this.selectedProduct) {
@@ -192,12 +194,14 @@ export class SearchService {
   }
   getVideos() {
     this.svcFirestore.getDocument('videos', this.selectedProduct.id).subscribe(d => {
-      this.selectedProduct.videos = (d.payload.data() as any).videos.map(l => this.getSafeLink(l.link));
+      this.selectedProduct.videos = (d.payload.data() as any).videos.map(l => l);
+      this.updateSafeLinks();
       this.searchResult.find(f => f.title === this.selectedProduct.title).videos = this.selectedProduct.videos;
     });
   }
 
   getSafeLink(link){
+    console.log(link);
     var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     var match = link.match(regExp);
 
@@ -275,6 +279,13 @@ export class SearchService {
     }
   }
 
+  updateSafeLinks(){
+    this.safeLinks = [];
+    this.selectedProduct.videos.forEach(e => {
+          this.safeLinks.push(this.getSafeLink(e.link));
+        });
+  }
+
   getProductData(){ 
       if (this.selectedProduct.images == null || this.selectedProduct.images.length === 0) {
         this.getImages();
@@ -282,6 +293,8 @@ export class SearchService {
 
       if (this.selectedProduct.videos == null || this.selectedProduct.videos.length === 0) {
         this.getVideos();
+      } else{
+        this.updateSafeLinks();
       }
 
       if (this.selectedProduct.deals == null || this.selectedProduct.deals.length === 0) {

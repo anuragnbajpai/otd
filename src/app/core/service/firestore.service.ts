@@ -72,6 +72,20 @@ export class FirestoreService {
     this.firestore.collection(name).doc(id).set( { videos });
   }
 
+  addVideo(name, id , video){
+    var prod = this.firestore.collection(name).doc(id);
+    prod.update({
+      videos: firebase.firestore.FieldValue.arrayUnion(video)
+    });
+  }
+
+  removeVideo(name, id , video){
+    var prod = this.firestore.collection(name).doc(id);
+    prod.update({
+      videos: firebase.firestore.FieldValue.arrayRemove(video)
+    });
+  }
+
   updateDeals(name,id, deals) {
     // delete item.id;
     this.firestore.collection(name).doc(id).set( { deals });

@@ -35,8 +35,12 @@ export class AddvideoComponent{
     if(!this.stateSearch.selectedProduct.videos){
       this.stateSearch.selectedProduct.videos = [];
     }
-    this.stateSearch.selectedProduct.videos.unshift(this.videoFormGroup.value);
-    this.svcFirestore.updateVideos('videos', this.stateSearch.selectedProduct.id, this.stateSearch.selectedProduct.videos);
+    let video = this.videoFormGroup.value;
+   // video.link = this.stateSearch.getSafeLink(video.link);
+    this.stateSearch.selectedProduct.videos.unshift(video);
+   // this.svcFirestore.updateVideos('videos', this.stateSearch.selectedProduct.id, this.stateSearch.selectedProduct.videos);
+
+    this.svcFirestore.addVideo('videos', this.stateSearch.selectedProduct.id, video);
 
   });
 
