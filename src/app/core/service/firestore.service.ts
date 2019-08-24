@@ -70,6 +70,20 @@ export class FirestoreService {
     this.firestore.collection(name).doc(id).set( { images });
   }
 
+  addImage(name, id , image){
+    var prod = this.firestore.collection(name).doc(id);
+    prod.update({
+      images: firebase.firestore.FieldValue.arrayUnion(image)
+    });
+  }
+
+  removeImage(name, id , image){
+    var prod = this.firestore.collection(name).doc(id);
+    prod.update({
+      images: firebase.firestore.FieldValue.arrayRemove(image)
+    });
+  }
+
   updateVideos(name, id, videos){
     this.firestore.collection(name).doc(id).set( { videos });
   }
@@ -93,9 +107,37 @@ export class FirestoreService {
     this.firestore.collection(name).doc(id).set( { deals });
   }
 
+  addDeal(name, id , deal){
+    var prod = this.firestore.collection(name).doc(id);
+    prod.update({
+      deals: firebase.firestore.FieldValue.arrayUnion(deal)
+    });
+  }
+
+  removeDeal(name, id , deal) {
+    var prod = this.firestore.collection(name).doc(id);
+    prod.update({
+      deals: firebase.firestore.FieldValue.arrayRemove(deal)
+    });
+  }
+
   updateReviews(name, id, reviews) {
     // delete item.id;
     this.firestore.collection(name).doc(id).set( { reviews });
+  }
+
+  addReview(name, id , Review){
+    var prod = this.firestore.collection(name).doc(id);
+    prod.update({
+      reviews: firebase.firestore.FieldValue.arrayUnion(Review)
+    });
+  }
+
+  removeReview(name, id , Review) {
+    var prod = this.firestore.collection(name).doc(id);
+    prod.update({
+      reviews: firebase.firestore.FieldValue.arrayRemove(Review)
+    });
   }
 
   updateReports(name, id, reports) {
